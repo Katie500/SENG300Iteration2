@@ -22,6 +22,10 @@ public class DoItYourselfStationLogic {
      * The controller that tracks the inserted card for payment
      */
     public PaymentController paymentController;
+    /**
+     * Tracks if the customers session has begun
+     */
+    private boolean inProgress = false;
 
     /**
      * Installs an instance of the logic on the indicated station.
@@ -65,6 +69,25 @@ public class DoItYourselfStationLogic {
         for(BarcodedProduct product : products) {
             ProductDatabases.BARCODED_PRODUCT_DATABASE.put(product.getBarcode(), product);
         }
+    }
+
+    /**
+     * Reports whether a session is currently in progress
+     *
+     * @return If a session is current in progress.
+     */
+    public boolean getInProgress() {
+        return inProgress;
+    }
+
+    /**
+     * Sets the session progress
+     *
+     * @param inProgress
+     *            If there is a session in progress
+     */
+    public boolean setInProgress(boolean inProgress) {
+        this.inProgress = inProgress;
     }
 }
 
