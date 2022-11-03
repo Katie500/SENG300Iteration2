@@ -25,6 +25,22 @@ public class ProductController implements BarcodeScannerListener {
     }
 
     /**
+     * Obtains the list of items scanned with this machine
+     *
+     * @return The total list of items scanned during the current transaction.
+     */
+    public List<BarcodedProduct> getCart() {
+        return cart;
+    }
+
+    /**
+     * Clears the current list of items scanned with this machine
+     */
+    public void clearCart() {
+        cart.clear();
+    }
+
+    /**
      * Obtains the total value of the items scanned with this machine
      *
      * @return The total value of items scanned during the current transaction.
