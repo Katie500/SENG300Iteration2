@@ -86,7 +86,7 @@ public class DoItYourselfStationLogic {
      * @param inProgress
      *            If there is a session in progress
      */
-    public boolean setInProgress(boolean inProgress) {
+    public void setInProgress(boolean inProgress) {
         this.inProgress = inProgress;
     }
 }
