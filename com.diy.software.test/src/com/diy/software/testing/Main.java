@@ -1,11 +1,13 @@
 package com.diy.software.testing;
 
-import package com.jimmyelectronics.necchil;
+//import package com.jimmyelectronics.necchi;
+//import package com.jimmyelectronics.opeechee;
 
 import org.junit.*;
 import com.jimmyselectronics.AbstractDevice;
 import com.jimmyselectronics.AbstractDeviceListener;
 import com.jimmyselectronics.opeechee.*;
+import com.jimmyselectronics.nechi.*;
 
 public class addItemsByScanTest {
 
@@ -45,5 +47,45 @@ public class addItemsByScanTest {
 
 
 
+}
+-----------------------------------------------------------------------------------------------------------------
 
+public class payWithCreditCardTest(){
+    private CardReader reader;
+    private Card card;
+    private String pin;
+
+    @Before
+    public void setup(){
+        pin = "1234";
+        reader = new CardReader();
+        card = new Card("Visa", "1234", "Tony", "333", pin, true, true);
+    }
+
+    @Test
+    public void blockCardTest(){
+        // Block card if wrong pin entered three times
+    }
+
+    @Test
+    public void cardDeniedTest(){
+        // Case where the transaction fails due to issues with the bank
+    }
+
+    @Test
+    public void cardInsertTest(){
+        // Test ability to read a card and its details
+    }
+
+    @Test
+    public void successfulPaymentTest(){
+        // transaction goes through and the amount due is decremented.
+        // Maybe test for printout of receipt or formulaation of receipt
+    }
+
+    @Test
+    public void cardRemovedTest(){
+        // Check for any card details once card is removed.
+        // Most details should not be saved typically. For security / privacy reasons
+    }
 }
