@@ -3,6 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/com.diy.hardware_0.2.iml" filepath="$PROJECT_DIR$/com.diy.hardware_0.2.iml" />
+<<<<<<< HEAD
+=======
+      <module fileurl="file://$PROJECT_DIR$/../com.diy.software/com.diy.software.iml" filepath="$PROJECT_DIR$/../com.diy.software/com.diy.software.iml" />
+>>>>>>> main
     </modules>
   </component>
 </project>
