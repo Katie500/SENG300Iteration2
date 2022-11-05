@@ -23,12 +23,12 @@ public class PaymentController implements CardReaderListener {
 
     @Override
     public void cardInserted(CardReader reader) {
-        cardInserted = true;
+        
     }
 
     @Override
     public void cardRemoved(CardReader reader) {
-        cardInserted = false;
+
     }
 
     /**

@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="af1b19c9-42ca-4013-a165-fef7f750ab44" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.diy.software/com.diy.software.iml" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.software/com.diy.software.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/controllers/PaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/controllers/PaymentController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -59,7 +56,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1667671380396</updated>
-      <workItem from="1667671382173" duration="890000" />
+      <workItem from="1667671382173" duration="1046000" />
     </task>
     <servers />
   </component>
