@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ProductController implements BarcodeScannerListener {
     private DoItYourselfStationLogic stationLogic;
-    private List<BarcodedProduct> cart = new ArrayList();
+    private List<BarcodedProduct> purchased = new ArrayList();
 
     /**
      * Basic constructor.
@@ -29,15 +29,15 @@ public class ProductController implements BarcodeScannerListener {
      *
      * @return The total list of items scanned during the current transaction.
      */
-    public List<BarcodedProduct> getCart() {
-        return cart;
+    public List<BarcodedProduct> getPurchased() {
+        return purchased;
     }
 
     /**
      * Clears the current list of items scanned with this machine
      */
     public void clearCart() {
-        cart.clear();
+        purchased.clear();
     }
 
     /**
@@ -46,7 +46,7 @@ public class ProductController implements BarcodeScannerListener {
      * @return The total value of items scanned during the current transaction.
      */
     public long getTotal() {
-        return cart.stream().mapToLong(p -> p.getPrice()).sum();
+        return purchased.stream().mapToLong(p -> p.getPrice()).sum();
     }
 
     @Override
@@ -61,6 +61,6 @@ public class ProductController implements BarcodeScannerListener {
 
         // Add the product to the cart
         var product = ProductDatabases.BARCODED_PRODUCT_DATABASE.get(barcode);
-        cart.add(product);
+        purchased.add(product);
     }
 }
