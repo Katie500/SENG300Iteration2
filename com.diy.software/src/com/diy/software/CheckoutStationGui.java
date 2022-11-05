@@ -10,13 +10,16 @@ public class CheckoutStationGui extends javax.swing.JFrame{
 //        //create gui here
 //    }
 
+        private DoItYourselfStationLogic stationLogic;
+
 
 
         /**
          * Creates new form checkout
          */
-        public CheckoutStationGui() {
+        public CheckoutStationGui(DoItYourselfStationLogic stationLogic) {
             initComponents();
+            this.stationLogic = stationLogic;
         }
 
 
@@ -108,6 +111,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
 
         private void payButtonActionPerformed(java.awt.event.ActionEvent evt) {
             // TODO add your handling code here:
+            var items = stationLogic.productController.getScanned().stream().map(p -> p.getDescription()).toList();
         }
 
         /**

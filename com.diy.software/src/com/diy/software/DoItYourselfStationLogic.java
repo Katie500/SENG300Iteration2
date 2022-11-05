@@ -40,8 +40,8 @@ public class DoItYourselfStationLogic {
      * @throws NullPointerException
      *             If any argument is null.
      */
-    public static DoItYourselfStationLogic installOn(DoItYourselfStation station, List<BarcodedProduct> products, CardIssuer creditIssuer) {
-        return new DoItYourselfStationLogic(station, products, creditIssuer);
+    public static DoItYourselfStationLogic installOn(DoItYourselfStation station) {
+        return new DoItYourselfStationLogic(station);
     }
 
     /**
@@ -57,18 +57,14 @@ public class DoItYourselfStationLogic {
      * @throws NullPointerException
      *             If any argument is null.
      */
-    public DoItYourselfStationLogic(DoItYourselfStation station, List<BarcodedProduct> products, CardIssuer creditIssuer) {
+    public DoItYourselfStationLogic(DoItYourselfStation station) {
         this.station = station;
 
         productController = new ProductController(this);
         station.scanner.register(productController);
 
-        paymentController = new PaymentController(this, creditIssuer);
+        paymentController = new PaymentController(this);
         station.cardReader.register(paymentController);
-
-        for(BarcodedProduct product : products) {
-            ProductDatabases.BARCODED_PRODUCT_DATABASE.put(product.getBarcode(), product);
-        }
     }
 
     /**

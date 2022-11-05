@@ -16,7 +16,7 @@ public class PaymentController implements CardReaderListener {
      * @param stationLogic
      *            The station logic that this is part of.
      */
-    public PaymentController(DoItYourselfStationLogic stationLogic, CardIssuer creditIssuer) {
+    public PaymentController(DoItYourselfStationLogic stationLogic) {
         this.stationLogic = stationLogic;
         this.creditIssuer = creditIssuer;
     }

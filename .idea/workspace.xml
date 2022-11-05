@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="af1b19c9-42ca-4013-a165-fef7f750ab44" name="Changes" comment="adding functionality to some gui files" />
+=======
+    <list default="true" id="af1b19c9-42ca-4013-a165-fef7f750ab44" name="Changes" comment="" />
+>>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,8 +58,13 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1667671380396</updated>
+<<<<<<< Updated upstream
       <workItem from="1667671382173" duration="1046000" />
       <workItem from="1667674160371" duration="7404000" />
+=======
+      <workItem from="1667671382173" duration="1586000" />
+      <workItem from="1667681819948" duration="2429000" />
+>>>>>>> Stashed changes
     </task>
     <task id="LOCAL-00001" summary="adding functionality to some gui files">
       <created>1667689446172</created>
