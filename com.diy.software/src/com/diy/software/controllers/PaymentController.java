@@ -9,7 +9,6 @@ import com.jimmyselectronics.opeechee.CardReaderListener;
 public class PaymentController implements CardReaderListener {
     private DoItYourselfStationLogic stationLogic;
     private CardIssuer creditIssuer;
-    private boolean cardInserted = false;
 
     /**
      * Basic constructor.
@@ -33,12 +32,10 @@ public class PaymentController implements CardReaderListener {
     }
 
     /**
-     * Reports whether a card is currently inserted
-     *
      * @return If a card is currently inserted into the machine.
      */
-    public boolean getInserted() {
-        return cardInserted;
+    public boolean payWithCard() {
+        return true;
     }
 
     @Override
