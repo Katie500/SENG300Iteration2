@@ -16,8 +16,9 @@ public class addItemsByScanTest {
     public void setup(){
         scanner = new BarcodeScanner();
         barcode = new Barcode(new Numeral[] { Numeral.one, Numeral.one, Numeral.one, Numeral.one }); // 1111
+        barcode2 = new Barcode(new Numeral[] { Numeral.one, Numeral.two, Numeral.three, Numeral.four }); // 1234
         item = new BarcodedItem(barcode, 10);
-        item2 = new BarcodedItem(null, 10);
+        item2 = new BarcodedItem(barcode2, 10);
     }
 
     @Test(expected = weightDiscrepancyException)
@@ -35,8 +36,13 @@ public class addItemsByScanTest {
 
     @Test
     public void notRegisteredTest(){
-
+        // No customer session, thus scan should be ignored and not registered.
     }
+
+    @Test
+    public void scannerPowerOffTest(){
+    }
+
 
 
 
