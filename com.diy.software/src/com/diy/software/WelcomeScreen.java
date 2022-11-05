@@ -18,9 +18,9 @@ public class WelcomeScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Welcome to Our Store");
+        jLabel1.setText("MAIN SCREEN");
 
-        jButton1.setText("Press here to continue");
+        jButton1.setText("Click to Continue");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
