@@ -5,18 +5,10 @@ import com.diy.hardware.DoItYourselfStation;
 import com.diy.hardware.external.ProductDatabases;
 import com.diy.simulation.Customer;
 import com.jimmyselectronics.necchi.Barcode;
-import com.jimmyselectronics.necchi.BarcodeScanner;
 import com.jimmyselectronics.necchi.BarcodedItem;
 import com.jimmyselectronics.necchi.Numeral;
-import com.jimmyselectronics.necchi.SampleBarcodeScannerListener;
 
 public class Demo {
-    private Barcode barcode;
-    private BarcodedItem item;
-    private BarcodeScanner scanner;
-    private SampleBarcodeScannerListener listener1, listener2, listener3;
-
-
     public static void main(String[] args) {
         // Setup Station
         DoItYourselfStation station = new DoItYourselfStation();
@@ -28,9 +20,9 @@ public class Demo {
         customer.useStation(station);
 
         // Create barcodes
-        Barcode barcode1 = new Barcode(new Numeral[] { Numeral.one }); // 1
-        Barcode barcode2 = new Barcode(new Numeral[] { Numeral.two, Numeral.three }); // 23
-        Barcode barcode3 = new Barcode(new Numeral[] { Numeral.one, Numeral.two, Numeral.three }); // 123
+        Barcode barcode1 = new Barcode(new Numeral[] { Numeral.one });
+        Barcode barcode2 = new Barcode(new Numeral[] { Numeral.two, Numeral.three });
+        Barcode barcode3 = new Barcode(new Numeral[] { Numeral.one, Numeral.two, Numeral.three });
 
         // Create barcoded items
         BarcodedItem item1 = new BarcodedItem(barcode1, 1);
