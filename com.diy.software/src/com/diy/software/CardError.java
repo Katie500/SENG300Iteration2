@@ -32,6 +32,11 @@ public class CardError extends javax.swing.JFrame {
         cancelLabel.setText("Press the \"X\" to try another card or press below to cancel transaction.");
 
         cancelButton.setText("Cancel Transaction");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout cardErrorPanelLayout = new javax.swing.GroupLayout(cardErrorPanel);
         cardErrorPanel.setLayout(cardErrorPanelLayout);
