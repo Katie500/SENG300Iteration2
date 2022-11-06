@@ -25,7 +25,7 @@ public class DoItYourselfStationLogic {
     /**
      * Tracks if the customers session has begun
      */
-    private boolean inProgress = false;
+    private boolean inProgress = true;
 
     /**
      * Installs an instance of the logic on the indicated station.

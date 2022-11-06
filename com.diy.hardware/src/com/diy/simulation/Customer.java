@@ -174,7 +174,7 @@ public final class Customer {
 
 		if(currentItem == null)
 			throw new NoSuchElementException();
-		
+
 		station.scanner.scan((BarcodedItem)currentItem);
 	}
 

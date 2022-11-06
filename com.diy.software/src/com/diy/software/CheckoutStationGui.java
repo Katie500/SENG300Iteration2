@@ -5,39 +5,33 @@ import com.diy.simulation.Customer;
 
 import javax.swing.*;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class CheckoutStationGui extends javax.swing.JFrame{
-
-//    public static void main(String[] args) {
-//        new DoItYourselfStation();
-//
-//    }
-
         private DoItYourselfStationLogic stationLogic;
         private Customer customer;
         private DoItYourselfStation station;
+        JPanel checkoutPanel = new JPanel();
+        JLabel welcomeLabelTop = new JLabel();
+        JButton addOwnBagsButton = new JButton();
+        JButton selectLanguageButton = new JButton();
+        JButton payButton = new JButton();
+        JScrollPane jScrollPane1 = new JScrollPane();
+        JList<String> itemList = new JList<>();
+        JButton callAttendantButton = new JButton();
+        JButton scanItemButton = new JButton();
 
 
 
         public CheckoutStationGui(Customer customer, DoItYourselfStation station, DoItYourselfStationLogic stationLogic) {
-            initCheckoutStationGui();
             this.stationLogic = stationLogic;
             this.customer = customer;
             this.station = station;
+            initCheckoutStationGui();
         }
 
 
         private void initCheckoutStationGui() {
-
-            JPanel checkoutPanel = new JPanel();
-            JLabel welcomeLabelTop = new JLabel();
-            JButton addOwnBagsButton = new JButton();
-            JButton selectLanguageButton = new JButton();
-            JButton payButton = new JButton();
-            JScrollPane jScrollPane1 = new JScrollPane();
-            JList<String> itemList = new JList<>();
-            JButton callAttendantButton = new JButton();
-
             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
             welcomeLabelTop.setText("Welcome to Checkout. Please scan items.");
@@ -47,6 +41,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
             selectLanguageButton.setText("Select Language");
 
             payButton.setText("Pay");
+
             payButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     payButtonActionPerformed(evt);
@@ -55,10 +50,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
 
             itemList.setModel(new javax.swing.AbstractListModel<String>() {
 
-                //NEED TO CONNECT BACK END SCANNING TO HERE
-                //String[] strings = { "Bananas       $2.75", "Eggs             $3.47", "Milk               $1.24", "Cheetos       $4.57", "Apples          $2.95" };
                 List<String> strings = stationLogic.productController.getScanned().stream().map(p -> p.getDescription()).toList();
-                //String[] strings = itemDescriptions;
                 public int getSize() { return strings.size(); }
                 public String getElementAt(int i) { return strings.get(i); }
             });
@@ -68,6 +60,13 @@ public class CheckoutStationGui extends javax.swing.JFrame{
             callAttendantButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     callAttendantButtonActionPerformed(evt);
+                }
+            });
+
+            scanItemButton.setText("Scan Item");
+            scanItemButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    scanItemButtonActionPerformed(evt);
                 }
             });
 
@@ -82,6 +81,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
                                                     .addComponent(callAttendantButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
                                                     .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                            .addComponent(scanItemButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                             .addComponent(selectLanguageButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                             .addComponent(addOwnBagsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                             .addComponent(payButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -103,6 +103,8 @@ public class CheckoutStationGui extends javax.swing.JFrame{
                                     .addComponent(payButton)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(selectLanguageButton)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(scanItemButton)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(addOwnBagsButton)
@@ -134,6 +136,21 @@ public class CheckoutStationGui extends javax.swing.JFrame{
         private void callAttendantButtonActionPerformed(java.awt.event.ActionEvent evt) {
             AttendantStationGui attendantGui = new AttendantStationGui(customer, station, stationLogic);
             attendantGui.setVisible(true);
+        }
+
+        private void scanItemButtonActionPerformed(java.awt.event.ActionEvent evt) {
+            try {
+                customer.selectNextItem();
+                customer.scanItem();
+                itemList.setModel(new javax.swing.AbstractListModel<String>() {
+
+                    List<String> strings = stationLogic.productController.getScanned().stream().map(p -> p.getDescription()).toList();
+                    public int getSize() { return strings.size(); }
+                    public String getElementAt(int i) { return strings.get(i); }
+                });
+            } catch(NoSuchElementException e) {
+                System.out.println("No more items in cart");
+            }
         }
 
 

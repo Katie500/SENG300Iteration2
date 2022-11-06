@@ -18,7 +18,6 @@ public class Demo {
         // Setup station logic
         DoItYourselfStationLogic stationLogic = new DoItYourselfStationLogic(station);
 
-
         // Setup customer
         Customer customer = new Customer();
         customer.useStation(station);
@@ -48,8 +47,7 @@ public class Demo {
         customer.shoppingCart.add(item2);
         customer.shoppingCart.add(item3);
 
-        // TODO: Finish this part
-        //CheckoutStationGui frame = new CheckoutStationGui(customer, station, stationLogic);
+        // Start at welcome screen
         WelcomeScreen frame = new WelcomeScreen(customer, station, stationLogic);
         frame.setVisible(true);
     }

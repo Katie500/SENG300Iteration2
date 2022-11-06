@@ -15,11 +15,9 @@ public class WelcomeScreen extends javax.swing.JFrame {
     public WelcomeScreen(Customer customer, DoItYourselfStation station, DoItYourselfStationLogic stationLogic)
     {
         initComponentsForWelcome();
-
         this.stationLogic = stationLogic;
         this.customer = customer;
         this.station = station;
-
     }
 
 
@@ -84,20 +82,8 @@ public class WelcomeScreen extends javax.swing.JFrame {
     }
 
     private void welcomeButtonActionPerformed(java.awt.event.ActionEvent evt) {
-
-        CheckoutStationGui gui = new CheckoutStationGui(customer,station, stationLogic);
+        CheckoutStationGui gui = new CheckoutStationGui(customer, station, stationLogic);
         gui.setVisible(true);
+        this.setVisible(false);
     }
-
-//    public static void main(String args[]) {
-//
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                //new WelcomeScreen().setVisible(true);
-//            }
-//        });
-//    }
-
-//netbeans sourced
-
 }

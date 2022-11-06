@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="af1b19c9-42ca-4013-a165-fef7f750ab44" name="Changes" comment="adding a working attendant gui" />
+    <list default="true" id="e290af6d-ab41-41f7-b71f-db079bd726a4" name="Changes" comment="adding functionality to some gui files">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/com.diy.hardware/src/com/diy/simulation/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.hardware/src/com/diy/simulation/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/com.diy.hardware_0.2/com.diy.hardware.iml" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.hardware_0.2/com.diy.hardware.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/CheckoutStationGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/CheckoutStationGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/Demo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/DoItYourselfStationLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/DoItYourselfStationLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/WelcomeScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/WelcomeScreen.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,7 +40,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Program Files/JetBrains/IntelliJ IDEA 2022.2.2/lib/junit4.jar&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/joeyv/Documents/Coding/seng-300-project/com.diy.hardware&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15429688&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
@@ -40,19 +48,24 @@
   }
 }</component>
   <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="com.diy.hardware" />
+    <configuration name="Demo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.diy.software.Demo" />
+      <module name="com.diy.software" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.diy.software.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="com.diy.hardware" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Demo" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -64,6 +77,7 @@
       <updated>1667671380396</updated>
       <workItem from="1667671382173" duration="1046000" />
       <workItem from="1667674160371" duration="7404000" />
+      <workItem from="1667706219071" duration="295000" />
     </task>
     <task id="LOCAL-00001" summary="adding functionality to some gui files">
       <created>1667689446172</created>
