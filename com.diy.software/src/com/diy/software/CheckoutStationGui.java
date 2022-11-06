@@ -4,6 +4,7 @@ import com.diy.hardware.DoItYourselfStation;
 import com.diy.simulation.Customer;
 
 import javax.swing.*;
+import java.util.List;
 
 public class CheckoutStationGui extends javax.swing.JFrame{
     //JFrame frame;
@@ -57,11 +58,11 @@ public class CheckoutStationGui extends javax.swing.JFrame{
             itemList.setModel(new javax.swing.AbstractListModel<String>() {
 
                 //NEED TO CONNECT BACK END SCANNING TO HERE
-                String[] strings = { "Bananas       $2.75", "Eggs             $3.47", "Milk               $1.24", "Cheetos       $4.57", "Apples          $2.95" };
-                //itemDescriptions = DoItYourselfStationLogic.getScanned().stream().map(p -> p.getDescription()).toList();
+                //String[] strings = { "Bananas       $2.75", "Eggs             $3.47", "Milk               $1.24", "Cheetos       $4.57", "Apples          $2.95" };
+                List<String> strings = stationLogic.productController.getScanned().stream().map(p -> p.getDescription()).toList();
                 //String[] strings = itemDescriptions;
-                public int getSize() { return strings.length; }
-                public String getElementAt(int i) { return strings[i]; }
+                public int getSize() { return strings.size(); }
+                public String getElementAt(int i) { return strings.get(i); }
             });
             jScrollPane1.setViewportView(itemList);
 

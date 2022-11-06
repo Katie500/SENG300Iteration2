@@ -49,8 +49,8 @@ public class Demo {
         customer.shoppingCart.add(item3);
 
         // TODO: Finish this part
-         //CheckoutStationGui frame = new CheckoutStationGui(customer, station, stationLogic);
-         WelcomeScreen frame = new WelcomeScreen(customer, station, stationLogic);
+        //CheckoutStationGui frame = new CheckoutStationGui(customer, station, stationLogic);
+        WelcomeScreen frame = new WelcomeScreen(customer, station, stationLogic);
         // frame.setVisible(true);
     }
 }
