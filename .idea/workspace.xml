@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e290af6d-ab41-41f7-b71f-db079bd726a4" name="Changes" comment="adding latest gui functionalities">
+    <list default="true" id="e290af6d-ab41-41f7-b71f-db079bd726a4" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/CardError.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-<<<<<<< Updated upstream
-=======
+      <change beforePath="$PROJECT_DIR$/com.diy.hardware/src/com/jimmyselectronics/opeechee/CardReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.hardware/src/com/jimmyselectronics/opeechee/CardReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/DoItYourselfStationLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/DoItYourselfStationLogic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/controllers/PaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/controllers/PaymentController.java" afterDir="false" />
->>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -40,7 +40,8 @@ public class PaymentController implements CardReaderListener {
     /**
      * @return If a card is currently inserted into the machine.
      */
-    public boolean payWithCard(long charge) {
+    public boolean payWithCard() {
+        long charge = stationLogic.productController.getTotal();
         long holdNumber = creditIssuer.authorizeHold(cardData.getNumber(), charge);
         boolean paySuccess = creditIssuer.postTransaction(cardData.getNumber(), holdNumber, charge);
         return paySuccess;

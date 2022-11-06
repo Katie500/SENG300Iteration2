@@ -36,8 +36,8 @@ public class CardReader extends AbstractDevice<CardReaderListener> {
 	 *             The insertion failed.
 	 */
 	public synchronized CardData insert(Card card, String pin) throws IOException {
-		if(!isPoweredUp())
-			throw new NoPowerException();
+//		if(!isPoweredUp())
+//			throw new NoPowerException();
 
 		if(cardIsInserted)
 			throw new IllegalStateException("There is already a card in the slot");
