@@ -1,37 +1,43 @@
 package com.diy.software;
 
 import com.diy.hardware.DoItYourselfStation;
+import com.diy.simulation.Customer;
+
 import javax.swing.*;
 
 public class CheckoutStationGui extends javax.swing.JFrame{
-    JFrame frame;
+    //JFrame frame;
 //    public static void main(String[] args) {
 //        new DoItYourselfStation();
-//        //create gui here
+//
 //    }
 
         private DoItYourselfStationLogic stationLogic;
+        private Customer customer;
+        private DoItYourselfStation station;
 
 
 
         /**
          * Creates new form checkout
          */
-        public CheckoutStationGui(DoItYourselfStationLogic stationLogic) {
-            initComponents();
+        public CheckoutStationGui(Customer customer, DoItYourselfStation station, DoItYourselfStationLogic stationLogic) {
+            initCheckoutStationGui();
             this.stationLogic = stationLogic;
+            this.customer = customer;
+            this.station = station;
         }
 
 
-        private void initComponents() {
+        private void initCheckoutStationGui() {
 
-            checkoutPanel = new javax.swing.JPanel();
-            welcomeLabelTop = new javax.swing.JLabel();
-            addOwnBagsButton = new javax.swing.JButton();
-            selectLanguageButton = new javax.swing.JButton();
-            payButton = new javax.swing.JButton();
-            jScrollPane1 = new javax.swing.JScrollPane();
-            itemList = new javax.swing.JList<>();
+            JPanel checkoutPanel = new JPanel();
+            JLabel welcomeLabelTop = new JLabel();
+            JButton addOwnBagsButton = new JButton();
+            JButton selectLanguageButton = new JButton();
+            JButton payButton = new JButton();
+            JScrollPane jScrollPane1 = new JScrollPane();
+            JList<String> itemList = new JList<>();
 
             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,6 +58,8 @@ public class CheckoutStationGui extends javax.swing.JFrame{
 
                 //NEED TO CONNECT BACK END SCANNING TO HERE
                 String[] strings = { "Bananas       $2.75", "Eggs             $3.47", "Milk               $1.24", "Cheetos       $4.57", "Apples          $2.95" };
+                //itemDescriptions = DoItYourselfStationLogic.getScanned().stream().map(p -> p.getDescription()).toList();
+                //String[] strings = itemDescriptions;
                 public int getSize() { return strings.length; }
                 public String getElementAt(int i) { return strings[i]; }
             });
@@ -107,11 +115,12 @@ public class CheckoutStationGui extends javax.swing.JFrame{
             );
 
             pack();
-        }// </editor-fold>
+        }
 
         private void payButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO add your handling code here:
-            var items = stationLogic.productController.getScanned().stream().map(p -> p.getDescription()).toList();
+            //var items = stationLogic.productController.getScanned().stream().map(p -> p.getDescription()).toList();
+            PaymentMethodScreenGui gui = new PaymentMethodScreenGui(customer, station, stationLogic);
+            gui.setVisible(true);
         }
 
         /**
@@ -140,19 +149,15 @@ public class CheckoutStationGui extends javax.swing.JFrame{
             /* Create and display the form */
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    new CheckoutStationGui().setVisible(true);
+                    DoItYourselfStation station = null;
+                    Customer customer = null;
+                    DoItYourselfStationLogic station1 = null;
+                    new CheckoutStationGui(customer,station, station1).setVisible(true);
                 }
             });
         }
 
-        private javax.swing.JButton addOwnBagsButton;
-        private javax.swing.JPanel checkoutPanel;
-        private javax.swing.JList<String> itemList;
-        private javax.swing.JScrollPane jScrollPane1;
-        private javax.swing.JButton payButton;
-        private javax.swing.JButton selectLanguageButton;
-        private javax.swing.JLabel welcomeLabelTop;
-
-
 
 }
+
+//sourced from netbeans

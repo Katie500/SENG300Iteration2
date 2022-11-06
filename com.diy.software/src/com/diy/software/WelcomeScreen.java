@@ -1,13 +1,26 @@
 package com.diy.software;
 
 import com.diy.hardware.DoItYourselfStation;
+import com.diy.simulation.Customer;
+
 import javax.swing.*;
 
 public class WelcomeScreen extends javax.swing.JFrame {
     JFrame frame;
-    public WelcomeScreen()
+
+
+    private DoItYourselfStationLogic stationLogic;
+    private DoItYourselfStation station;
+    private Customer customer;
+
+    public WelcomeScreen(Customer customer, DoItYourselfStation station, DoItYourselfStationLogic stationLogic)
     {
         initComponentsForWelcome();
+
+        this.stationLogic = stationLogic;
+        this.customer = customer;
+        this.station = station;
+
     }
 
 
@@ -74,7 +87,7 @@ public class WelcomeScreen extends javax.swing.JFrame {
 
     private void welcomeButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
-        CheckoutStationGui gui = new CheckoutStationGui();
+        CheckoutStationGui gui = new CheckoutStationGui(customer,station, stationLogic);
         gui.setVisible(true);
     }
 
@@ -82,7 +95,7 @@ public class WelcomeScreen extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new WelcomeScreen().setVisible(true);
+                //new WelcomeScreen().setVisible(true);
             }
         });
     }

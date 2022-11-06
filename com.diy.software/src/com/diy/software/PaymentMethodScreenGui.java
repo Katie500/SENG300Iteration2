@@ -1,27 +1,34 @@
 package com.diy.software;
 
 import com.diy.hardware.DoItYourselfStation;
+import com.diy.simulation.Customer;
+
 import javax.swing.*;
 
 public class PaymentMethodScreenGui extends javax.swing.JFrame {
 
-    /**
-     * Creates new form PaymentMethodScreenGui
-     */
-    public PaymentMethodScreenGui() {
+    private static DoItYourselfStationLogic stationLogic;
+    private static Customer customer;
+    private static DoItYourselfStation station;
+
+
+    public PaymentMethodScreenGui(Customer customer, DoItYourselfStation station, DoItYourselfStationLogic stationLogic) {
         initComponents();
+        PaymentMethodScreenGui.customer = customer;
+        PaymentMethodScreenGui.station = station;
+        PaymentMethodScreenGui.stationLogic = stationLogic;
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+
     private void initComponents() {
 
         //Different components of the PaymentMethod GUI
-        payPanel = new javax.swing.JPanel();
-        cashButton = new javax.swing.JButton();
-        cryptoButton = new javax.swing.JButton();
-        creditButton = new javax.swing.JButton();
-        receiptButton = new javax.swing.JButton();
+        JPanel payPanel = new JPanel();
+        JButton cashButton = new JButton();
+        JButton cryptoButton = new JButton();
+        JButton creditButton = new JButton();
+        JButton receiptButton = new JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,11 +119,7 @@ public class PaymentMethodScreenGui extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -133,21 +136,14 @@ public class PaymentMethodScreenGui extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(PaymentMethodScreenGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PaymentMethodScreenGui().setVisible(true);
+                new PaymentMethodScreenGui(customer, station, stationLogic).setVisible(true);
             }
         });
     }
 
-    // Variables declaration - do not modify                     
-    private javax.swing.JButton cashButton;
-    private javax.swing.JButton creditButton;
-    private javax.swing.JButton cryptoButton;
-    private javax.swing.JPanel payPanel;
-    private javax.swing.JButton receiptButton;
-    // End of variables declaration                   
+
+    //sourced from netbeans
 }
