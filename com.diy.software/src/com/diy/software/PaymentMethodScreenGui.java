@@ -103,12 +103,14 @@ public class PaymentMethodScreenGui extends javax.swing.JFrame {
         pack();
     }
 
-    private void creditButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-
+    private void creditButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        WelcomeScreen gui = new WelcomeScreen(customer, station, stationLogic);
+        gui.setVisible(true);
     }                                            
 
-    private void cashButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-
+    private void cashButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        WelcomeScreen gui = new WelcomeScreen(customer, station, stationLogic);
+        gui.setVisible(true);
     }                                          
 
     private void receiptButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
