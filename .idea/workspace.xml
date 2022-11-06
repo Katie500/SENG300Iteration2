@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e290af6d-ab41-41f7-b71f-db079bd726a4" name="Changes" comment="adding latest gui functionalities">
-      <change afterPath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/CardError.java" afterDir="false" />
+    <list default="true" id="e290af6d-ab41-41f7-b71f-db079bd726a4" name="Changes" comment="error pannel to gui set functionality">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/CardError.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/CardError.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/PaymentMethodScreenGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/PaymentMethodScreenGui.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +103,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667706502326</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="adding new error pannel to gui set functionality">
+      <created>1667710427340</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1667710427340</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -123,6 +131,8 @@
     <MESSAGE value="adding functionality to some gui files" />
     <MESSAGE value="adding a working attendant gui" />
     <MESSAGE value="adding latest gui functionalities" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding latest gui functionalities" />
+    <MESSAGE value="adding new error pannel to gui set functionality" />
+    <MESSAGE value="error pannel to gui set functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="error pannel to gui set functionality" />
   </component>
 </project>

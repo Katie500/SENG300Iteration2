@@ -1,8 +1,5 @@
 package com.diy.software;
-
-
 import com.diy.hardware.DoItYourselfStation;
-import com.diy.simulation.Customer;
 
 public class CardError extends javax.swing.JFrame {
 

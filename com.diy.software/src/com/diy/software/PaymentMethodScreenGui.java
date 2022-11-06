@@ -104,15 +104,15 @@ public class PaymentMethodScreenGui extends javax.swing.JFrame {
     }
 
     private void creditButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        // TODO add your handling code here:
+
     }                                            
 
     private void cashButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
+
     }                                          
 
     private void receiptButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // TODO add your handling code here:
+
     }                                             
 
 
