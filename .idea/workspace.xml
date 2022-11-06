@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e290af6d-ab41-41f7-b71f-db079bd726a4" name="Changes" comment="adding functionality to some gui files">
+    <list default="true" id="e290af6d-ab41-41f7-b71f-db079bd726a4" name="Changes" comment="adding latest gui functionalities">
+      <change afterPath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/CardError.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.diy.hardware/src/com/diy/simulation/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.hardware/src/com/diy/simulation/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.diy.hardware_0.2/com.diy.hardware.iml" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.hardware_0.2/com.diy.hardware.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/CheckoutStationGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/CheckoutStationGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/Demo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/DoItYourselfStationLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/DoItYourselfStationLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/WelcomeScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/WelcomeScreen.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
