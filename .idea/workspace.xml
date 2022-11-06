@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="af1b19c9-42ca-4013-a165-fef7f750ab44" name="Changes" comment="adding a working attendant gui" />
+    <list default="true" id="af1b19c9-42ca-4013-a165-fef7f750ab44" name="Changes" comment="adding latest gui functionalities">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/AttendantStationGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/AttendantStationGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/CheckoutStationGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/CheckoutStationGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/PaymentMethodScreenGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/PaymentMethodScreenGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/WelcomeScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/WelcomeScreen.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -86,7 +92,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667704759989</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="adding latest gui functionalities">
+      <created>1667706502326</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1667706502326</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -106,6 +119,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="adding functionality to some gui files" />
     <MESSAGE value="adding a working attendant gui" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding a working attendant gui" />
+    <MESSAGE value="adding latest gui functionalities" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding latest gui functionalities" />
   </component>
 </project>
