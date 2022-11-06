@@ -100,7 +100,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667704759989</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="adding latest gui functionalities">
+      <created>1667706502326</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1667706502326</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -120,6 +127,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="adding functionality to some gui files" />
     <MESSAGE value="adding a working attendant gui" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding a working attendant gui" />
+    <MESSAGE value="adding latest gui functionalities" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding latest gui functionalities" />
   </component>
 </project>

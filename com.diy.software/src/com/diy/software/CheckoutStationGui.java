@@ -61,6 +61,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     callAttendantButtonActionPerformed(evt);
                 }
+
             });
 
             scanItemButton.setText("Scan Item");
@@ -175,14 +176,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
 
 
 
-//            java.awt.EventQueue.invokeLater(new Runnable() {
-//                public void run() {
-//                    DoItYourselfStation station = null;
-//                    Customer customer = null;
-//                    DoItYourselfStationLogic station1 = null;
-//                    new CheckoutStationGui(customer,station, station1).setVisible(true);
-//                }
-//            });
+
 
         }
 
