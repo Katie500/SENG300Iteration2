@@ -9,6 +9,7 @@ import com.jimmyselectronics.opeechee.CardReaderListener;
 public class PaymentController implements CardReaderListener {
     private DoItYourselfStationLogic stationLogic;
     private CardIssuer creditIssuer;
+    private Card.CardData cardData;
 
     /**
      * Basic constructor.
@@ -16,7 +17,7 @@ public class PaymentController implements CardReaderListener {
      * @param stationLogic
      *            The station logic that this is part of.
      */
-    public PaymentController(DoItYourselfStationLogic stationLogic) {
+    public PaymentController(DoItYourselfStationLogic stationLogic, CardIssuer creditIssuer) {
         this.stationLogic = stationLogic;
         this.creditIssuer = creditIssuer;
     }
@@ -28,17 +29,20 @@ public class PaymentController implements CardReaderListener {
 
     @Override
     public void cardRemoved(CardReader reader) {
+        cardData = null;
+    }
 
+    @Override
+    public void cardDataRead(CardReader reader, Card.CardData data) {
+        cardData = data;
     }
 
     /**
      * @return If a card is currently inserted into the machine.
      */
-    public boolean payWithCard() {
-        return true;
-    }
-
-    @Override
-    public void cardDataRead(CardReader reader, Card.CardData data) {
+    public boolean payWithCard(long charge) {
+        long holdNumber = creditIssuer.authorizeHold(cardData.getNumber(), charge);
+        boolean paySuccess = creditIssuer.postTransaction(cardData.getNumber(), holdNumber, charge);
+        return paySuccess;
     }
 }
