@@ -1,5 +1,6 @@
 package com.diy.software;
 
+<<<<<<< HEAD
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -41,3 +42,15 @@ public class AttendantScreen {
 	}
 
 }
+=======
+import com.diy.hardware.DoItYourselfStation;
+import javax.swing.*;
+
+public class AttendantStationGui extends javax.swing.JFrame {
+    JFrame frame;
+    public static void main(String[] args) {
+        new DoItYourselfStation();
+        //create gui here
+    }
+}
+>>>>>>> 62adfd7e8e40db90fa19efe7ff98cd25ce02c77d
