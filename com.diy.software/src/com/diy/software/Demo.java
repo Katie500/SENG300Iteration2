@@ -2,11 +2,16 @@ package com.diy.software;
 
 import com.diy.hardware.BarcodedProduct;
 import com.diy.hardware.DoItYourselfStation;
+import com.diy.hardware.external.CardIssuer;
 import com.diy.hardware.external.ProductDatabases;
 import com.diy.simulation.Customer;
 import com.jimmyselectronics.necchi.Barcode;
 import com.jimmyselectronics.necchi.BarcodedItem;
 import com.jimmyselectronics.necchi.Numeral;
+import com.jimmyselectronics.opeechee.Card;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class Demo {
     public static void main(String[] args) {
@@ -14,13 +19,6 @@ public class Demo {
         DoItYourselfStation station = new DoItYourselfStation();
         station.scanner.plugIn();
         station.scanner.turnOn();
-
-        // Setup station logic
-        DoItYourselfStationLogic stationLogic = new DoItYourselfStationLogic(station);
-
-        // Setup customer
-        Customer customer = new Customer();
-        customer.useStation(station);
 
         // Create barcodes
         Barcode barcode1 = new Barcode(new Numeral[] { Numeral.one });
@@ -42,10 +40,31 @@ public class Demo {
         ProductDatabases.BARCODED_PRODUCT_DATABASE.put(barcode2, product2);
         ProductDatabases.BARCODED_PRODUCT_DATABASE.put(barcode3, product3);
 
+        // Setup customer
+        Customer customer = new Customer();
+        customer.useStation(station);
+
         // Add items to cart
         customer.shoppingCart.add(item1);
         customer.shoppingCart.add(item2);
         customer.shoppingCart.add(item3);
+
+        // Create cards
+        Card card = new Card("Credit", "0000111122223333", "John Doe", "012", "345", true, true);
+
+        // Add card to customer waller
+        customer.wallet.cards.add(card);
+
+        // Populate card issuer
+        CardIssuer creditIssuer = new CardIssuer("Credit", 10);
+        Date date = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.DATE, 1);
+        creditIssuer.addCardData(card.number, card.cardholder, c, card.cvv, 10000);
+
+        // Setup station logic
+        DoItYourselfStationLogic stationLogic = new DoItYourselfStationLogic(station, creditIssuer);
 
         // Start at welcome screen
         WelcomeScreen frame = new WelcomeScreen(customer, station, stationLogic);

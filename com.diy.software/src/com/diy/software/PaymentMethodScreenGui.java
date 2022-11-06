@@ -4,6 +4,7 @@ import com.diy.hardware.DoItYourselfStation;
 import com.diy.simulation.Customer;
 
 import javax.swing.*;
+import java.io.IOException;
 
 public class PaymentMethodScreenGui extends javax.swing.JFrame {
 
@@ -104,9 +105,24 @@ public class PaymentMethodScreenGui extends javax.swing.JFrame {
     }
 
     private void creditButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        WelcomeScreen gui = new WelcomeScreen(customer, station, stationLogic);
-        gui.setVisible(true);
-    }                                            
+        try {
+            customer.selectCard("Credit");
+            customer.insertCard("345");
+            var paymentSuccess = stationLogic.paymentController.payWithCard();
+
+            if (paymentSuccess) {
+                System.out.println("Payment success");
+                WelcomeScreen gui = new WelcomeScreen(customer, station, stationLogic);
+                gui.setVisible(true);
+            } else {
+                CardError gui = new CardError(customer,station,stationLogic);
+                gui.setVisible(true);
+            }
+        } catch (IOException e) {
+            CardError gui = new CardError(customer,station,stationLogic);
+            gui.setVisible(true);
+        }
+    }
 
     private void cashButtonActionPerformed(java.awt.event.ActionEvent evt) {
         WelcomeScreen gui = new WelcomeScreen(customer, station, stationLogic);

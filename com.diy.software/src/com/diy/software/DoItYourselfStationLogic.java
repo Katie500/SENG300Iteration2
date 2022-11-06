@@ -40,8 +40,8 @@ public class DoItYourselfStationLogic {
      * @throws NullPointerException
      *             If any argument is null.
      */
-    public static DoItYourselfStationLogic installOn(DoItYourselfStation station) {
-        return new DoItYourselfStationLogic(station);
+    public static DoItYourselfStationLogic installOn(DoItYourselfStation station, CardIssuer creditIssuer) {
+        return new DoItYourselfStationLogic(station, creditIssuer);
     }
 
     /**
@@ -57,13 +57,13 @@ public class DoItYourselfStationLogic {
      * @throws NullPointerException
      *             If any argument is null.
      */
-    public DoItYourselfStationLogic(DoItYourselfStation station) {
+    public DoItYourselfStationLogic(DoItYourselfStation station, CardIssuer creditIssuer) {
         this.station = station;
 
         productController = new ProductController(this);
         station.scanner.register(productController);
 
-        paymentController = new PaymentController(this);
+        paymentController = new PaymentController(this, creditIssuer);
         station.cardReader.register(paymentController);
     }
 
