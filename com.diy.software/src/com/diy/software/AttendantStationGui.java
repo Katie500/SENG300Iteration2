@@ -1,56 +1,181 @@
 package com.diy.software;
 
-<<<<<<< HEAD
-import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-
-public class AttendantScreen {
-
-	private JFrame frame;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AttendantScreen window = new AttendantScreen();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public AttendantScreen() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
-
-}
-=======
 import com.diy.hardware.DoItYourselfStation;
-import javax.swing.*;
+import com.diy.simulation.Customer;
 
 public class AttendantStationGui extends javax.swing.JFrame {
-    JFrame frame;
-    public static void main(String[] args) {
-        new DoItYourselfStation();
-        //create gui here
+
+    private DoItYourselfStationLogic stationLogic;
+    private DoItYourselfStation station;
+    private Customer customer;
+
+    public AttendantStationGui(Customer customer, DoItYourselfStation station, DoItYourselfStationLogic stationLogic) {
+        initComponents();
+        this.stationLogic = stationLogic;
+        this.customer = customer;
+        this.station = station;
     }
+
+
+    @SuppressWarnings("unchecked")
+
+    private void initComponents() {
+
+        javax.swing.JTextField jTextField3 = new javax.swing.JTextField();
+        javax.swing.JLabel jLabel3 = new javax.swing.JLabel();
+        javax.swing.JPanel attendantPanel = new javax.swing.JPanel();
+        javax.swing.JTextField preventStationTextbox = new javax.swing.JTextField();
+        javax.swing.JButton finalizeButton = new javax.swing.JButton();
+        javax.swing.JLabel preventStationLabel = new javax.swing.JLabel();
+        javax.swing.JTextField permitStationTextBox = new javax.swing.JTextField();
+        javax.swing.JLabel permitStationLabel = new javax.swing.JLabel();
+        javax.swing.JTextField removeItemTextbox = new javax.swing.JTextField();
+        javax.swing.JLabel removeItemLabel = new javax.swing.JLabel();
+        javax.swing.JTextField addItemTextbox = new javax.swing.JTextField();
+        // Variables declaration - do not modify
+        javax.swing.JLabel addItemLabel = new javax.swing.JLabel();
+
+        jTextField3.setText("jTextField1");
+
+        jLabel3.setText("Permit Station:");
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        preventStationTextbox.setText("ex: 2");
+        preventStationTextbox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                preventStationTextboxActionPerformed(evt);
+            }
+        });
+
+        finalizeButton.setText("Finalize");
+        finalizeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finalizeButtonActionPerformed(evt);
+            }
+        });
+
+        preventStationLabel.setText("Prevent Station:");
+
+        permitStationTextBox.setText("ex: 2");
+
+        permitStationLabel.setText("Permit Station:");
+
+        removeItemTextbox.setText("enter item");
+
+        removeItemLabel.setText("Remove Item:");
+
+        addItemTextbox.setText("enter item");
+
+        addItemLabel.setText("Add Item:");
+
+        javax.swing.GroupLayout attendantPanelLayout = new javax.swing.GroupLayout(attendantPanel);
+        attendantPanel.setLayout(attendantPanelLayout);
+        attendantPanelLayout.setHorizontalGroup(
+                attendantPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(attendantPanelLayout.createSequentialGroup()
+                                .addGroup(attendantPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(attendantPanelLayout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addGroup(attendantPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addGroup(attendantPanelLayout.createSequentialGroup()
+                                                                .addComponent(removeItemLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(removeItemTextbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(attendantPanelLayout.createSequentialGroup()
+                                                                .addComponent(addItemLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(addItemTextbox))
+                                                        .addGroup(attendantPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, attendantPanelLayout.createSequentialGroup()
+                                                                        .addComponent(preventStationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                        .addComponent(preventStationTextbox, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, attendantPanelLayout.createSequentialGroup()
+                                                                        .addComponent(permitStationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                        .addComponent(permitStationTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addGroup(attendantPanelLayout.createSequentialGroup()
+                                                .addGap(53, 53, 53)
+                                                .addComponent(finalizeButton)))
+                                .addContainerGap(227, Short.MAX_VALUE))
+        );
+        attendantPanelLayout.setVerticalGroup(
+                attendantPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(attendantPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(attendantPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(preventStationTextbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(preventStationLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(attendantPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(permitStationTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(permitStationLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(attendantPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(removeItemTextbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(removeItemLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(attendantPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(addItemTextbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(addItemLabel))
+                                .addGap(18, 18, 18)
+                                .addComponent(finalizeButton)
+                                .addContainerGap(148, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(attendantPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(attendantPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
+    }
+
+    private void finalizeButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void preventStationTextboxActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    public static void main(String args[]) {
+
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(AttendantStationGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(AttendantStationGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(AttendantStationGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(AttendantStationGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                //new AttendantStationGui().setVisible(true);
+//            }
+//        });
+    }
+
+
 }
->>>>>>> 62adfd7e8e40db90fa19efe7ff98cd25ce02c77d
+
+//sourced from netbeans
+
+

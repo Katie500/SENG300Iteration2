@@ -51,6 +51,6 @@ public class Demo {
         // TODO: Finish this part
         //CheckoutStationGui frame = new CheckoutStationGui(customer, station, stationLogic);
         WelcomeScreen frame = new WelcomeScreen(customer, station, stationLogic);
-        // frame.setVisible(true);
+        frame.setVisible(true);
     }
 }

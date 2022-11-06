@@ -6,7 +6,6 @@ import com.diy.simulation.Customer;
 import javax.swing.*;
 
 public class WelcomeScreen extends javax.swing.JFrame {
-    JFrame frame;
 
 
     private DoItYourselfStationLogic stationLogic;
@@ -27,7 +26,6 @@ public class WelcomeScreen extends javax.swing.JFrame {
     private void initComponentsForWelcome() {
         JPanel welcomePanel = new JPanel();
         JLabel welcomeLabel = new JLabel();
-        // Variables declaration - do not modify
         JButton welcomeButton = new JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -91,14 +89,14 @@ public class WelcomeScreen extends javax.swing.JFrame {
         gui.setVisible(true);
     }
 
-    public static void main(String args[]) {
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                //new WelcomeScreen().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                //new WelcomeScreen().setVisible(true);
+//            }
+//        });
+//    }
 
 //netbeans sourced
 

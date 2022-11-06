@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.util.List;
 
 public class CheckoutStationGui extends javax.swing.JFrame{
-    //JFrame frame;
+
 //    public static void main(String[] args) {
 //        new DoItYourselfStation();
 //
@@ -19,9 +19,6 @@ public class CheckoutStationGui extends javax.swing.JFrame{
 
 
 
-        /**
-         * Creates new form checkout
-         */
         public CheckoutStationGui(Customer customer, DoItYourselfStation station, DoItYourselfStationLogic stationLogic) {
             initCheckoutStationGui();
             this.stationLogic = stationLogic;
@@ -39,6 +36,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
             JButton payButton = new JButton();
             JScrollPane jScrollPane1 = new JScrollPane();
             JList<String> itemList = new JList<>();
+            JButton callAttendantButton = new JButton();
 
             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,6 +64,13 @@ public class CheckoutStationGui extends javax.swing.JFrame{
             });
             jScrollPane1.setViewportView(itemList);
 
+            callAttendantButton.setText("Call Attendant");
+            callAttendantButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    callAttendantButtonActionPerformed(evt);
+                }
+            });
+
             javax.swing.GroupLayout checkoutPanelLayout = new javax.swing.GroupLayout(checkoutPanel);
             checkoutPanel.setLayout(checkoutPanelLayout);
             checkoutPanelLayout.setHorizontalGroup(
@@ -74,7 +79,8 @@ public class CheckoutStationGui extends javax.swing.JFrame{
                                     .addContainerGap()
                                     .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, checkoutPanelLayout.createSequentialGroup()
-                                                    .addGap(0, 0, Short.MAX_VALUE)
+                                                    .addComponent(callAttendantButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
                                                     .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                             .addComponent(selectLanguageButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                             .addComponent(addOwnBagsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -98,7 +104,9 @@ public class CheckoutStationGui extends javax.swing.JFrame{
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(selectLanguageButton)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(addOwnBagsButton)
+                                    .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(addOwnBagsButton)
+                                            .addComponent(callAttendantButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(15, 15, 15))
             );
 
@@ -119,14 +127,16 @@ public class CheckoutStationGui extends javax.swing.JFrame{
         }
 
         private void payButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            //var items = stationLogic.productController.getScanned().stream().map(p -> p.getDescription()).toList();
             PaymentMethodScreenGui gui = new PaymentMethodScreenGui(customer, station, stationLogic);
             gui.setVisible(true);
         }
 
-        /**
-         * @param args the command line arguments
-         */
+        private void callAttendantButtonActionPerformed(java.awt.event.ActionEvent evt) {
+            AttendantStationGui attendantGui = new AttendantStationGui(customer, station, stationLogic);
+            attendantGui.setVisible(true);
+        }
+
+
         public static void main(String args[]) {
 
             try {
@@ -145,19 +155,19 @@ public class CheckoutStationGui extends javax.swing.JFrame{
             } catch (javax.swing.UnsupportedLookAndFeelException ex) {
                 java.util.logging.Logger.getLogger(CheckoutStationGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
-            //</editor-fold>
 
-            /* Create and display the form */
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    DoItYourselfStation station = null;
-                    Customer customer = null;
-                    DoItYourselfStationLogic station1 = null;
-                    new CheckoutStationGui(customer,station, station1).setVisible(true);
-                }
-            });
+
+
+//            java.awt.EventQueue.invokeLater(new Runnable() {
+//                public void run() {
+//                    DoItYourselfStation station = null;
+//                    Customer customer = null;
+//                    DoItYourselfStationLogic station1 = null;
+//                    new CheckoutStationGui(customer,station, station1).setVisible(true);
+//                }
+//            });
+
         }
-
 
 }
 

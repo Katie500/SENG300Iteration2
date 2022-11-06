@@ -101,7 +101,7 @@ public class PaymentMethodScreenGui extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>                        
+    }
 
     private void creditButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
@@ -115,9 +115,7 @@ public class PaymentMethodScreenGui extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                             
 
-    /**
-     * @param args the command line arguments
-     */
+
     public static void main(String args[]) {
 
         try {
@@ -137,11 +135,11 @@ public class PaymentMethodScreenGui extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(PaymentMethodScreenGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PaymentMethodScreenGui(customer, station, stationLogic).setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new PaymentMethodScreenGui(customer, station, stationLogic).setVisible(true);
+//            }
+//        });
     }
 
 
