@@ -1,0 +1,331 @@
+Index: com.diy.software/src/com/diy/software/PaymentMethodScreenGui.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.diy.software;\r\n\r\nimport com.diy.hardware.DoItYourselfStation;\r\nimport com.diy.simulation.Customer;\r\n\r\nimport javax.swing.*;\r\n\r\npublic class PaymentMethodScreenGui extends javax.swing.JFrame {\r\n\r\n    private static DoItYourselfStationLogic stationLogic;\r\n    private static Customer customer;\r\n    private static DoItYourselfStation station;\r\n\r\n\r\n    public PaymentMethodScreenGui(Customer customer, DoItYourselfStation station, DoItYourselfStationLogic stationLogic) {\r\n        initComponents();\r\n        PaymentMethodScreenGui.customer = customer;\r\n        PaymentMethodScreenGui.station = station;\r\n        PaymentMethodScreenGui.stationLogic = stationLogic;\r\n    }\r\n\r\n    @SuppressWarnings(\"unchecked\")\r\n\r\n    private void initComponents() {\r\n\r\n        //Different components of the PaymentMethod GUI\r\n        JPanel payPanel = new JPanel();\r\n        JButton cashButton = new JButton();\r\n        JButton cryptoButton = new JButton();\r\n        JButton creditButton = new JButton();\r\n        JButton receiptButton = new JButton();\r\n\r\n        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);\r\n\r\n        cashButton.setText(\"Pay With Cash\");\r\n        cashButton.addActionListener(new java.awt.event.ActionListener() {\r\n            public void actionPerformed(java.awt.event.ActionEvent evt) {\r\n                cashButtonActionPerformed(evt);\r\n            }\r\n        });\r\n\r\n        cryptoButton.setText(\"Pay With Cryptocurrency\");\r\n\r\n        creditButton.setText(\"Pay With Credit Card\");\r\n        creditButton.addActionListener(new java.awt.event.ActionListener() {\r\n            public void actionPerformed(java.awt.event.ActionEvent evt) {\r\n                creditButtonActionPerformed(evt);\r\n            }\r\n        });\r\n\r\n        receiptButton.setText(\"Print Receipt\");\r\n        receiptButton.addActionListener(new java.awt.event.ActionListener() {\r\n            public void actionPerformed(java.awt.event.ActionEvent evt) {\r\n                receiptButtonActionPerformed(evt);\r\n            }\r\n        });\r\n\r\n        javax.swing.GroupLayout payPanelLayout = new javax.swing.GroupLayout(payPanel);\r\n        payPanel.setLayout(payPanelLayout);\r\n        payPanelLayout.setHorizontalGroup(\r\n            payPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)\r\n            .addGroup(payPanelLayout.createSequentialGroup()\r\n                .addGap(87, 87, 87)\r\n                .addGroup(payPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)\r\n                    .addGroup(payPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)\r\n                        .addComponent(creditButton)\r\n                        .addComponent(cryptoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)\r\n                        .addComponent(cashButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))\r\n                    .addComponent(receiptButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))\r\n                .addContainerGap(110, Short.MAX_VALUE))\r\n        );\r\n        payPanelLayout.setVerticalGroup(\r\n            payPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)\r\n            .addGroup(payPanelLayout.createSequentialGroup()\r\n                .addGap(48, 48, 48)\r\n                .addComponent(cashButton)\r\n                .addGap(38, 38, 38)\r\n                .addComponent(cryptoButton)\r\n                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)\r\n                .addComponent(creditButton)\r\n                .addGap(30, 30, 30)\r\n                .addComponent(receiptButton)\r\n                .addContainerGap())\r\n        );\r\n\r\n        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());\r\n        getContentPane().setLayout(layout);\r\n        layout.setHorizontalGroup(\r\n            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)\r\n            .addGroup(layout.createSequentialGroup()\r\n                .addGap(63, 63, 63)\r\n                .addComponent(payPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)\r\n                .addContainerGap(25, Short.MAX_VALUE))\r\n        );\r\n        layout.setVerticalGroup(\r\n            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)\r\n            .addGroup(layout.createSequentialGroup()\r\n                .addContainerGap()\r\n                .addComponent(payPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)\r\n                .addContainerGap(39, Short.MAX_VALUE))\r\n        );\r\n\r\n        pack();\r\n    }// </editor-fold>                        \r\n\r\n    private void creditButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             \r\n        // TODO add your handling code here:\r\n    }                                            \r\n\r\n    private void cashButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           \r\n        // TODO add your handling code here:\r\n    }                                          \r\n\r\n    private void receiptButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              \r\n        // TODO add your handling code here:\r\n    }                                             \r\n\r\n    /**\r\n     * @param args the command line arguments\r\n     */\r\n    public static void main(String args[]) {\r\n\r\n        try {\r\n            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {\r\n                if (\"Nimbus\".equals(info.getName())) {\r\n                    javax.swing.UIManager.setLookAndFeel(info.getClassName());\r\n                    break;\r\n                }\r\n            }\r\n        } catch (ClassNotFoundException ex) {\r\n            java.util.logging.Logger.getLogger(PaymentMethodScreenGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);\r\n        } catch (InstantiationException ex) {\r\n            java.util.logging.Logger.getLogger(PaymentMethodScreenGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);\r\n        } catch (IllegalAccessException ex) {\r\n            java.util.logging.Logger.getLogger(PaymentMethodScreenGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);\r\n        } catch (javax.swing.UnsupportedLookAndFeelException ex) {\r\n            java.util.logging.Logger.getLogger(PaymentMethodScreenGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);\r\n        }\r\n\r\n        java.awt.EventQueue.invokeLater(new Runnable() {\r\n            public void run() {\r\n                new PaymentMethodScreenGui(customer, station, stationLogic).setVisible(true);\r\n            }\r\n        });\r\n    }\r\n\r\n\r\n    //sourced from netbeans\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/com.diy.software/src/com/diy/software/PaymentMethodScreenGui.java b/com.diy.software/src/com/diy/software/PaymentMethodScreenGui.java
+--- a/com.diy.software/src/com/diy/software/PaymentMethodScreenGui.java	(revision 727f7aa9317690290eb2b643007ae7c821a447ec)
++++ b/com.diy.software/src/com/diy/software/PaymentMethodScreenGui.java	(date 1667699530186)
+@@ -101,7 +101,7 @@
+         );
+ 
+         pack();
+-    }// </editor-fold>                        
++    }
+ 
+     private void creditButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
+         // TODO add your handling code here:
+@@ -115,9 +115,7 @@
+         // TODO add your handling code here:
+     }                                             
+ 
+-    /**
+-     * @param args the command line arguments
+-     */
++
+     public static void main(String args[]) {
+ 
+         try {
+@@ -137,11 +135,11 @@
+             java.util.logging.Logger.getLogger(PaymentMethodScreenGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+         }
+ 
+-        java.awt.EventQueue.invokeLater(new Runnable() {
+-            public void run() {
+-                new PaymentMethodScreenGui(customer, station, stationLogic).setVisible(true);
+-            }
+-        });
++//        java.awt.EventQueue.invokeLater(new Runnable() {
++//            public void run() {
++//                new PaymentMethodScreenGui(customer, station, stationLogic).setVisible(true);
++//            }
++//        });
+     }
+ 
+ 
+Index: com.diy.software/src/com/diy/software/Demo.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.diy.software;\r\n\r\nimport com.diy.hardware.BarcodedProduct;\r\nimport com.diy.hardware.DoItYourselfStation;\r\nimport com.diy.hardware.external.ProductDatabases;\r\nimport com.diy.simulation.Customer;\r\nimport com.jimmyselectronics.necchi.Barcode;\r\nimport com.jimmyselectronics.necchi.BarcodedItem;\r\nimport com.jimmyselectronics.necchi.Numeral;\r\n\r\npublic class Demo {\r\n    public static void main(String[] args) {\r\n        // Setup station\r\n        DoItYourselfStation station = new DoItYourselfStation();\r\n        station.scanner.plugIn();\r\n        station.scanner.turnOn();\r\n\r\n        // Setup station logic\r\n        DoItYourselfStationLogic stationLogic = new DoItYourselfStationLogic(station);\r\n\r\n\r\n        // Setup customer\r\n        Customer customer = new Customer();\r\n        customer.useStation(station);\r\n\r\n        // Create barcodes\r\n        Barcode barcode1 = new Barcode(new Numeral[] { Numeral.one });\r\n        Barcode barcode2 = new Barcode(new Numeral[] { Numeral.two, Numeral.three });\r\n        Barcode barcode3 = new Barcode(new Numeral[] { Numeral.one, Numeral.two, Numeral.three });\r\n\r\n        // Create barcoded items\r\n        BarcodedItem item1 = new BarcodedItem(barcode1, 1);\r\n        BarcodedItem item2 = new BarcodedItem(barcode2, 1);\r\n        BarcodedItem item3 = new BarcodedItem(barcode3, 1);\r\n\r\n        // Create barcoded products\r\n        BarcodedProduct product1 = new BarcodedProduct(barcode1, \"Food\", 5, 15);\r\n        BarcodedProduct product2 = new BarcodedProduct(barcode2, \"More Food\", 10, 25);\r\n        BarcodedProduct product3 = new BarcodedProduct(barcode3, \"All The Tood\", 20, 35);\r\n\r\n        // Add barcoded products to database\r\n        ProductDatabases.BARCODED_PRODUCT_DATABASE.put(barcode1, product1);\r\n        ProductDatabases.BARCODED_PRODUCT_DATABASE.put(barcode2, product2);\r\n        ProductDatabases.BARCODED_PRODUCT_DATABASE.put(barcode3, product3);\r\n\r\n        // Add items to cart\r\n        customer.shoppingCart.add(item1);\r\n        customer.shoppingCart.add(item2);\r\n        customer.shoppingCart.add(item3);\r\n\r\n        // TODO: Finish this part\r\n         //CheckoutStationGui frame = new CheckoutStationGui(customer, station, stationLogic);\r\n         WelcomeScreen frame = new WelcomeScreen(customer, station, stationLogic);\r\n        // frame.setVisible(true);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/com.diy.software/src/com/diy/software/Demo.java b/com.diy.software/src/com/diy/software/Demo.java
+--- a/com.diy.software/src/com/diy/software/Demo.java	(revision 727f7aa9317690290eb2b643007ae7c821a447ec)
++++ b/com.diy.software/src/com/diy/software/Demo.java	(date 1667698178154)
+@@ -50,7 +50,7 @@
+ 
+         // TODO: Finish this part
+          //CheckoutStationGui frame = new CheckoutStationGui(customer, station, stationLogic);
+-         WelcomeScreen frame = new WelcomeScreen(customer, station, stationLogic);
+-        // frame.setVisible(true);
++        WelcomeScreen frame = new WelcomeScreen(customer, station, stationLogic);
++        frame.setVisible(true);
+     }
+ }
+\ No newline at end of file
+Index: com.diy.software/src/com/diy/software/WelcomeScreen.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.diy.software;\r\n\r\nimport com.diy.hardware.DoItYourselfStation;\r\nimport com.diy.simulation.Customer;\r\n\r\nimport javax.swing.*;\r\n\r\npublic class WelcomeScreen extends javax.swing.JFrame {\r\n    JFrame frame;\r\n\r\n\r\n    private DoItYourselfStationLogic stationLogic;\r\n    private DoItYourselfStation station;\r\n    private Customer customer;\r\n\r\n    public WelcomeScreen(Customer customer, DoItYourselfStation station, DoItYourselfStationLogic stationLogic)\r\n    {\r\n        initComponentsForWelcome();\r\n\r\n        this.stationLogic = stationLogic;\r\n        this.customer = customer;\r\n        this.station = station;\r\n\r\n    }\r\n\r\n\r\n    private void initComponentsForWelcome() {\r\n        JPanel welcomePanel = new JPanel();\r\n        JLabel welcomeLabel = new JLabel();\r\n        // Variables declaration - do not modify\r\n        JButton welcomeButton = new JButton();\r\n\r\n        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);\r\n\r\n        welcomeLabel.setText(\"Welcome to Our Store\");\r\n\r\n        welcomeButton.setText(\"Press here to start scanning\");\r\n        welcomeButton.addActionListener(new java.awt.event.ActionListener() {\r\n            public void actionPerformed(java.awt.event.ActionEvent evt) {\r\n                welcomeButtonActionPerformed(evt);\r\n            }\r\n        });\r\n\r\n        javax.swing.GroupLayout welcomePanelLayout = new javax.swing.GroupLayout(welcomePanel);\r\n        welcomePanel.setLayout(welcomePanelLayout);\r\n        welcomePanelLayout.setHorizontalGroup(\r\n                welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)\r\n                        .addGroup(welcomePanelLayout.createSequentialGroup()\r\n                                .addGroup(welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)\r\n                                        .addGroup(welcomePanelLayout.createSequentialGroup()\r\n                                                .addGap(118, 118, 118)\r\n                                                .addComponent(welcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))\r\n                                        .addGroup(welcomePanelLayout.createSequentialGroup()\r\n                                                .addGap(90, 90, 90)\r\n                                                .addComponent(welcomeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))\r\n                                .addContainerGap(90, Short.MAX_VALUE))\r\n        );\r\n        welcomePanelLayout.setVerticalGroup(\r\n                welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)\r\n                        .addGroup(welcomePanelLayout.createSequentialGroup()\r\n                                .addContainerGap()\r\n                                .addComponent(welcomeLabel)\r\n                                .addGap(98, 98, 98)\r\n                                .addComponent(welcomeButton)\r\n                                .addContainerGap(135, Short.MAX_VALUE))\r\n        );\r\n\r\n        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());\r\n        getContentPane().setLayout(layout);\r\n        layout.setHorizontalGroup(\r\n                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)\r\n                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()\r\n                                .addContainerGap(29, Short.MAX_VALUE)\r\n                                .addComponent(welcomePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)\r\n                                .addGap(15, 15, 15))\r\n        );\r\n        layout.setVerticalGroup(\r\n                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)\r\n                        .addGroup(layout.createSequentialGroup()\r\n                                .addContainerGap()\r\n                                .addComponent(welcomePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)\r\n                                .addContainerGap(17, Short.MAX_VALUE))\r\n        );\r\n\r\n        pack();\r\n    }\r\n\r\n    private void welcomeButtonActionPerformed(java.awt.event.ActionEvent evt) {\r\n\r\n        CheckoutStationGui gui = new CheckoutStationGui(customer,station, stationLogic);\r\n        gui.setVisible(true);\r\n    }\r\n\r\n    public static void main(String args[]) {\r\n\r\n        java.awt.EventQueue.invokeLater(new Runnable() {\r\n            public void run() {\r\n                //new WelcomeScreen().setVisible(true);\r\n            }\r\n        });\r\n    }\r\n\r\n//netbeans sourced\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/com.diy.software/src/com/diy/software/WelcomeScreen.java b/com.diy.software/src/com/diy/software/WelcomeScreen.java
+--- a/com.diy.software/src/com/diy/software/WelcomeScreen.java	(revision 727f7aa9317690290eb2b643007ae7c821a447ec)
++++ b/com.diy.software/src/com/diy/software/WelcomeScreen.java	(date 1667699271337)
+@@ -91,14 +91,14 @@
+         gui.setVisible(true);
+     }
+ 
+-    public static void main(String args[]) {
+-
+-        java.awt.EventQueue.invokeLater(new Runnable() {
+-            public void run() {
+-                //new WelcomeScreen().setVisible(true);
+-            }
+-        });
+-    }
++//    public static void main(String args[]) {
++//
++//        java.awt.EventQueue.invokeLater(new Runnable() {
++//            public void run() {
++//                //new WelcomeScreen().setVisible(true);
++//            }
++//        });
++//    }
+ 
+ //netbeans sourced
+ 
+Index: com.diy.software/src/com/diy/software/CheckoutStationGui.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.diy.software;\r\n\r\nimport com.diy.hardware.DoItYourselfStation;\r\nimport com.diy.simulation.Customer;\r\n\r\nimport javax.swing.*;\r\n\r\npublic class CheckoutStationGui extends javax.swing.JFrame{\r\n    //JFrame frame;\r\n//    public static void main(String[] args) {\r\n//        new DoItYourselfStation();\r\n//\r\n//    }\r\n\r\n        private DoItYourselfStationLogic stationLogic;\r\n        private Customer customer;\r\n        private DoItYourselfStation station;\r\n\r\n\r\n\r\n        /**\r\n         * Creates new form checkout\r\n         */\r\n        public CheckoutStationGui(Customer customer, DoItYourselfStation station, DoItYourselfStationLogic stationLogic) {\r\n            initCheckoutStationGui();\r\n            this.stationLogic = stationLogic;\r\n            this.customer = customer;\r\n            this.station = station;\r\n        }\r\n\r\n\r\n        private void initCheckoutStationGui() {\r\n\r\n            JPanel checkoutPanel = new JPanel();\r\n            JLabel welcomeLabelTop = new JLabel();\r\n            JButton addOwnBagsButton = new JButton();\r\n            JButton selectLanguageButton = new JButton();\r\n            JButton payButton = new JButton();\r\n            JScrollPane jScrollPane1 = new JScrollPane();\r\n            JList<String> itemList = new JList<>();\r\n\r\n            setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);\r\n\r\n            welcomeLabelTop.setText(\"Welcome to Checkout. Please scan items.\");\r\n\r\n            addOwnBagsButton.setText(\"Add Own Bags\");\r\n\r\n            selectLanguageButton.setText(\"Select Language\");\r\n\r\n            payButton.setText(\"Pay\");\r\n            payButton.addActionListener(new java.awt.event.ActionListener() {\r\n                public void actionPerformed(java.awt.event.ActionEvent evt) {\r\n                    payButtonActionPerformed(evt);\r\n                }\r\n            });\r\n\r\n            itemList.setModel(new javax.swing.AbstractListModel<String>() {\r\n\r\n                //NEED TO CONNECT BACK END SCANNING TO HERE\r\n                String[] strings = { \"Bananas       $2.75\", \"Eggs             $3.47\", \"Milk               $1.24\", \"Cheetos       $4.57\", \"Apples          $2.95\" };\r\n                //itemDescriptions = DoItYourselfStationLogic.getScanned().stream().map(p -> p.getDescription()).toList();\r\n                //String[] strings = itemDescriptions;\r\n                public int getSize() { return strings.length; }\r\n                public String getElementAt(int i) { return strings[i]; }\r\n            });\r\n            jScrollPane1.setViewportView(itemList);\r\n\r\n            javax.swing.GroupLayout checkoutPanelLayout = new javax.swing.GroupLayout(checkoutPanel);\r\n            checkoutPanel.setLayout(checkoutPanelLayout);\r\n            checkoutPanelLayout.setHorizontalGroup(\r\n                    checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)\r\n                            .addGroup(checkoutPanelLayout.createSequentialGroup()\r\n                                    .addContainerGap()\r\n                                    .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)\r\n                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, checkoutPanelLayout.createSequentialGroup()\r\n                                                    .addGap(0, 0, Short.MAX_VALUE)\r\n                                                    .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)\r\n                                                            .addComponent(selectLanguageButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)\r\n                                                            .addComponent(addOwnBagsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)\r\n                                                            .addComponent(payButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))\r\n                                            .addGroup(checkoutPanelLayout.createSequentialGroup()\r\n                                                    .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)\r\n                                                            .addComponent(welcomeLabelTop, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)\r\n                                                            .addComponent(jScrollPane1))\r\n                                                    .addGap(0, 149, Short.MAX_VALUE)))\r\n                                    .addContainerGap())\r\n            );\r\n            checkoutPanelLayout.setVerticalGroup(\r\n                    checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)\r\n                            .addGroup(checkoutPanelLayout.createSequentialGroup()\r\n                                    .addContainerGap()\r\n                                    .addComponent(welcomeLabelTop)\r\n                                    .addGap(18, 18, 18)\r\n                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)\r\n                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)\r\n                                    .addComponent(payButton)\r\n                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)\r\n                                    .addComponent(selectLanguageButton)\r\n                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)\r\n                                    .addComponent(addOwnBagsButton)\r\n                                    .addGap(15, 15, 15))\r\n            );\r\n\r\n            javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());\r\n            getContentPane().setLayout(layout);\r\n            layout.setHorizontalGroup(\r\n                    layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)\r\n                            .addGroup(layout.createSequentialGroup()\r\n                                    .addContainerGap()\r\n                                    .addComponent(checkoutPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))\r\n            );\r\n            layout.setVerticalGroup(\r\n                    layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)\r\n                            .addComponent(checkoutPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)\r\n            );\r\n\r\n            pack();\r\n        }\r\n\r\n        private void payButtonActionPerformed(java.awt.event.ActionEvent evt) {\r\n            //var items = stationLogic.productController.getScanned().stream().map(p -> p.getDescription()).toList();\r\n            PaymentMethodScreenGui gui = new PaymentMethodScreenGui(customer, station, stationLogic);\r\n            gui.setVisible(true);\r\n        }\r\n\r\n        /**\r\n         * @param args the command line arguments\r\n         */\r\n        public static void main(String args[]) {\r\n\r\n            try {\r\n                for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {\r\n                    if (\"Nimbus\".equals(info.getName())) {\r\n                        javax.swing.UIManager.setLookAndFeel(info.getClassName());\r\n                        break;\r\n                    }\r\n                }\r\n            } catch (ClassNotFoundException ex) {\r\n                java.util.logging.Logger.getLogger(CheckoutStationGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);\r\n            } catch (InstantiationException ex) {\r\n                java.util.logging.Logger.getLogger(CheckoutStationGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);\r\n            } catch (IllegalAccessException ex) {\r\n                java.util.logging.Logger.getLogger(CheckoutStationGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);\r\n            } catch (javax.swing.UnsupportedLookAndFeelException ex) {\r\n                java.util.logging.Logger.getLogger(CheckoutStationGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);\r\n            }\r\n            //</editor-fold>\r\n\r\n            /* Create and display the form */\r\n            java.awt.EventQueue.invokeLater(new Runnable() {\r\n                public void run() {\r\n                    DoItYourselfStation station = null;\r\n                    Customer customer = null;\r\n                    DoItYourselfStationLogic station1 = null;\r\n                    new CheckoutStationGui(customer,station, station1).setVisible(true);\r\n                }\r\n            });\r\n        }\r\n\r\n\r\n}\r\n\r\n//sourced from netbeans
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/com.diy.software/src/com/diy/software/CheckoutStationGui.java b/com.diy.software/src/com/diy/software/CheckoutStationGui.java
+--- a/com.diy.software/src/com/diy/software/CheckoutStationGui.java	(revision 727f7aa9317690290eb2b643007ae7c821a447ec)
++++ b/com.diy.software/src/com/diy/software/CheckoutStationGui.java	(date 1667701336926)
+@@ -4,9 +4,10 @@
+ import com.diy.simulation.Customer;
+ 
+ import javax.swing.*;
++import java.util.List;
+ 
+ public class CheckoutStationGui extends javax.swing.JFrame{
+-    //JFrame frame;
++
+ //    public static void main(String[] args) {
+ //        new DoItYourselfStation();
+ //
+@@ -18,9 +19,6 @@
+ 
+ 
+ 
+-        /**
+-         * Creates new form checkout
+-         */
+         public CheckoutStationGui(Customer customer, DoItYourselfStation station, DoItYourselfStationLogic stationLogic) {
+             initCheckoutStationGui();
+             this.stationLogic = stationLogic;
+@@ -38,6 +36,7 @@
+             JButton payButton = new JButton();
+             JScrollPane jScrollPane1 = new JScrollPane();
+             JList<String> itemList = new JList<>();
++            JButton callAttendantButton = new JButton();
+ 
+             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+ 
+@@ -57,14 +56,21 @@
+             itemList.setModel(new javax.swing.AbstractListModel<String>() {
+ 
+                 //NEED TO CONNECT BACK END SCANNING TO HERE
+-                String[] strings = { "Bananas       $2.75", "Eggs             $3.47", "Milk               $1.24", "Cheetos       $4.57", "Apples          $2.95" };
+-                //itemDescriptions = DoItYourselfStationLogic.getScanned().stream().map(p -> p.getDescription()).toList();
+-                //String[] strings = itemDescriptions;
++                //String[] strings = { "Bananas       $2.75", "Eggs             $3.47", "Milk               $1.24", "Cheetos       $4.57", "Apples          $2.95" };
++                List<String> items = stationLogic.productController.getScanned().stream().map(p -> p.getDescription()).toList();
++                String[] strings = items.toArray(new String[0]);
+                 public int getSize() { return strings.length; }
+                 public String getElementAt(int i) { return strings[i]; }
+             });
+             jScrollPane1.setViewportView(itemList);
+ 
++            callAttendantButton.setText("Call Attendant");
++            callAttendantButton.addActionListener(new java.awt.event.ActionListener() {
++                public void actionPerformed(java.awt.event.ActionEvent evt) {
++                    callAttendantButtonActionPerformed(evt);
++                }
++            });
++
+             javax.swing.GroupLayout checkoutPanelLayout = new javax.swing.GroupLayout(checkoutPanel);
+             checkoutPanel.setLayout(checkoutPanelLayout);
+             checkoutPanelLayout.setHorizontalGroup(
+@@ -73,7 +79,8 @@
+                                     .addContainerGap()
+                                     .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, checkoutPanelLayout.createSequentialGroup()
+-                                                    .addGap(0, 0, Short.MAX_VALUE)
++                                                    .addComponent(callAttendantButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
++                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
+                                                     .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                             .addComponent(selectLanguageButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                             .addComponent(addOwnBagsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+@@ -97,7 +104,9 @@
+                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                     .addComponent(selectLanguageButton)
+                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+-                                    .addComponent(addOwnBagsButton)
++                                    .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
++                                            .addComponent(addOwnBagsButton)
++                                            .addComponent(callAttendantButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                     .addGap(15, 15, 15))
+             );
+ 
+@@ -123,9 +132,11 @@
+             gui.setVisible(true);
+         }
+ 
+-        /**
+-         * @param args the command line arguments
+-         */
++        private void callAttendantButtonActionPerformed(java.awt.event.ActionEvent evt) {
++            // TODO add your handling code here:
++        }
++
++
+         public static void main(String args[]) {
+ 
+             try {
+@@ -144,19 +155,19 @@
+             } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+                 java.util.logging.Logger.getLogger(CheckoutStationGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+             }
+-            //</editor-fold>
++
+ 
+-            /* Create and display the form */
+-            java.awt.EventQueue.invokeLater(new Runnable() {
+-                public void run() {
+-                    DoItYourselfStation station = null;
+-                    Customer customer = null;
+-                    DoItYourselfStationLogic station1 = null;
+-                    new CheckoutStationGui(customer,station, station1).setVisible(true);
+-                }
+-            });
++
++//            java.awt.EventQueue.invokeLater(new Runnable() {
++//                public void run() {
++//                    DoItYourselfStation station = null;
++//                    Customer customer = null;
++//                    DoItYourselfStationLogic station1 = null;
++//                    new CheckoutStationGui(customer,station, station1).setVisible(true);
++//                }
++//            });
++
+         }
+-
+ 
+ }
+ 
+Index: com.diy.hardware_0.2/com.diy.hardware.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<module version=\"4\">\r\n  <component name=\"NewModuleRootManager\" inherit-compiler-output=\"true\">\r\n    <exclude-output />\r\n    <content url=\"file://$MODULE_DIR$/../com.diy.hardware\">\r\n      <sourceFolder url=\"file://$MODULE_DIR$/../com.diy.hardware/src\" isTestSource=\"false\" />\r\n    </content>\r\n    <orderEntry type=\"jdk\" jdkName=\"openjdk-19\" jdkType=\"JavaSDK\" />\r\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\r\n  </component>\r\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/com.diy.hardware_0.2/com.diy.hardware.iml b/com.diy.hardware_0.2/com.diy.hardware.iml
+--- a/com.diy.hardware_0.2/com.diy.hardware.iml	(revision 727f7aa9317690290eb2b643007ae7c821a447ec)
++++ b/com.diy.hardware_0.2/com.diy.hardware.iml	(date 1667698098745)
+@@ -2,10 +2,15 @@
+ <module version="4">
+   <component name="NewModuleRootManager" inherit-compiler-output="true">
+     <exclude-output />
+-    <content url="file://$MODULE_DIR$/../com.diy.hardware">
+-      <sourceFolder url="file://$MODULE_DIR$/../com.diy.hardware/src" isTestSource="false" />
+-    </content>
+-    <orderEntry type="jdk" jdkName="openjdk-19" jdkType="JavaSDK" />
+     <orderEntry type="sourceFolder" forTests="false" />
++    <orderEntry type="module-library">
++      <library>
++        <CLASSES>
++          <root url="jar://$APPLICATION_HOME_DIR$/lib/junit4.jar!/" />
++        </CLASSES>
++        <JAVADOC />
++        <SOURCES />
++      </library>
++    </orderEntry>
+   </component>
+ </module>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"af1b19c9-42ca-4013-a165-fef7f750ab44\" name=\"Changes\" comment=\"adding functionality to some gui files\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/com.diy.software/src/com/diy/software/CheckoutStationGui.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/com.diy.software/src/com/diy/software/CheckoutStationGui.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/com.diy.software/src/com/diy/software/Demo.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/com.diy.software/src/com/diy/software/Demo.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/com.diy.software/src/com/diy/software/PaymentMethodScreenGui.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/com.diy.software/src/com/diy/software/PaymentMethodScreenGui.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/com.diy.software/src/com/diy/software/WelcomeScreen.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/com.diy.software/src/com/diy/software/WelcomeScreen.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2H8ewoTJ1QER2qULgdbFUedniHb\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/world/Desktop/SENG300/seng-300-project/com.diy.hardware&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.15429688&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\">\r\n    <configuration default=\"true\" type=\"JetRunConfigurationType\">\r\n      <module name=\"com.diy.hardware\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"KotlinStandaloneScriptRunConfigurationType\">\r\n      <module name=\"com.diy.hardware\" />\r\n      <option name=\"filePath\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"af1b19c9-42ca-4013-a165-fef7f750ab44\" name=\"Changes\" comment=\"\" />\r\n      <created>1667671380396</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1667671380396</updated>\r\n      <workItem from=\"1667671382173\" duration=\"1046000\" />\r\n      <workItem from=\"1667674160371\" duration=\"7404000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"adding functionality to some gui files\">\r\n      <created>1667689446172</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1667689446172</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"adding functionality to some gui files\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"adding functionality to some gui files\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 727f7aa9317690290eb2b643007ae7c821a447ec)
++++ b/.idea/workspace.xml	(date 1667699530760)
+@@ -3,6 +3,7 @@
+   <component name="ChangeListManager">
+     <list default="true" id="af1b19c9-42ca-4013-a165-fef7f750ab44" name="Changes" comment="adding functionality to some gui files">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/com.diy.hardware_0.2/com.diy.hardware.iml" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.hardware_0.2/com.diy.hardware.iml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/CheckoutStationGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/CheckoutStationGui.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/Demo.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/PaymentMethodScreenGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/PaymentMethodScreenGui.java" afterDir="false" />
+@@ -24,19 +25,20 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
+-    &quot;last_opened_file_path&quot;: &quot;C:/Users/world/Desktop/SENG300/seng-300-project/com.diy.hardware&quot;,
+-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+-    &quot;project.structure.proportion&quot;: &quot;0.15429688&quot;,
+-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "WebServerToolWindowFactoryState": "false",
++    "jdk.selected.JAVA_MODULE": "openjdk-19",
++    "last_opened_file_path": "C:/Program Files/JetBrains/IntelliJ IDEA 2022.2.2/lib/junit4.jar",
++    "project.structure.last.edited": "Modules",
++    "project.structure.proportion": "0.15429688",
++    "project.structure.side.proportion": "0.2",
++    "settings.editor.selected.configurable": "preferences.lookFeel"
+   }
+-}</component>
++}]]></component>
+   <component name="RunManager">
+     <configuration default="true" type="JetRunConfigurationType">
+       <module name="com.diy.hardware" />
+@@ -70,7 +72,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1667689446172</updated>
+     </task>
+-    <option name="localTasksCounter" value="2" />
++    <task id="LOCAL-00002" summary="adding functionality to some gui files">
++      <created>1667696746161</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1667696746161</updated>
++    </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">

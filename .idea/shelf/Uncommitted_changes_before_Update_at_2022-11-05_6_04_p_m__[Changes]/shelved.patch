@@ -1,0 +1,159 @@
+Index: com.diy.software/src/com/diy/software/CheckoutStationGui.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.diy.software;\r\n\r\nimport com.diy.hardware.DoItYourselfStation;\r\nimport javax.swing.*;\r\n\r\npublic class CheckoutStationGui extends javax.swing.JFrame{\r\n    JFrame frame;\r\n//    public static void main(String[] args) {\r\n//        new DoItYourselfStation();\r\n//        //create gui here\r\n//    }\r\n\r\n\r\n\r\n        /**\r\n         * Creates new form checkout\r\n         */\r\n        public CheckoutStationGui() {\r\n            initComponents();\r\n        }\r\n\r\n\r\n        private void initComponents() {\r\n\r\n            checkoutPanel = new javax.swing.JPanel();\r\n            welcomeLabelTop = new javax.swing.JLabel();\r\n            addOwnBagsButton = new javax.swing.JButton();\r\n            selectLanguageButton = new javax.swing.JButton();\r\n            payButton = new javax.swing.JButton();\r\n            jScrollPane1 = new javax.swing.JScrollPane();\r\n            itemList = new javax.swing.JList<>();\r\n\r\n            setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);\r\n\r\n            welcomeLabelTop.setText(\"Welcome to Checkout. Please scan items.\");\r\n\r\n            addOwnBagsButton.setText(\"Add Own Bags\");\r\n\r\n            selectLanguageButton.setText(\"Select Language\");\r\n\r\n            payButton.setText(\"Pay\");\r\n            payButton.addActionListener(new java.awt.event.ActionListener() {\r\n                public void actionPerformed(java.awt.event.ActionEvent evt) {\r\n                    payButtonActionPerformed(evt);\r\n                }\r\n            });\r\n\r\n            itemList.setModel(new javax.swing.AbstractListModel<String>() {\r\n\r\n                //NEED TO CONNECT BACK END SCANNING TO HERE\r\n                String[] strings = { \"Bananas       $2.75\", \"Eggs             $3.47\", \"Milk               $1.24\", \"Cheetos       $4.57\", \"Apples          $2.95\" };\r\n                public int getSize() { return strings.length; }\r\n                public String getElementAt(int i) { return strings[i]; }\r\n            });\r\n            jScrollPane1.setViewportView(itemList);\r\n\r\n            javax.swing.GroupLayout checkoutPanelLayout = new javax.swing.GroupLayout(checkoutPanel);\r\n            checkoutPanel.setLayout(checkoutPanelLayout);\r\n            checkoutPanelLayout.setHorizontalGroup(\r\n                    checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)\r\n                            .addGroup(checkoutPanelLayout.createSequentialGroup()\r\n                                    .addContainerGap()\r\n                                    .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)\r\n                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, checkoutPanelLayout.createSequentialGroup()\r\n                                                    .addGap(0, 0, Short.MAX_VALUE)\r\n                                                    .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)\r\n                                                            .addComponent(selectLanguageButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)\r\n                                                            .addComponent(addOwnBagsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)\r\n                                                            .addComponent(payButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))\r\n                                            .addGroup(checkoutPanelLayout.createSequentialGroup()\r\n                                                    .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)\r\n                                                            .addComponent(welcomeLabelTop, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)\r\n                                                            .addComponent(jScrollPane1))\r\n                                                    .addGap(0, 149, Short.MAX_VALUE)))\r\n                                    .addContainerGap())\r\n            );\r\n            checkoutPanelLayout.setVerticalGroup(\r\n                    checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)\r\n                            .addGroup(checkoutPanelLayout.createSequentialGroup()\r\n                                    .addContainerGap()\r\n                                    .addComponent(welcomeLabelTop)\r\n                                    .addGap(18, 18, 18)\r\n                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)\r\n                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)\r\n                                    .addComponent(payButton)\r\n                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)\r\n                                    .addComponent(selectLanguageButton)\r\n                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)\r\n                                    .addComponent(addOwnBagsButton)\r\n                                    .addGap(15, 15, 15))\r\n            );\r\n\r\n            javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());\r\n            getContentPane().setLayout(layout);\r\n            layout.setHorizontalGroup(\r\n                    layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)\r\n                            .addGroup(layout.createSequentialGroup()\r\n                                    .addContainerGap()\r\n                                    .addComponent(checkoutPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))\r\n            );\r\n            layout.setVerticalGroup(\r\n                    layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)\r\n                            .addComponent(checkoutPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)\r\n            );\r\n\r\n            pack();\r\n        }// </editor-fold>\r\n\r\n        private void payButtonActionPerformed(java.awt.event.ActionEvent evt) {\r\n            // TODO add your handling code here:\r\n        }\r\n\r\n        /**\r\n         * @param args the command line arguments\r\n         */\r\n        public static void main(String args[]) {\r\n\r\n            try {\r\n                for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {\r\n                    if (\"Nimbus\".equals(info.getName())) {\r\n                        javax.swing.UIManager.setLookAndFeel(info.getClassName());\r\n                        break;\r\n                    }\r\n                }\r\n            } catch (ClassNotFoundException ex) {\r\n                java.util.logging.Logger.getLogger(CheckoutStationGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);\r\n            } catch (InstantiationException ex) {\r\n                java.util.logging.Logger.getLogger(CheckoutStationGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);\r\n            } catch (IllegalAccessException ex) {\r\n                java.util.logging.Logger.getLogger(CheckoutStationGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);\r\n            } catch (javax.swing.UnsupportedLookAndFeelException ex) {\r\n                java.util.logging.Logger.getLogger(CheckoutStationGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);\r\n            }\r\n            //</editor-fold>\r\n\r\n            /* Create and display the form */\r\n            java.awt.EventQueue.invokeLater(new Runnable() {\r\n                public void run() {\r\n                    new CheckoutStationGui().setVisible(true);\r\n                }\r\n            });\r\n        }\r\n\r\n        private javax.swing.JButton addOwnBagsButton;\r\n        private javax.swing.JPanel checkoutPanel;\r\n        private javax.swing.JList<String> itemList;\r\n        private javax.swing.JScrollPane jScrollPane1;\r\n        private javax.swing.JButton payButton;\r\n        private javax.swing.JButton selectLanguageButton;\r\n        private javax.swing.JLabel welcomeLabelTop;\r\n\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/com.diy.software/src/com/diy/software/CheckoutStationGui.java b/com.diy.software/src/com/diy/software/CheckoutStationGui.java
+--- a/com.diy.software/src/com/diy/software/CheckoutStationGui.java	(revision 8c8d63c891e689f684d81ce57cd21466c0f60544)
++++ b/com.diy.software/src/com/diy/software/CheckoutStationGui.java	(date 1667692992636)
+@@ -7,28 +7,30 @@
+     JFrame frame;
+ //    public static void main(String[] args) {
+ //        new DoItYourselfStation();
+-//        //create gui here
++//
+ //    }
++        private DoItYourselfStationLogic stationLogic;
+ 
+ 
+ 
+         /**
+          * Creates new form checkout
+          */
+-        public CheckoutStationGui() {
+-            initComponents();
++        public CheckoutStationGui(DoItYourselfStationLogic stationLogic) {
++            initCheckoutStationGui();
++            this.stationLogic = stationLogic;
+         }
+ 
+ 
+-        private void initComponents() {
++        private void initCheckoutStationGui() {
+ 
+-            checkoutPanel = new javax.swing.JPanel();
+-            welcomeLabelTop = new javax.swing.JLabel();
+-            addOwnBagsButton = new javax.swing.JButton();
+-            selectLanguageButton = new javax.swing.JButton();
+-            payButton = new javax.swing.JButton();
+-            jScrollPane1 = new javax.swing.JScrollPane();
+-            itemList = new javax.swing.JList<>();
++            JPanel checkoutPanel = new JPanel();
++            JLabel welcomeLabelTop = new JLabel();
++            JButton addOwnBagsButton = new JButton();
++            JButton selectLanguageButton = new JButton();
++            JButton payButton = new JButton();
++            JScrollPane jScrollPane1 = new JScrollPane();
++            JList<String> itemList = new JList<>();
+ 
+             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+ 
+@@ -49,6 +51,8 @@
+ 
+                 //NEED TO CONNECT BACK END SCANNING TO HERE
+                 String[] strings = { "Bananas       $2.75", "Eggs             $3.47", "Milk               $1.24", "Cheetos       $4.57", "Apples          $2.95" };
++                //itemDescriptions = DoItYourselfStationLogic.getScanned().stream().map(p -> p.getDescription()).toList();
++                //String[] strings = itemDescriptions;
+                 public int getSize() { return strings.length; }
+                 public String getElementAt(int i) { return strings[i]; }
+             });
+@@ -141,14 +145,7 @@
+             });
+         }
+ 
+-        private javax.swing.JButton addOwnBagsButton;
+-        private javax.swing.JPanel checkoutPanel;
+-        private javax.swing.JList<String> itemList;
+-        private javax.swing.JScrollPane jScrollPane1;
+-        private javax.swing.JButton payButton;
+-        private javax.swing.JButton selectLanguageButton;
+-        private javax.swing.JLabel welcomeLabelTop;
+ 
+-
++}
+ 
+-}
+\ No newline at end of file
++//sourced from netbeans
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"af1b19c9-42ca-4013-a165-fef7f750ab44\" name=\"Changes\" comment=\"adding functionality to some gui files\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2H8ewoTJ1QER2qULgdbFUedniHb\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"WebServerToolWindowFactoryState\": \"false\",\r\n    \"jdk.selected.JAVA_MODULE\": \"openjdk-19\",\r\n    \"last_opened_file_path\": \"C:/Users/world/Desktop/SENG300/seng-300-project/com.diy.hardware\",\r\n    \"project.structure.last.edited\": \"Modules\",\r\n    \"project.structure.proportion\": \"0.15429688\",\r\n    \"project.structure.side.proportion\": \"0.2\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RunManager\">\r\n    <configuration default=\"true\" type=\"JetRunConfigurationType\">\r\n      <module name=\"com.diy.hardware\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"KotlinStandaloneScriptRunConfigurationType\">\r\n      <module name=\"com.diy.hardware\" />\r\n      <option name=\"filePath\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"af1b19c9-42ca-4013-a165-fef7f750ab44\" name=\"Changes\" comment=\"\" />\r\n      <created>1667671380396</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1667671380396</updated>\r\n      <workItem from=\"1667671382173\" duration=\"1046000\" />\r\n      <workItem from=\"1667674160371\" duration=\"7404000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"adding functionality to some gui files\">\r\n      <created>1667689446172</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1667689446172</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"adding functionality to some gui files\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"adding functionality to some gui files\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 8c8d63c891e689f684d81ce57cd21466c0f60544)
++++ b/.idea/workspace.xml	(date 1667693058545)
+@@ -1,7 +1,10 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="af1b19c9-42ca-4013-a165-fef7f750ab44" name="Changes" comment="adding functionality to some gui files" />
++    <list default="true" id="af1b19c9-42ca-4013-a165-fef7f750ab44" name="Changes" comment="adding functionality to some gui files">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/CheckoutStationGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.diy.software/src/com/diy/software/CheckoutStationGui.java" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -18,19 +21,19 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+-    "WebServerToolWindowFactoryState": "false",
+-    "jdk.selected.JAVA_MODULE": "openjdk-19",
+-    "last_opened_file_path": "C:/Users/world/Desktop/SENG300/seng-300-project/com.diy.hardware",
+-    "project.structure.last.edited": "Modules",
+-    "project.structure.proportion": "0.15429688",
+-    "project.structure.side.proportion": "0.2"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
++    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
++    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/world/Desktop/SENG300/seng-300-project/com.diy.hardware&quot;,
++    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
++    &quot;project.structure.proportion&quot;: &quot;0.15429688&quot;,
++    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RunManager">
+     <configuration default="true" type="JetRunConfigurationType">
+       <module name="com.diy.hardware" />
+@@ -55,7 +58,7 @@
+       <option name="presentableId" value="Default" />
+       <updated>1667671380396</updated>
+       <workItem from="1667671382173" duration="1046000" />
+-      <workItem from="1667674160371" duration="7404000" />
++      <workItem from="1667674160371" duration="10080000" />
+     </task>
+     <task id="LOCAL-00001" summary="adding functionality to some gui files">
+       <created>1667689446172</created>
+@@ -64,7 +67,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1667689446172</updated>
+     </task>
+-    <option name="localTasksCounter" value="2" />
++    <task id="LOCAL-00002" summary="adding functionality to some gui files">
++      <created>1667689623892</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1667689623892</updated>
++    </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
