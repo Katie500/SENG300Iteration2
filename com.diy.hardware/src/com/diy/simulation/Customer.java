@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import com.diy.hardware.DoItYourselfStation;
+import com.diy.hardware.DoItYourselfStationAR;
 import com.jimmyselectronics.Item;
 import com.jimmyselectronics.necchi.BarcodedItem;
 import com.jimmyselectronics.opeechee.Card;
@@ -35,7 +35,7 @@ public final class Customer {
 	private Item currentItem = null;
 
 	private Card selectedCard = null;
-	private DoItYourselfStation station = null;
+	private DoItYourselfStationAR station = null;
 
 	/**
 	 * The customer starts to use the indicated station.
@@ -43,7 +43,7 @@ public final class Customer {
 	 * @param station
 	 *            The station to use.
 	 */
-	public void useStation(DoItYourselfStation station) {
+	public void useStation(DoItYourselfStationAR station) {
 		if(station == null)
 			throw new NullPointerSimulationException("station");
 
@@ -192,7 +192,7 @@ public final class Customer {
 		if(currentItem == null)
 			throw new NoSuchElementException();
 
-		station.baggingArea.add(currentItem);
+		station.scale.add(currentItem);
 		currentItem = null;
 	}
 }
