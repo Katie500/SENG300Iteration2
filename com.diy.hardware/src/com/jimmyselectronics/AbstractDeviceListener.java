@@ -14,7 +14,7 @@ public interface AbstractDeviceListener {
 	 * @param device
 	 *            The device that has been enabled.
 	 */
-	default void enabled(AbstractDevice<? extends AbstractDeviceListener> device) {};
+	public void enabled(AbstractDevice<? extends AbstractDeviceListener> device);
 
 	/**
 	 * Announces that the indicated device has been disabled.
@@ -22,7 +22,7 @@ public interface AbstractDeviceListener {
 	 * @param device
 	 *            The device that has been disabled.
 	 */
-	default void disabled(AbstractDevice<? extends AbstractDeviceListener> device) {};
+	public void disabled(AbstractDevice<? extends AbstractDeviceListener> device);
 
 	/**
 	 * Announces that the indicated device has been turned on.
@@ -30,7 +30,7 @@ public interface AbstractDeviceListener {
 	 * @param device
 	 *            The device that has been turned on.
 	 */
-	default void turnedOn(AbstractDevice<? extends AbstractDeviceListener> device) {};
+	public void turnedOn(AbstractDevice<? extends AbstractDeviceListener> device);
 
 	/**
 	 * Announces that the indicated device has been turned off.
@@ -38,5 +38,5 @@ public interface AbstractDeviceListener {
 	 * @param device
 	 *            The device that has been turned off.
 	 */
-	default void turnedOff(AbstractDevice<? extends AbstractDeviceListener> device) {};
+	public void turnedOff(AbstractDevice<? extends AbstractDeviceListener> device);
 }

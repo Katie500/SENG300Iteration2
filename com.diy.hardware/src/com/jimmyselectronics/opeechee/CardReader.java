@@ -20,7 +20,69 @@ import ca.ucalgary.seng300.simulation.SimulationException;
 public class CardReader extends AbstractDevice<CardReaderListener> {
 	private boolean cardIsInserted = false;
 	private final static ThreadLocalRandom random = ThreadLocalRandom.current();
+	private final static double PROBABILITY_OF_TAP_FAILURE = 0.01;
 	private final static double PROBABILITY_OF_INSERT_FAILURE = 0.01;
+	private final static double PROBABILITY_OF_SWIPE_FAILURE = 0.1;
+
+	/**
+	 * Tap the card. Requires power.
+	 * 
+	 * @param card
+	 *            The card to tap.
+	 * @return The card's (possibly corrupted) data, or null if the card is not tap
+	 *             enabled.
+	 * @throws IOException
+	 *             If the tap failed (lack of failure does not mean that the data is
+	 *             not corrupted).
+	 */
+	public synchronized CardData tap(Card card) throws IOException {
+		if(!isPoweredUp())
+			throw new NoPowerException();
+
+		if(card.isTapEnabled) {
+			notifyCardTapped();
+
+			if(random.nextDouble(0.0, 1.0) > PROBABILITY_OF_TAP_FAILURE) {
+				CardData data = card.tap();
+
+				notifyCardDataRead(data);
+
+				return data;
+			}
+			else
+				throw new ChipFailureException();
+		}
+
+		// else ignore
+
+		return null;
+	}
+
+	/**
+	 * Swipe the card. Requires power.
+	 * 
+	 * @param card
+	 *            The card to swipe.
+	 * @return The card data.
+	 * @throws IOException
+	 *             If the swipe failed.
+	 */
+	public synchronized CardData swipe(Card card) throws IOException {
+		if(!isPoweredUp())
+			throw new NoPowerException();
+
+		notifyCardSwiped();
+
+		if(random.nextDouble(0.0, 1.0) > PROBABILITY_OF_SWIPE_FAILURE) {
+			CardData data = card.swipe();
+
+			notifyCardDataRead(data);
+
+			return data;
+		}
+
+		throw new MagneticStripeFailureException();
+	}
 
 	/**
 	 * Insert the card. Requires power.
@@ -74,9 +136,19 @@ public class CardReader extends AbstractDevice<CardReaderListener> {
 		notifyCardRemoved();
 	}
 
+	private void notifyCardTapped() {
+		for(CardReaderListener l : listeners())
+			l.cardTapped(this);
+	}
+
 	private void notifyCardInserted() {
 		for(CardReaderListener l : listeners())
 			l.cardInserted(this);
+	}
+
+	private void notifyCardSwiped() {
+		for(CardReaderListener l : listeners())
+			l.cardSwiped(this);
 	}
 
 	private void notifyCardDataRead(CardData data) {

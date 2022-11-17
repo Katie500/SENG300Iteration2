@@ -49,7 +49,7 @@ public final class Card {
 	 * Create a card instance.
 	 * 
 	 * @param kind
-	 *            The type of the card.
+	 *            The kind of the card.
 	 * @param number
 	 *            The number of the card. This has to be a string of digits.
 	 * @param cardholder
@@ -93,8 +93,49 @@ public final class Card {
 	}
 
 	private static final Random random = new Random(0);
+	private static final double PROBABILITY_OF_MAGNETIC_STRIPE_FAILURE = 0.01;
+	private static final double PROBABILITY_OF_TAP_FAILURE = 0.005;
 	private static final double PROBABILITY_OF_INSERT_FAILURE = 0.001;
+	private static final double PROBABILITY_OF_MAGNETIC_STRIPE_CORRUPTION = 0.001;
 	private static final double PROBABILITY_OF_CHIP_CORRUPTION = 0.00001;
+
+	/**
+	 * Simulates the action of swiping the card.
+	 * 
+	 * @return The card data.
+	 * @throws IOException
+	 *             If anything went wrong with the data transfer.
+	 */
+	public final synchronized CardSwipeData swipe() throws IOException {
+		if(isBlocked)
+			throw new BlockedCardException();
+
+		if(random.nextDouble() <= PROBABILITY_OF_MAGNETIC_STRIPE_FAILURE)
+			throw new MagneticStripeFailureException();
+
+		return new CardSwipeData();
+	}
+
+	/**
+	 * Simulates the action of tapping the card.
+	 * 
+	 * @return The card data.
+	 * @throws IOException
+	 *             If anything went wrong with the data transfer.
+	 */
+	public final synchronized CardTapData tap() throws IOException {
+		if(isBlocked)
+			throw new BlockedCardException();
+
+		if(isTapEnabled) {
+			if(random.nextDouble() <= PROBABILITY_OF_TAP_FAILURE)
+				throw new TapFailureException();
+
+			return new CardTapData();
+		}
+
+		return null;
+	}
 
 	/**
 	 * Simulates the action of inserting the card.
@@ -183,6 +224,56 @@ public final class Card {
 	}
 
 	/**
+	 * The data from swiping a card.
+	 */
+	public class CardSwipeData implements CardData {
+		@Override
+		public String getKind() {
+			return randomize(kind, PROBABILITY_OF_MAGNETIC_STRIPE_CORRUPTION);
+		}
+
+		@Override
+		public String getNumber() {
+			return randomize(number, PROBABILITY_OF_MAGNETIC_STRIPE_CORRUPTION);
+		}
+
+		@Override
+		public String getCardholder() {
+			return randomize(cardholder, PROBABILITY_OF_MAGNETIC_STRIPE_CORRUPTION);
+		}
+
+		@Override
+		public String getCVV() {
+			throw new UnsupportedOperationException();
+		}
+	}
+
+	/**
+	 * The data from tapping a card.
+	 */
+	public final class CardTapData implements CardData {
+		@Override
+		public String getKind() {
+			return randomize(kind, PROBABILITY_OF_CHIP_CORRUPTION);
+		}
+
+		@Override
+		public String getNumber() {
+			return randomize(number, PROBABILITY_OF_CHIP_CORRUPTION);
+		}
+
+		@Override
+		public String getCardholder() {
+			return randomize(cardholder, PROBABILITY_OF_CHIP_CORRUPTION);
+		}
+
+		@Override
+		public String getCVV() {
+			return randomize(cvv, PROBABILITY_OF_CHIP_CORRUPTION);
+		}
+	}
+
+	/**
 	 * The data from inserting a card.
 	 */
 	public final class CardInsertData implements CardData {
@@ -212,7 +303,7 @@ public final class Card {
 		}
 
 		private boolean testPIN(String pinToTest) {
-			if(pinToTest == pin) {
+			if(pinToTest.equals(pin)) {
 				failedTrials = 0;
 				return true;
 			}

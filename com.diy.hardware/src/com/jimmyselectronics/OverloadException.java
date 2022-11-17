@@ -13,4 +13,14 @@ public class OverloadException extends Exception {
 	 * Create an exception without an error message.
 	 */
 	public OverloadException() {}
+
+	/**
+	 * Create an exception with an error message.
+	 * 
+	 * @param message
+	 *            The error message to use.
+	 */
+	public OverloadException(String message) {
+		super(message);
+	}
 }
