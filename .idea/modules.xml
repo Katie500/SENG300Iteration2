@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/com.diy.hardware_0.2.iml" filepath="$PROJECT_DIR$/com.diy.hardware_0.2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../SENG300/seng-300-project/com.diy.hardware/com.diy.hardware_0.2.iml" filepath="$PROJECT_DIR$/../SENG300/seng-300-project/com.diy.hardware/com.diy.hardware_0.2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../SENG300/seng-300-project/com.diy.software/com.diy.software.iml" filepath="$PROJECT_DIR$/../SENG300/seng-300-project/com.diy.software/com.diy.software.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../SENG300/seng-300-project/com.diy.software.test/com.diy.software.test.iml" filepath="$PROJECT_DIR$/../SENG300/seng-300-project/com.diy.software.test/com.diy.software.test.iml" />
     </modules>
   </component>
 </project>
