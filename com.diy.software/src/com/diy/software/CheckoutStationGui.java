@@ -11,7 +11,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
         private DoItYourselfStationLogic stationLogic;
         private Customer customer;
         private DoItYourselfStationAR station;
-        JPanel checkoutPanel = new JPanel();
+          JPanel checkoutPanel = new JPanel();
         JLabel welcomeLabelTop = new JLabel();
         JButton addOwnBagsButton = new JButton();
         JButton selectLanguageButton = new JButton();
