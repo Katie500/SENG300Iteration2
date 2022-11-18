@@ -1,6 +1,6 @@
 package com.diy.software;
 
-import com.diy.hardware.DoItYourselfStation;
+import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.simulation.Customer;
 
 import javax.swing.*;
@@ -10,10 +10,10 @@ public class PaymentMethodScreenGui extends javax.swing.JFrame {
 
     private static DoItYourselfStationLogic stationLogic;
     private static Customer customer;
-    private static DoItYourselfStation station;
+    private static DoItYourselfStationAR station;
 
 
-    public PaymentMethodScreenGui(Customer customer, DoItYourselfStation station, DoItYourselfStationLogic stationLogic) {
+    public PaymentMethodScreenGui(Customer customer, DoItYourselfStationAR station, DoItYourselfStationLogic stationLogic) {
         initComponents();
         PaymentMethodScreenGui.customer = customer;
         PaymentMethodScreenGui.station = station;

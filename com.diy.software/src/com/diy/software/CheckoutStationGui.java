@@ -1,6 +1,6 @@
 package com.diy.software;
 
-import com.diy.hardware.DoItYourselfStation;
+import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.simulation.Customer;
 
 import javax.swing.*;
@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
 public class CheckoutStationGui extends javax.swing.JFrame{
         private DoItYourselfStationLogic stationLogic;
         private Customer customer;
-        private DoItYourselfStation station;
+        private DoItYourselfStationAR station;
         JPanel checkoutPanel = new JPanel();
         JLabel welcomeLabelTop = new JLabel();
         JButton addOwnBagsButton = new JButton();
@@ -23,7 +23,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
 
 
 
-        public CheckoutStationGui(Customer customer, DoItYourselfStation station, DoItYourselfStationLogic stationLogic) {
+        public CheckoutStationGui(Customer customer, DoItYourselfStationAR station, DoItYourselfStationLogic stationLogic) {
             this.stationLogic = stationLogic;
             this.customer = customer;
             this.station = station;

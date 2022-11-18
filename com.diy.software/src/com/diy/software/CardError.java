@@ -1,14 +1,14 @@
 package com.diy.software;
-import com.diy.hardware.DoItYourselfStation;
+import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.simulation.Customer;
 
 public class CardError extends javax.swing.JFrame {
 
     private DoItYourselfStationLogic stationLogic;
     private Customer customer;
-    private DoItYourselfStation station;
+    private DoItYourselfStationAR station;
 
-    public CardError(Customer customer, DoItYourselfStation station, DoItYourselfStationLogic stationLogic) {
+    public CardError(Customer customer, DoItYourselfStationAR station, DoItYourselfStationLogic stationLogic) {
         initComponents();
         this.stationLogic = stationLogic;
         this.customer = customer;

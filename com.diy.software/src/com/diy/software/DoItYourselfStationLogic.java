@@ -1,7 +1,7 @@
 package com.diy.software;
 
 import com.diy.hardware.BarcodedProduct;
-import com.diy.hardware.DoItYourselfStation;
+import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.hardware.external.CardIssuer;
 import com.diy.hardware.external.ProductDatabases;
 import com.diy.software.controllers.PaymentController;
@@ -13,7 +13,7 @@ public class DoItYourselfStationLogic {
     /**
      * The station on which the logic is installed.
      */
-    public DoItYourselfStation station;
+    public DoItYourselfStationAR station;
     /**
      * The controller that tracks the scanned products
      */
@@ -40,7 +40,7 @@ public class DoItYourselfStationLogic {
      * @throws NullPointerException
      *             If any argument is null.
      */
-    public static DoItYourselfStationLogic installOn(DoItYourselfStation station, CardIssuer creditIssuer) {
+    public static DoItYourselfStationLogic installOn(DoItYourselfStationAR station, CardIssuer creditIssuer) {
         return new DoItYourselfStationLogic(station, creditIssuer);
     }
 
@@ -57,7 +57,7 @@ public class DoItYourselfStationLogic {
      * @throws NullPointerException
      *             If any argument is null.
      */
-    public DoItYourselfStationLogic(DoItYourselfStation station, CardIssuer creditIssuer) {
+    public DoItYourselfStationLogic(DoItYourselfStationAR station, CardIssuer creditIssuer) {
         this.station = station;
 
         productController = new ProductController(this);

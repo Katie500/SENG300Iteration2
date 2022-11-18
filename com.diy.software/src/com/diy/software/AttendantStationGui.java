@@ -1,16 +1,16 @@
 package com.diy.software;
 
 
-import com.diy.hardware.DoItYourselfStation;
+import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.simulation.Customer;
 
 public class AttendantStationGui extends javax.swing.JFrame {
 
     private DoItYourselfStationLogic stationLogic;
-    private DoItYourselfStation station;
+    private DoItYourselfStationAR station;
     private Customer customer;
 
-    public AttendantStationGui(Customer customer, DoItYourselfStation station, DoItYourselfStationLogic stationLogic) {
+    public AttendantStationGui(Customer customer, DoItYourselfStationAR station, DoItYourselfStationLogic stationLogic) {
         initComponents();
         this.stationLogic = stationLogic;
         this.customer = customer;

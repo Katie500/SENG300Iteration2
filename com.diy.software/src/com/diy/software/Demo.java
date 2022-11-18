@@ -1,7 +1,7 @@
 package com.diy.software;
 
 import com.diy.hardware.BarcodedProduct;
-import com.diy.hardware.DoItYourselfStation;
+import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.hardware.external.CardIssuer;
 import com.diy.hardware.external.ProductDatabases;
 import com.diy.simulation.Customer;
@@ -16,7 +16,7 @@ import java.util.Date;
 public class Demo {
     public static void main(String[] args) {
         // Setup station
-        DoItYourselfStation station = new DoItYourselfStation();
+    	DoItYourselfStationAR station = new DoItYourselfStationAR();
         station.scanner.plugIn();
         station.scanner.turnOn();
 

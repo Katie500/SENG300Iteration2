@@ -1,6 +1,6 @@
 package com.diy.software;
 
-import com.diy.hardware.DoItYourselfStation;
+import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.simulation.Customer;
 
 import javax.swing.*;
@@ -9,10 +9,10 @@ public class WelcomeScreen extends javax.swing.JFrame {
 
 
     private DoItYourselfStationLogic stationLogic;
-    private DoItYourselfStation station;
+    private DoItYourselfStationAR station;
     private Customer customer;
 
-    public WelcomeScreen(Customer customer, DoItYourselfStation station, DoItYourselfStationLogic stationLogic)
+    public WelcomeScreen(Customer customer, DoItYourselfStationAR station, DoItYourselfStationLogic stationLogic)
     {
         initComponentsForWelcome();
         this.stationLogic = stationLogic;
