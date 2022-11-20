@@ -233,52 +233,52 @@ public class DebitCardInputGui extends javax.swing.JFrame {
         }
 
         private void zeroButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Ifeanyi connect buttons to actually do something
+            // TODO: Irish connect buttons to actually do something
             //could also connect the password box to the numbers so password stuff appears
         }
 
         private void nineButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Ifeanyi connect buttons to actually do something
+            // TODO: Irish connect buttons to actually do something
             //could also connect the password box to the numbers so password stuff appears
         }
 
         private void eightButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Ifeanyi connect buttons to actually do something
+            // TODO: Irish connect buttons to actually do something
             //could also connect the password box to the numbers so password stuff appears
         }
 
         private void sevenButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Ifeanyi connect buttons to actually do something
+            // TODO: Irish connect buttons to actually do something
             //could also connect the password box to the numbers so password stuff appears
         }
 
         private void sixButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Ifeanyi connect buttons to actually do something
+            // TODO: Irish connect buttons to actually do something
             //could also connect the password box to the numbers so password stuff appears
         }
 
         private void fiveButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Ifeanyi connect buttons to actually do something
+            // TODO: Irish connect buttons to actually do something
             //could also connect the password box to the numbers so password stuff appears
         }
 
         private void fourButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Ifeanyi connect buttons to actually do something
+            // TODO: Irish connect buttons to actually do something
             //could also connect the password box to the numbers so password stuff appears
         }
 
         private void threeButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Ifeanyi connect buttons to actually do something
+            // TODO: Irish connect buttons to actually do something
             //could also connect the password box to the numbers so password stuff appears
         }
 
         private void twoButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Ifeanyi connect buttons to actually do something
+            // TODO: Irish connect buttons to actually do something
             //could also connect the password box to the numbers so password stuff appears
         }
 
         private void oneButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Ifeanyi connect buttons to actually do something
+            // TODO: Irish connect buttons to actually do something
             //could also connect the password box to the numbers so password stuff appears
         }
 
