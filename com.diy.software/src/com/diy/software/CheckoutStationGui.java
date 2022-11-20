@@ -3,6 +3,8 @@ package com.diy.software;
 import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.simulation.Customer;
 
+import ca.ucalgary.seng300.simulation.InvalidArgumentSimulationException;
+
 import javax.swing.*;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -20,6 +22,10 @@ public class CheckoutStationGui extends javax.swing.JFrame{
         JList<String> itemList = new JList<>();
         JButton callAttendantButton = new JButton();
         JButton scanItemButton = new JButton();
+        
+        //Error label
+        JLabel errorTitle = new JLabel();
+        JLabel errorMessage = new JLabel();
 
 
 
@@ -150,7 +156,11 @@ public class CheckoutStationGui extends javax.swing.JFrame{
                     public String getElementAt(int i) { return strings.get(i); }
                 });
             } catch(NoSuchElementException e) {
+                errorMessage.setText("No more items in cart");
                 System.out.println("No more items in cart");
+            } catch(InvalidArgumentSimulationException e) {
+            	errorMessage.setText("The weight has to be positive");
+            	System.out.println("The weight has to be positive");
             }
         }
 
