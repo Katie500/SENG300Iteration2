@@ -24,7 +24,6 @@ public class CheckoutStationGui extends javax.swing.JFrame{
         JButton scanItemButton = new JButton();
         
         //Error label
-        JLabel errorTitle = new JLabel();
         JLabel errorMessage = new JLabel();
 
 
@@ -95,7 +94,8 @@ public class CheckoutStationGui extends javax.swing.JFrame{
                                             .addGroup(checkoutPanelLayout.createSequentialGroup()
                                                     .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                             .addComponent(welcomeLabelTop, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-                                                            .addComponent(jScrollPane1))
+                                                            .addComponent(jScrollPane1)
+                                                            .addComponent(errorMessage))
                                                     .addGap(0, 149, Short.MAX_VALUE)))
                                     .addContainerGap())
             );
@@ -106,6 +106,8 @@ public class CheckoutStationGui extends javax.swing.JFrame{
                                     .addComponent(welcomeLabelTop)
                                     .addGap(18, 18, 18)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                                    .addComponent(errorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                                     .addComponent(payButton)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -156,11 +158,9 @@ public class CheckoutStationGui extends javax.swing.JFrame{
                     public String getElementAt(int i) { return strings.get(i); }
                 });
             } catch(NoSuchElementException e) {
-                errorMessage.setText("No more items in cart");
-                System.out.println("No more items in cart");
+                errorMessage.setText("Error: No more items in cart");
             } catch(InvalidArgumentSimulationException e) {
-            	errorMessage.setText("The weight has to be positive");
-            	System.out.println("The weight has to be positive");
+            	errorMessage.setText("Error: the weight has to be positive");
             }
         }
 
