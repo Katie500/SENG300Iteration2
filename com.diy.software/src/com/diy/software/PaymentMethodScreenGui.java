@@ -6,7 +6,9 @@ import com.diy.simulation.Customer;
 import javax.swing.*;
 import java.io.IOException;
 
+
 public class PaymentMethodScreenGui extends javax.swing.JFrame {
+
 
     private static DoItYourselfStationLogic stationLogic;
     private static Customer customer;
@@ -20,16 +22,16 @@ public class PaymentMethodScreenGui extends javax.swing.JFrame {
         PaymentMethodScreenGui.stationLogic = stationLogic;
     }
 
+
     @SuppressWarnings("unchecked")
 
     private void initComponents() {
 
-        //Different components of the PaymentMethod GUI
         JPanel payPanel = new JPanel();
         JButton cashButton = new JButton();
         JButton cryptoButton = new JButton();
         JButton creditButton = new JButton();
-        JButton receiptButton = new JButton();
+        JButton debitButton = new JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -40,70 +42,75 @@ public class PaymentMethodScreenGui extends javax.swing.JFrame {
             }
         });
 
-        cryptoButton.setText("Pay With Cryptocurrency");
+        cryptoButton.setText("Pay With Crypto");
+        cryptoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cryptoButtonActionPerformed(evt);
+            }
+        });
 
-        creditButton.setText("Pay With Credit Card");
+        creditButton.setText("Pay With Credit");
         creditButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creditButtonActionPerformed(evt);
             }
         });
 
-        receiptButton.setText("Print Receipt");
-        receiptButton.addActionListener(new java.awt.event.ActionListener() {
+        debitButton.setText("Pay With Debit");
+        debitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                receiptButtonActionPerformed(evt);
+                debitButtonActionPerformed(evt);
             }
         });
 
         javax.swing.GroupLayout payPanelLayout = new javax.swing.GroupLayout(payPanel);
         payPanel.setLayout(payPanelLayout);
         payPanelLayout.setHorizontalGroup(
-            payPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(payPanelLayout.createSequentialGroup()
-                .addGap(87, 87, 87)
-                .addGroup(payPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(payPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(creditButton)
-                        .addComponent(cryptoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cashButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(receiptButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(110, Short.MAX_VALUE))
+                payPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(payPanelLayout.createSequentialGroup()
+                                .addGap(87, 87, 87)
+                                .addGroup(payPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(cashButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cryptoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(creditButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(debitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap(110, Short.MAX_VALUE))
         );
         payPanelLayout.setVerticalGroup(
-            payPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(payPanelLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(cashButton)
-                .addGap(38, 38, 38)
-                .addComponent(cryptoButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addComponent(creditButton)
-                .addGap(30, 30, 30)
-                .addComponent(receiptButton)
-                .addContainerGap())
+                payPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(payPanelLayout.createSequentialGroup()
+                                .addGap(68, 68, 68)
+                                .addComponent(cashButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(cryptoButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(creditButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(debitButton)
+                                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(payPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(63, 63, 63)
+                                .addComponent(payPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(payPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(payPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
     }
 
+    //TODO: Credit is broken for some reason
     private void creditButtonActionPerformed(java.awt.event.ActionEvent evt) {
         try {
             customer.selectCard("Credit");
@@ -112,50 +119,52 @@ public class PaymentMethodScreenGui extends javax.swing.JFrame {
 
             if (paymentSuccess) {
                 System.out.println("Payment success");
-                WelcomeScreen gui = new WelcomeScreen(customer, station, stationLogic);
+                ConfirmationScreenGui gui = new ConfirmationScreenGui(customer, station, stationLogic);
                 gui.setVisible(true);
+                this.setVisible(false);
             } else {
-                CardError gui = new CardError(customer,station,stationLogic);
+                PaymentErrorGui gui = new PaymentErrorGui(customer,station,stationLogic);
                 gui.setVisible(true);
             }
         } catch (IOException e) {
-            CardError gui = new CardError(customer,station,stationLogic);
+            PaymentErrorGui gui = new PaymentErrorGui(customer,station,stationLogic);
             gui.setVisible(true);
         }
     }
 
     private void cashButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        WelcomeScreen gui = new WelcomeScreen(customer, station, stationLogic);
+        //TODO: Check to see if cash was inserted and if correct then call the code featured below
+        ConfirmationScreenGui gui = new ConfirmationScreenGui(customer, station, stationLogic);
         gui.setVisible(true);
-    }                                          
+        this.setVisible(false);
+        /*IF cash was not correct, error message gui call is:
+        PaymentErrorGui gui = new PaymentErrorGui(customer,station,stationLogic);
+        gui.setVisible(true);
+         */
+    }
 
-    private void receiptButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
-
-    }                                             
-
-
-    public static void main(String args[]) {
-
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PaymentMethodScreenGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PaymentMethodScreenGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PaymentMethodScreenGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PaymentMethodScreenGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-
+    private void debitButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        DebitCardInputGui gui = new DebitCardInputGui(customer, station, stationLogic);
+        gui.setVisible(true);
+        this.setVisible(false);
+    }
+    private void cryptoButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        //TODO: Check to see if crypto was received and if correct then call the code featured below
+        ConfirmationScreenGui gui = new ConfirmationScreenGui(customer, station, stationLogic);
+        gui.setVisible(true);
+        this.setVisible(false);
+        /*IF crypto was not received, error message gui call is:
+        PaymentErrorGui gui = new PaymentErrorGui(customer,station,stationLogic);
+        gui.setVisible(true);
+         */
     }
 
 
-    //sourced from netbeans
+
+
+
 }
+
+
+    //sourced from netbeans
+
