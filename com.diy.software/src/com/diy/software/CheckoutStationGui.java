@@ -6,6 +6,8 @@ import com.diy.simulation.Customer;
 import ca.ucalgary.seng300.simulation.InvalidArgumentSimulationException;
 
 import javax.swing.*;
+
+import java.awt.Color;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -46,6 +48,8 @@ public class CheckoutStationGui extends javax.swing.JFrame{
             selectLanguageButton.setText("Select Language");
 
             payButton.setText("Pay");
+            
+            errorMessage.setForeground(Color.red);
 
             payButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
