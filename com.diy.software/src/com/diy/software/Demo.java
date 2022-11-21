@@ -19,6 +19,8 @@ public class Demo {
     	DoItYourselfStationAR station = new DoItYourselfStationAR();
         station.scanner.plugIn();
         station.scanner.turnOn();
+        station.cardReader.plugIn();
+        station.cardReader.turnOn();
 
         // Create barcodes
         Barcode barcode1 = new Barcode(new Numeral[] { Numeral.one });
