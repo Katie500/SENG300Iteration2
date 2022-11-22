@@ -19,6 +19,8 @@ public class Demo {
     	DoItYourselfStationAR station = new DoItYourselfStationAR();
         station.scanner.plugIn();
         station.scanner.turnOn();
+        station.cardReader.plugIn();
+        station.cardReader.turnOn();
 
         // Create barcodes
         Barcode barcode1 = new Barcode(new Numeral[] { Numeral.one });
@@ -26,14 +28,14 @@ public class Demo {
         Barcode barcode3 = new Barcode(new Numeral[] { Numeral.one, Numeral.two, Numeral.three });
 
         // Create barcoded items
-        BarcodedItem item1 = new BarcodedItem(barcode1, 1);
+        BarcodedItem item1 = new BarcodedItem(barcode1, 15);
         BarcodedItem item2 = new BarcodedItem(barcode2, 1);
         BarcodedItem item3 = new BarcodedItem(barcode3, 1);
 
         // Create barcoded products
-        BarcodedProduct product1 = new BarcodedProduct(barcode1, "Food", 5, 15);
-        BarcodedProduct product2 = new BarcodedProduct(barcode2, "More Food", 10, 25);
-        BarcodedProduct product3 = new BarcodedProduct(barcode3, "All The Tood", 20, 35);
+        BarcodedProduct product1 = new BarcodedProduct(barcode1, "Banana", 5, 15);
+        BarcodedProduct product2 = new BarcodedProduct(barcode2, "Apples", 10, 25);
+        BarcodedProduct product3 = new BarcodedProduct(barcode3, "Bread", 20, 35);
 
         // Add barcoded products to database
         ProductDatabases.BARCODED_PRODUCT_DATABASE.put(barcode1, product1);
@@ -67,7 +69,7 @@ public class Demo {
         DoItYourselfStationLogic stationLogic = new DoItYourselfStationLogic(station, creditIssuer);
 
         // Start at welcome screen
-        WelcomeScreen frame = new WelcomeScreen(customer, station, stationLogic);
+        WelcomeScreenGui frame = new WelcomeScreenGui(customer, station, stationLogic);
         frame.setVisible(true);
     }
 }
