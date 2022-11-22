@@ -2,6 +2,7 @@ package com.diy.software;
 
 import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.simulation.Customer;
+import com.diy.software.controllers.ReceiptController;
 
 import ca.ucalgary.seng300.simulation.InvalidArgumentSimulationException;
 
@@ -35,7 +36,11 @@ public class CheckoutStationGui extends javax.swing.JFrame{
 
     //Error label
     JLabel errorMessage = new JLabel();
-
+    
+    boolean signalink = false;
+    boolean signalpaper= false;
+    
+    
 
     public CheckoutStationGui(Customer customer, DoItYourselfStationAR station, DoItYourselfStationLogic stationLogic) {
         this.stationLogic = stationLogic;
@@ -59,7 +64,21 @@ public class CheckoutStationGui extends javax.swing.JFrame{
             }
         });
 
-
+        ReceiptController receipt = new ReceiptController();
+        boolean lowink = receipt.getLowInk();
+        boolean lowpaper = receipt.getLowPaper();
+        
+//        boolean signalink = false;
+//        boolean signalpaper= false;
+        		
+        if(lowink==true) {
+        	lowInkLabel.setText("Caution: Low Ink");
+        	signalink = true;
+        }
+        if(lowpaper == true) {
+        	lowPaperLabel.setText("Caution: Low Paper");
+        	signalpaper = true;
+        }
         payButton.setText("Pay");
         payButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,12 +266,14 @@ public class CheckoutStationGui extends javax.swing.JFrame{
         gui.setVisible(true);
 
     }
-
-
-    //TODO: Nasima and Kyle, Here are your calls for low ink and low paper. Idk where you are going to put them tho. GL
-    //lowInkLabel.setText("Caution: Low Ink");
-    //lowPaperLabel.setText("Caution: Low Paper");
-
+    
+    public boolean getSignalInk() {
+    	return signalink;
+    }
+    
+    public boolean getSignalPaper() {
+    	return signalpaper;
+    }
 
 
 }
