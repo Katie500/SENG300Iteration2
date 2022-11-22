@@ -1,13 +1,15 @@
 package com.diy.software;
 
 import com.diy.hardware.DoItYourselfStationAR;
+import com.diy.hardware.external.CardIssuer;
 import com.diy.simulation.Customer;
 import com.jimmyselectronics.opeechee.Card;
+import com.jimmyselectronics.opeechee.Card.CardData;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.awt.*;
-import java.util.*;
 
 public class DebitCardInputGui extends javax.swing.JFrame {
 	private JPanel mainPanel = new JPanel();
@@ -15,11 +17,12 @@ public class DebitCardInputGui extends javax.swing.JFrame {
 	
 	private JPanel pinpadPanel = new JPanel(new GridBagLayout());
 	private JLabel pinpadInput = new JLabel();
-	
 	private JLabel errorMessage = new JLabel();
 	
-	private String pinEntered = "";
+	private WalletGui walletGui = new WalletGui();
 	
+	private String pinEntered = "";
+
     private static DoItYourselfStationLogic stationLogic;
     private static Customer customer;
     private static DoItYourselfStationAR station;
@@ -30,39 +33,22 @@ public class DebitCardInputGui extends javax.swing.JFrame {
         DebitCardInputGui.station = station;
         DebitCardInputGui.stationLogic = stationLogic;
         
+        station.plugIn();
+        station.turnOn();
+        
     	setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         initComponents();
-        addCardsToWallet();
-        
-        customer.selectCard("Debit 1");
-    }
-
-    private void addCardsToWallet() {
-    	Random random = new Random();
-		String cardNumber = Long.toString((long) (1000000000000000L + random.nextFloat() * 9000000000000000L));
-		
-		String cvv = Integer.toString(100 + random.nextInt(900));
-		String pin = "1234";
-//		String pin = Integer.toString(1000 + random.nextInt(9000));
-		
-		Card debitCard = new Card("Debit 1", cardNumber, "Card Holder 1", cvv, pin, true, false);
-		
-		customer.wallet.cards.add(debitCard);
-		customer.selectCard("Debit 1");
-
-		System.out.println(customer.wallet.cards);
     }
     
-    
+  
     private void initComponents() {
         mainPanel.setLayout(new GridBagLayout());
         
         gbc.insets = new Insets(10,10,0,10);
         gbc.ipadx = 15;
         gbc.ipady = 5;
-
-
-//       Add label
+        
+        //       Add label
         JLabel debitPINLabel = new JLabel();
         debitPINLabel.setText("Please Enter PIN for Debit Transactions");
         debitPINLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -72,7 +58,6 @@ public class DebitCardInputGui extends javax.swing.JFrame {
         
         mainPanel.add(debitPINLabel, gbc);
 
-        
 //      Add pin pad input
         JPanel textPanel = new JPanel();
 		textPanel.setPreferredSize(new Dimension(75, 25));
@@ -101,6 +86,12 @@ public class DebitCardInputGui extends javax.swing.JFrame {
         gbc.gridy = 4;
         mainPanel.add(pinpadPanel, gbc);
         addPinpadButtons();
+        
+        gbc.gridx = 2;
+        gbc.gridy = 1;
+        gbc.gridheight = 4;
+        gbc.fill = GridBagConstraints.BOTH;
+        mainPanel.add(walletGui, gbc);
         
         add(mainPanel);
         pack();
@@ -169,23 +160,40 @@ public class DebitCardInputGui extends javax.swing.JFrame {
 			System.out.println(pinEntered);
 		}
 	};
+
 	
 	private void validatePayment() {
-		if(pinEntered.length() < 4 || pinEntered != "1234") {
-			errorMessage.setText("Invalid PIN");
-			pinpadInput.setText("");
-			pinEntered = "";
+		CardIssuer cardIssuer = walletGui.getSelectedCardIssuer();
+		Card selectedCard = walletGui.getSelectedCard();
+		
+		System.out.println("Card inserted: " + selectedCard.number);
+		
+		try {
+			CardData selectedCardData = station.cardReader.insert(selectedCard, pinEntered);
 			
-		} else {
-	        //TODO: Check to see if card was accepted and if correct then call the code featured below
-	        ConfirmationScreenGui successGui = new ConfirmationScreenGui(customer, station, stationLogic);
-	        successGui.setVisible(true);
-	        setVisible(false);
-	        
-		    /*IF cash was not correct, error message gui call is:
-		    PaymentErrorGui gui = new PaymentErrorGui(customer,station,stationLogic);
-		    gui.setVisible(true);*/
+			System.out.println("Pin input success: " + selectedCardData.getNumber());
+			stationLogic.paymentController.cardDataRead(station.cardReader, selectedCardData);
+		} catch (IOException e) {
+			System.out.println("Failed to get card data");
+			e.printStackTrace();
 		}
+		
+		
+//		if(pinEntered.length() < 4 || pinEntered != "1234") {
+//			errorMessage.setText("Invalid PIN");
+//			pinpadInput.setText("");
+//			pinEntered = "";
+//			
+//		} else {
+//	        //TODO: Check to see if card was accepted and if correct then call the code featured below
+//	        ConfirmationScreenGui successGui = new ConfirmationScreenGui(customer, station, stationLogic);
+//	        successGui.setVisible(true);
+//	        setVisible(false);
+//	        
+//		    /*IF cash was not correct, error message gui call is:
+//		    PaymentErrorGui gui = new PaymentErrorGui(customer,station,stationLogic);
+//		    gui.setVisible(true);*/
+//		}
 	}
 }
 
