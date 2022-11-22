@@ -65,8 +65,8 @@ public class CheckoutStationGui extends javax.swing.JFrame{
         });
 
         ReceiptController receipt = new ReceiptController();
-        boolean lowink = true;//receipt.getLowInk();
-        boolean lowpaper = true;//receipt.getLowPaper();
+        boolean lowink = receipt.getLowInk();
+        boolean lowpaper = receipt.getLowPaper();
         
 //        boolean signalink = false;
 //        boolean signalpaper= false;
