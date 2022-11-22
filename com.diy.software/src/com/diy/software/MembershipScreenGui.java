@@ -2,12 +2,20 @@ package com.diy.software;
 
 import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.simulation.Customer;
+import com.diy.software.controllers.MembershipController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MembershipScreenGui extends javax.swing.JFrame {
 
     private static DoItYourselfStationLogic stationLogic;
     private static Customer customer;
     private static DoItYourselfStationAR station;
+    private ArrayList<Integer> memberPin = new ArrayList<Integer>();
+    private javax.swing.JPasswordField passwordPINtextbox = new javax.swing.JPasswordField();
+    private MembershipController membershipController = new MembershipController();
+
 
     public MembershipScreenGui(Customer customer, DoItYourselfStationAR station, DoItYourselfStationLogic stationLogic) {
         initComponents();
@@ -17,6 +25,15 @@ public class MembershipScreenGui extends javax.swing.JFrame {
 
     }
 
+    private String convertMembershipToString(ArrayList<Integer> list)
+    {
+        StringBuilder memString = new StringBuilder(list.size());
+        for(Integer number: list)
+        {
+            memString.append(number);
+        }
+        return memString.toString();
+    }
 
         @SuppressWarnings("unchecked")
 
@@ -24,7 +41,6 @@ public class MembershipScreenGui extends javax.swing.JFrame {
 
             javax.swing.JPanel membershipNumberPanel = new javax.swing.JPanel();
             javax.swing.JLabel membershipLabel = new javax.swing.JLabel();
-            javax.swing.JPasswordField passwordPINtextbox = new javax.swing.JPasswordField();
             javax.swing.JButton twoButton = new javax.swing.JButton();
             javax.swing.JButton oneButton = new javax.swing.JButton();
             javax.swing.JButton threeButton = new javax.swing.JButton();
@@ -39,6 +55,12 @@ public class MembershipScreenGui extends javax.swing.JFrame {
             javax.swing.JButton cancelButton = new javax.swing.JButton();
 
             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+            //Create Memberships
+            membershipController.insertMember("73", "John Willard", 2012, "January", 23);
+            membershipController.insertMember("33", "Edwardo Saville", 2003, "December", 25);
+            membershipController.insertMember("28", "Samantha Rowler", 2021, "August", 3);
+            membershipController.insertMember("10", "Jerome Walker", 2009, "April", 15);
 
             membershipLabel.setText("Please Enter Membership Number:");
 
@@ -225,56 +247,84 @@ public class MembershipScreenGui extends javax.swing.JFrame {
         }
 
         private void twoButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Ifeanyi connect buttons to actually do something
+            memberPin.add(2);
+            passwordPINtextbox.setText(convertMembershipToString(memberPin));
+            System.out.println(convertMembershipToString(memberPin));
         }
 
         private void oneButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Ifeanyi connect buttons to actually do something
+            memberPin.add(1);
+            passwordPINtextbox.setText(convertMembershipToString(memberPin));
+            System.out.println(convertMembershipToString(memberPin));
         }
 
         private void threeButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Ifeanyi connect buttons to actually do something
+            memberPin.add(3);
+            passwordPINtextbox.setText(convertMembershipToString(memberPin));
+            System.out.println(convertMembershipToString(memberPin));
         }
 
         private void fourButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Ifeanyi connect buttons to actually do something
+            memberPin.add(4);
+            passwordPINtextbox.setText(convertMembershipToString(memberPin));
+            System.out.println(convertMembershipToString(memberPin));
         }
 
         private void fiveButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Ifeanyi connect buttons to actually do something
+            memberPin.add(5);
+            passwordPINtextbox.setText(convertMembershipToString(memberPin));
+            System.out.println(convertMembershipToString(memberPin));
         }
 
         private void sixButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Ifeanyi connect buttons to actually do something
+            memberPin.add(6);
+            passwordPINtextbox.setText(convertMembershipToString(memberPin));
+            System.out.println(convertMembershipToString(memberPin));
         }
 
         private void sevenButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Ifeanyi connect buttons to actually do something
+            memberPin.add(7);
+            passwordPINtextbox.setText(convertMembershipToString(memberPin));
+            System.out.println(convertMembershipToString(memberPin));
         }
 
         private void eightButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Ifeanyi connect buttons to actually do something
+            memberPin.add(8);
+            passwordPINtextbox.setText(convertMembershipToString(memberPin));
+            System.out.println(convertMembershipToString(memberPin));
         }
 
         private void nineButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Ifeanyi connect buttons to actually do something
+            memberPin.add(9);
+            passwordPINtextbox.setText(convertMembershipToString(memberPin));
+            System.out.println(convertMembershipToString(memberPin));
         }
 
         private void zeroButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Ifeanyi connect buttons to actually do something
+            memberPin.add(0);
+            passwordPINtextbox.setText(convertMembershipToString(memberPin));
+            System.out.println(convertMembershipToString(memberPin));
         }
 
         private void enterButtonActionPerformed(java.awt.event.ActionEvent evt) {
             // TODO: store membership number someplace awesome so we can find it later
+            if(membershipController.verifyMembership(convertMembershipToString(memberPin)) == 1){
+                System.out.println("Valid Membership");
+            }
+            else{
+                System.out.println("invalid Membership");
+            }
             this.setVisible(false);
         }
 
         private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
             // TODO: disregard whatever input was inputted
+            memberPin.clear();
             this.setVisible(false);
         }
 
         private void passwordPINtextboxActionPerformed(java.awt.event.ActionEvent evt) {
+            System.out.println("Change");
             // TODO: Ifeanyi connect buttons to show up here maybe (?)
         }
 

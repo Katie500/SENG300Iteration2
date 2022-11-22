@@ -6,6 +6,7 @@ import com.diy.hardware.external.CardIssuer;
 import com.diy.hardware.external.ProductDatabases;
 import com.diy.simulation.Customer;
 import com.jimmyselectronics.necchi.Barcode;
+//import com.jimmyselectronics.necchi.BarcodedItem;
 import com.jimmyselectronics.necchi.BarcodedItem;
 import com.jimmyselectronics.necchi.Numeral;
 import com.jimmyselectronics.opeechee.Card;
@@ -19,6 +20,8 @@ public class Demo {
     	DoItYourselfStationAR station = new DoItYourselfStationAR();
         station.scanner.plugIn();
         station.scanner.turnOn();
+        station.cardReader.plugIn();
+        station.cardReader.turnOn();
 
         // Create barcodes
         Barcode barcode1 = new Barcode(new Numeral[] { Numeral.one });

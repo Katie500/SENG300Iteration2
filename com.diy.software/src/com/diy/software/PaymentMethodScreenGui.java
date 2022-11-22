@@ -144,7 +144,7 @@ public class PaymentMethodScreenGui extends javax.swing.JFrame {
     }
 
     private void debitButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        DebitCardInputGui gui = new DebitCardInputGui(customer, station, stationLogic);
+        DebitCardSelectionGui gui = new DebitCardSelectionGui(customer, station, stationLogic);
         gui.setVisible(true);
         this.setVisible(false);
     }
