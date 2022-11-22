@@ -65,8 +65,8 @@ public class CheckoutStationGui extends javax.swing.JFrame{
         });
 
         ReceiptController receipt = new ReceiptController();
-        boolean lowink = receipt.getLowInk();
-        boolean lowpaper = receipt.getLowPaper();
+        boolean lowink = true;//receipt.getLowInk();
+        boolean lowpaper = true;//receipt.getLowPaper();
         
 //        boolean signalink = false;
 //        boolean signalpaper= false;
@@ -153,9 +153,9 @@ public class CheckoutStationGui extends javax.swing.JFrame{
                                                 .addGap(6, 6, 6)
                                                 .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addGroup(checkoutPanelLayout.createSequentialGroup()
-                                                                .addComponent(lowInkLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(lowInkLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(lowPaperLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addComponent(lowPaperLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                         .addComponent(errorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                                 .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
