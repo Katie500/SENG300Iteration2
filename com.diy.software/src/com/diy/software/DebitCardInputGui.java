@@ -2,310 +2,191 @@ package com.diy.software;
 
 import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.simulation.Customer;
+import com.jimmyselectronics.opeechee.Card;
 
 import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
+import java.util.*;
 
 public class DebitCardInputGui extends javax.swing.JFrame {
-
+	private JPanel mainPanel = new JPanel();
+	private GridBagConstraints gbc = new GridBagConstraints();
+	
+	private JPanel pinpadPanel = new JPanel(new GridBagLayout());
+	private JLabel pinpadInput = new JLabel();
+	
+	private JLabel errorMessage = new JLabel();
+	
+	private String pinEntered = "";
+	
     private static DoItYourselfStationLogic stationLogic;
     private static Customer customer;
     private static DoItYourselfStationAR station;
 
     public DebitCardInputGui(Customer customer, DoItYourselfStationAR station, DoItYourselfStationLogic stationLogic) {
-        initComponents();
+        // Set variables
         DebitCardInputGui.customer = customer;
         DebitCardInputGui.station = station;
         DebitCardInputGui.stationLogic = stationLogic;
-
+        
+    	setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        initComponents();
+        addCardsToWallet();
+        
+        customer.selectCard("Debit 1");
     }
 
+    private void addCardsToWallet() {
+    	Random random = new Random();
+		String cardNumber = Long.toString((long) (1000000000000000L + random.nextFloat() * 9000000000000000L));
+		
+		String cvv = Integer.toString(100 + random.nextInt(900));
+		String pin = "1234";
+//		String pin = Integer.toString(1000 + random.nextInt(9000));
+		
+		Card debitCard = new Card("Debit 1", cardNumber, "Card Holder 1", cvv, pin, true, false);
+		
+		customer.wallet.cards.add(debitCard);
+		customer.selectCard("Debit 1");
 
-        @SuppressWarnings("unchecked")
-
-        private void initComponents() {
-
-            JPanel debitCardInputPanel = new JPanel();
-            JLabel debitPINLabel = new JLabel();
-            JPasswordField passwordPINtextbox = new JPasswordField();
-            JButton twoButton = new JButton();
-            JButton oneButton = new JButton();
-            JButton threeButton = new JButton();
-            JButton fourButton = new JButton();
-            JButton fiveButton = new JButton();
-            JButton sixButton = new JButton();
-            JButton sevenButton = new JButton();
-            JButton eightButton = new JButton();
-            JButton nineButton = new JButton();
-            JButton zeroButton = new JButton();
-            JButton enterButton = new JButton();
-            // Variables declaration - do not modify
-            JButton cancelButton = new JButton();
-
-            setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-            debitPINLabel.setText("Please Enter PIN for Debit Transactions");
-
-            passwordPINtextbox.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    passwordPINtextboxActionPerformed(evt);
-                }
-            });
-
-            twoButton.setText("2");
-            twoButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    twoButtonActionPerformed(evt);
-                }
-            });
-
-            oneButton.setText("1");
-            oneButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    oneButtonActionPerformed(evt);
-                }
-            });
-
-            threeButton.setText("3");
-            threeButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    threeButtonActionPerformed(evt);
-                }
-            });
-
-            fourButton.setText("4");
-            fourButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    fourButtonActionPerformed(evt);
-                }
-            });
-
-            fiveButton.setText("5");
-            fiveButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    fiveButtonActionPerformed(evt);
-                }
-            });
-
-            sixButton.setText("6");
-            sixButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    sixButtonActionPerformed(evt);
-                }
-            });
-
-            sevenButton.setText("7");
-            sevenButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    sevenButtonActionPerformed(evt);
-                }
-            });
-
-            eightButton.setText("8");
-            eightButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    eightButtonActionPerformed(evt);
-                }
-            });
-
-            nineButton.setText("9");
-            nineButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    nineButtonActionPerformed(evt);
-                }
-            });
-
-            zeroButton.setText("0");
-            zeroButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    zeroButtonActionPerformed(evt);
-                }
-            });
-
-            enterButton.setText("Enter");
-            enterButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    enterButtonActionPerformed(evt);
-                }
-            });
-
-            cancelButton.setText("Cancel");
-
-            cancelButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    cancelButtonActionPerformed(evt);
-                }
-            });
-
-            cancelButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    cancelButtonActionPerformed(evt);
-                }
-            });
-
-            javax.swing.GroupLayout debitCardInputPanelLayout = new javax.swing.GroupLayout(debitCardInputPanel);
-            debitCardInputPanel.setLayout(debitCardInputPanelLayout);
-            debitCardInputPanelLayout.setHorizontalGroup(
-                    debitCardInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(debitCardInputPanelLayout.createSequentialGroup()
-                                    .addGroup(debitCardInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(debitCardInputPanelLayout.createSequentialGroup()
-                                                    .addGap(79, 79, 79)
-                                                    .addComponent(debitPINLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(debitCardInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addGroup(debitCardInputPanelLayout.createSequentialGroup()
-                                                            .addContainerGap()
-                                                            .addComponent(passwordPINtextbox, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, debitCardInputPanelLayout.createSequentialGroup()
-                                                            .addGap(148, 148, 148)
-                                                            .addGroup(debitCardInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                    .addComponent(sevenButton)
-                                                                    .addComponent(fourButton)
-                                                                    .addComponent(oneButton))
-                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                            .addGroup(debitCardInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                    .addGroup(debitCardInputPanelLayout.createSequentialGroup()
-                                                                            .addComponent(twoButton)
-                                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                            .addComponent(threeButton))
-                                                                    .addGroup(debitCardInputPanelLayout.createSequentialGroup()
-                                                                            .addGroup(debitCardInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                                    .addComponent(eightButton)
-                                                                                    .addComponent(fiveButton)
-                                                                                    .addComponent(zeroButton))
-                                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                            .addGroup(debitCardInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                                    .addComponent(sixButton)
-                                                                                    .addComponent(nineButton)))))))
-                                    .addContainerGap(68, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, debitCardInputPanelLayout.createSequentialGroup()
-                                    .addGap(14, 14, 14)
-                                    .addComponent(cancelButton)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(enterButton)
-                                    .addGap(30, 30, 30))
-            );
-            debitCardInputPanelLayout.setVerticalGroup(
-                    debitCardInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(debitCardInputPanelLayout.createSequentialGroup()
-                                    .addGap(17, 17, 17)
-                                    .addComponent(debitPINLabel)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(passwordPINtextbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addGroup(debitCardInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(twoButton)
-                                            .addComponent(oneButton)
-                                            .addComponent(threeButton))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(debitCardInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(fourButton)
-                                            .addComponent(fiveButton)
-                                            .addComponent(sixButton))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(debitCardInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(eightButton)
-                                            .addComponent(nineButton)
-                                            .addComponent(sevenButton))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(zeroButton)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                                    .addGroup(debitCardInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(enterButton)
-                                            .addComponent(cancelButton))
-                                    .addGap(45, 45, 45))
-            );
-
-            javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-            getContentPane().setLayout(layout);
-            layout.setHorizontalGroup(
-                    layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(debitCardInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addContainerGap())
-            );
-            layout.setVerticalGroup(
-                    layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(debitCardInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            );
-
-            pack();
-        }
-
-        private void zeroButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Irish connect buttons to actually do something
-            //could also connect the password box to the numbers so password stuff appears
-        }
-
-        private void nineButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Irish connect buttons to actually do something
-            //could also connect the password box to the numbers so password stuff appears
-        }
-
-        private void eightButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Irish connect buttons to actually do something
-            //could also connect the password box to the numbers so password stuff appears
-        }
-
-        private void sevenButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Irish connect buttons to actually do something
-            //could also connect the password box to the numbers so password stuff appears
-        }
-
-        private void sixButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Irish connect buttons to actually do something
-            //could also connect the password box to the numbers so password stuff appears
-        }
-
-        private void fiveButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Irish connect buttons to actually do something
-            //could also connect the password box to the numbers so password stuff appears
-        }
-
-        private void fourButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Irish connect buttons to actually do something
-            //could also connect the password box to the numbers so password stuff appears
-        }
-
-        private void threeButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Irish connect buttons to actually do something
-            //could also connect the password box to the numbers so password stuff appears
-        }
-
-        private void twoButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Irish connect buttons to actually do something
-            //could also connect the password box to the numbers so password stuff appears
-        }
-
-        private void oneButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: Irish connect buttons to actually do something
-            //could also connect the password box to the numbers so password stuff appears
-        }
+		System.out.println(customer.wallet.cards);
+    }
+    
+    
+    private void initComponents() {
+        mainPanel.setLayout(new GridBagLayout());
+        
+        gbc.insets = new Insets(10,10,0,10);
+        gbc.ipadx = 15;
+        gbc.ipady = 5;
 
 
-        private void enterButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            //TODO: Check to see if card was accepted and if correct then call the code featured below
-            ConfirmationScreenGui gui = new ConfirmationScreenGui(customer, station, stationLogic);
-            gui.setVisible(true);
-            this.setVisible(false);
-        /*IF cash was not correct, error message gui call is:
-        PaymentErrorGui gui = new PaymentErrorGui(customer,station,stationLogic);
-        gui.setVisible(true);
-         */
-        }
+//       Add label
+        JLabel debitPINLabel = new JLabel();
+        debitPINLabel.setText("Please Enter PIN for Debit Transactions");
+        debitPINLabel.setHorizontalAlignment(JLabel.CENTER);
 
-        private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
-            this.setVisible(false);
-        }
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        
+        mainPanel.add(debitPINLabel, gbc);
 
-        private void passwordPINtextboxActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO: connect the buttons here
-        }
+        
+//      Add pin pad input
+        JPanel textPanel = new JPanel();
+		textPanel.setPreferredSize(new Dimension(75, 25));
+		textPanel.setMinimumSize(new Dimension(75, 25));
+		textPanel.setMaximumSize(new Dimension(75, 25));
+		textPanel.setBorder(BorderFactory.createLineBorder(Color.gray));
+		textPanel.setBackground(Color.white);
+		textPanel.add(pinpadInput);
 
+		pinpadInput.setFont(new Font(pinpadInput.getName(), Font.PLAIN, 18));
+		
+        gbc.gridy = 2;
+        mainPanel.add(textPanel, gbc);
 
+        
+//      Add error message that shows up if payment could not be validated
+        gbc.insets = new Insets(0,0,5,0);
+        errorMessage.setFont(new Font(errorMessage.getName(), Font.PLAIN, 10));
+        errorMessage.setHorizontalAlignment(JLabel.CENTER);
+        errorMessage.setText(" ");
+        gbc.gridy = 3;
+        mainPanel.add(errorMessage, gbc);
 
+        
+//      Add pin pad buttons
+        gbc.gridy = 4;
+        mainPanel.add(pinpadPanel, gbc);
+        addPinpadButtons();
+        
+        add(mainPanel);
+        pack();
+    }
 
-
-
+	private void addPinpadButtons() {
+		for(int i = 1; i <= 12; i++) {
+			String buttonLabel = Integer.toString(i);
+			
+			gbc.insets = new Insets(3, 3, 3, 3);
+			
+			if(i == 10) {
+				buttonLabel = "Cancel";
+				gbc.insets = new Insets(10,5,10,10);
+				gbc.gridx = 1;
+				gbc.gridy = 7;
+				
+			} else if(i == 11) {
+				buttonLabel = "0";
+				gbc.gridx = 4;
+				gbc.gridy = 6;
+				
+			} else if(i == 12) {
+				buttonLabel = "Enter";
+				gbc.insets = new Insets(10,10,10,5);
+				gbc.gridx = 7;
+				gbc.gridy = 7;
+				
+			} else if(i%3 == 0) {
+				gbc.gridx = 5;
+				gbc.gridy = (int) (2 + Math.floor(i/3));
+				
+			} else {
+				gbc.gridx = 2 + i%3;
+				gbc.gridy = (int) (3 + Math.floor(i/3));
+			}
+			
+			JButton b = new JButton(buttonLabel);
+			b.addActionListener(pinpadListener);
+			
+			pinpadPanel.add(b, gbc);
+		}
+	}
+	
+	ActionListener pinpadListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String buttonPressed = e.getActionCommand();
+			String newText = pinpadInput.getText();
+			
+			errorMessage.setText(" ");
+			
+			if(buttonPressed.equals("Enter")) {
+				validatePayment();
+				return;
+			} else if (buttonPressed.equals("Cancel")) {
+				newText = "";
+				pinEntered = "";
+				setVisible(false);
+			} else if (pinEntered.length() < 4) {
+				pinEntered += buttonPressed;
+				newText += '*';
+			}
+			
+			pinpadInput.setText(newText);
+			System.out.println(pinEntered);
+		}
+	};
+	
+	private void validatePayment() {
+		if(pinEntered.length() < 4 || pinEntered != "1234") {
+			errorMessage.setText("Invalid PIN");
+			pinpadInput.setText("");
+			pinEntered = "";
+			
+		} else {
+	        //TODO: Check to see if card was accepted and if correct then call the code featured below
+	        ConfirmationScreenGui successGui = new ConfirmationScreenGui(customer, station, stationLogic);
+	        successGui.setVisible(true);
+	        setVisible(false);
+	        
+		    /*IF cash was not correct, error message gui call is:
+		    PaymentErrorGui gui = new PaymentErrorGui(customer,station,stationLogic);
+		    gui.setVisible(true);*/
+		}
+	}
 }
+
 //sourced from netbeans
