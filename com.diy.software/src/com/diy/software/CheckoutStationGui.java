@@ -39,6 +39,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
     
     boolean signalink = false;
     boolean signalpaper= false;
+
     
     
 
