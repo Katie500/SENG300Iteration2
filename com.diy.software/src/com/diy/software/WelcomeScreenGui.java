@@ -3,28 +3,27 @@ package com.diy.software;
 import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.simulation.Customer;
 
-import javax.swing.*;
 
-public class WelcomeScreen extends javax.swing.JFrame {
-
+public class WelcomeScreenGui extends javax.swing.JFrame {
 
     private DoItYourselfStationLogic stationLogic;
     private DoItYourselfStationAR station;
     private Customer customer;
 
-    public WelcomeScreen(Customer customer, DoItYourselfStationAR station, DoItYourselfStationLogic stationLogic)
-    {
-        initComponentsForWelcome();
+    public WelcomeScreenGui(Customer customer, DoItYourselfStationAR station, DoItYourselfStationLogic stationLogic) {
+        initComponents();
         this.stationLogic = stationLogic;
         this.customer = customer;
         this.station = station;
     }
 
+    @SuppressWarnings("unchecked")
 
-    private void initComponentsForWelcome() {
-        JPanel welcomePanel = new JPanel();
-        JLabel welcomeLabel = new JLabel();
-        JButton welcomeButton = new JButton();
+    private void initComponents() {
+
+        javax.swing.JPanel welcomePanel = new javax.swing.JPanel();
+        javax.swing.JLabel welcomeLabel = new javax.swing.JLabel();
+        javax.swing.JButton welcomeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,8 +47,8 @@ public class WelcomeScreen extends javax.swing.JFrame {
                                                 .addComponent(welcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(welcomePanelLayout.createSequentialGroup()
                                                 .addGap(90, 90, 90)
-                                                .addComponent(welcomeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(90, Short.MAX_VALUE))
+                                                .addComponent(welcomeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)))
+                                .addGap(90, 90, 90))
         );
         welcomePanelLayout.setVerticalGroup(
                 welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,4 +85,7 @@ public class WelcomeScreen extends javax.swing.JFrame {
         gui.setVisible(true);
         this.setVisible(false);
     }
+
+
+
 }

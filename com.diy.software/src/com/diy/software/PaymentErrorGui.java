@@ -2,13 +2,15 @@ package com.diy.software;
 import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.simulation.Customer;
 
-public class CardError extends javax.swing.JFrame {
+import java.awt.*;
+
+public class PaymentErrorGui extends javax.swing.JFrame {
 
     private DoItYourselfStationLogic stationLogic;
     private Customer customer;
     private DoItYourselfStationAR station;
 
-    public CardError(Customer customer, DoItYourselfStationAR station, DoItYourselfStationLogic stationLogic) {
+    public PaymentErrorGui(Customer customer, DoItYourselfStationAR station, DoItYourselfStationLogic stationLogic) {
         initComponents();
         this.stationLogic = stationLogic;
         this.customer = customer;
@@ -25,11 +27,14 @@ public class CardError extends javax.swing.JFrame {
         javax.swing.JLabel cancelLabel = new javax.swing.JLabel();
         javax.swing.JButton cancelButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        //This is commented so that it doesn't exit all code if you close this panel
+        //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        errorLabel.setText("ERROR: There was an issue with your card.");
+        errorLabel.setText("ERROR: There was an issue with your payment.");
 
-        cancelLabel.setText("Press the \"X\" to try another card or press below to cancel transaction.");
+        errorLabel.setForeground(Color.red);
+
+        cancelLabel.setText("Press the \"X\" to try another payment method or press below to cancel transaction.");
 
         cancelButton.setText("Cancel Transaction");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -86,28 +91,12 @@ public class CardError extends javax.swing.JFrame {
         pack();
     }
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        WelcomeScreen gui = new WelcomeScreen(customer, station, stationLogic);
+        WelcomeScreenGui gui = new WelcomeScreenGui(customer, station, stationLogic);
         gui.setVisible(true);
+        this.setVisible(false);
     }
 
-    public static void main(String args[]) {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CardError.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CardError.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CardError.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CardError.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-    }
+
     // sourced from netbeans
 }
 
