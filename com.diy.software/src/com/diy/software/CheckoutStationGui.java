@@ -2,6 +2,7 @@ package com.diy.software;
 
 import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.simulation.Customer;
+import com.diy.software.controllers.ReceiptController;
 
 import ca.ucalgary.seng300.simulation.InvalidArgumentSimulationException;
 
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class CheckoutStationGui extends javax.swing.JFrame{
+
     private DoItYourselfStationLogic stationLogic;
     private Customer customer;
     private DoItYourselfStationAR station;
@@ -34,8 +36,11 @@ public class CheckoutStationGui extends javax.swing.JFrame{
 
     //Error label
     JLabel errorMessage = new JLabel();
-
-
+    
+    boolean signalink = false;
+    boolean signalpaper= false;
+    
+    
 
     public CheckoutStationGui(Customer customer, DoItYourselfStationAR station, DoItYourselfStationLogic stationLogic) {
         this.stationLogic = stationLogic;
@@ -59,7 +64,21 @@ public class CheckoutStationGui extends javax.swing.JFrame{
             }
         });
 
-
+        ReceiptController receipt = new ReceiptController();
+        boolean lowink = true;//receipt.getLowInk();
+        boolean lowpaper = true;//receipt.getLowPaper();
+        
+//        boolean signalink = false;
+//        boolean signalpaper= false;
+        		
+        if(lowink==true) {
+        	lowInkLabel.setText("Caution: Low Ink");
+        	signalink = true;
+        }
+        if(lowpaper == true) {
+        	lowPaperLabel.setText("Caution: Low Paper");
+        	signalpaper = true;
+        }
         payButton.setText("Pay");
         payButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,9 +153,9 @@ public class CheckoutStationGui extends javax.swing.JFrame{
                                                 .addGap(6, 6, 6)
                                                 .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addGroup(checkoutPanelLayout.createSequentialGroup()
-                                                                .addComponent(lowInkLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(lowInkLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(lowPaperLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addComponent(lowPaperLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                         .addComponent(errorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                                 .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -247,12 +266,14 @@ public class CheckoutStationGui extends javax.swing.JFrame{
         gui.setVisible(true);
 
     }
-
-
-    //TODO: Nasima and Kyle, Here are your calls for low ink and low paper. Idk where you are going to put them tho. GL
-    //lowInkLabel.setText("Caution: Low Ink");
-    //lowPaperLabel.setText("Caution: Low Paper");
-
+    
+    public boolean getSignalInk() {
+    	return signalink;
+    }
+    
+    public boolean getSignalPaper() {
+    	return signalpaper;
+    }
 
 
 }
