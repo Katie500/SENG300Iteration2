@@ -1,8 +1,9 @@
-package com.diy.software;
+package com.diy.software.gui;
 
 import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.hardware.external.CardIssuer;
 import com.diy.simulation.Customer;
+import com.diy.software.DoItYourselfStationLogic;
 import com.jimmyselectronics.opeechee.Card;
 import com.jimmyselectronics.opeechee.Card.CardData;
 

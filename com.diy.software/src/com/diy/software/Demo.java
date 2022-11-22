@@ -5,6 +5,7 @@ import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.hardware.external.CardIssuer;
 import com.diy.hardware.external.ProductDatabases;
 import com.diy.simulation.Customer;
+import com.diy.software.gui.WelcomeScreenGui;
 import com.jimmyselectronics.necchi.Barcode;
 //import com.jimmyselectronics.necchi.BarcodedItem;
 import com.jimmyselectronics.necchi.BarcodedItem;

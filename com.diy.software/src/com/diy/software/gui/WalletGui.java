@@ -1,4 +1,4 @@
-package com.diy.software;
+package com.diy.software.gui;
 
 import java.util.Calendar;
 import java.util.Random;
