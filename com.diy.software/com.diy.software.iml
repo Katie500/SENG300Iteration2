@@ -8,6 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="com.diy.hardware_0.2" />
-    <orderEntry type="module" module-name="com.diy.hardware_0.3" />
+    <orderEntry type="module" module-name="com.diy.hardware_0.31" />
   </component>
 </module>
