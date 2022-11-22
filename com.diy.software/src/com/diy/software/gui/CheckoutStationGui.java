@@ -1,7 +1,8 @@
-package com.diy.software;
+package com.diy.software.gui;
 
 import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.simulation.Customer;
+import com.diy.software.DoItYourselfStationLogic;
 import com.diy.software.controllers.ReceiptController;
 
 import ca.ucalgary.seng300.simulation.InvalidArgumentSimulationException;

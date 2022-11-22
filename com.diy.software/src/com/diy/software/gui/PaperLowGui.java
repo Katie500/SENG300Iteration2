@@ -1,9 +1,11 @@
 //I'm making this a pop-up because I think it's weird to only have it as a notification on checkout. It should either be on all panels or have as a single pop-up
 //Call for this program is:
-//InkLowGui gui = new InkLowGui();
+//PaperLowGui gui = new PaperLowGui();
 //gui.setVisible(true);
 
-package com.diy.software;
+
+
+package com.diy.software.gui;
 
 import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.simulation.Customer;
@@ -12,15 +14,16 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class InkLowGui extends javax.swing.JFrame {
+
+public class PaperLowGui extends javax.swing.JFrame {
 
 
-    public InkLowGui() {
+    public PaperLowGui() {
         initComponents();
     }
 
-    @SuppressWarnings("unchecked")
 
+    @SuppressWarnings("unchecked")
     private void initComponents() {
 
         JPanel inkLowPanel = new JPanel();
@@ -28,7 +31,8 @@ public class InkLowGui extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        inkLowLabel.setText("Receipt Ink LOW Please replace Ink");
+        inkLowLabel.setText("Receipt Paper LOW Please replace Ink");
+
         inkLowLabel.setForeground(Color.red);
 
         javax.swing.GroupLayout inkLowPanelLayout = new javax.swing.GroupLayout(inkLowPanel);
@@ -67,8 +71,6 @@ public class InkLowGui extends javax.swing.JFrame {
 
         pack();
     }
-
-
 }
 
 //sourced from netbeans
