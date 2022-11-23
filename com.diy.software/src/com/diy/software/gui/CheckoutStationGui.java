@@ -1,6 +1,5 @@
 package com.diy.software.gui;
 
-import com.diy.hardware.BarcodedProduct;
 import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.simulation.Customer;
 import com.diy.software.DoItYourselfStationLogic;
@@ -11,7 +10,6 @@ import ca.ucalgary.seng300.simulation.InvalidArgumentSimulationException;
 import javax.swing.*;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -109,14 +107,15 @@ public class CheckoutStationGui extends javax.swing.JFrame{
             }
         });
 
+
         scanItemButton.setText("Scan Item");
         scanItemButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	scanItemButtonActionPerformed(evt);
+                scanItemButtonActionPerformed(evt);
             }
         });
 
-//        totalLabel.setText("TOTAL: " + stationLogic.productController.getTotal());
+        totalLabel.setText("TOTAL: ");
 
         purchaseBagToggleButton.setText("Purchase Bag");
         purchaseBagToggleButton.addActionListener(new java.awt.event.ActionListener() {
@@ -235,21 +234,13 @@ public class CheckoutStationGui extends javax.swing.JFrame{
 
     private void scanItemButtonActionPerformed(java.awt.event.ActionEvent evt) {
         //TODO: Add prices The idea I'm working with right now is to attatch them to the end of the name
-        List<BarcodedProduct> list = new ArrayList();
-        
-        list = stationLogic.productController.getScanned();
-        int currentIndex = stationLogic.productController.getCurrentIndex();
-        
-    	try {
+        try {
             customer.selectNextItem();
             customer.scanItem();
-            stationLogic.productController.updateCost(list.get(currentIndex).getPrice());
-            stationLogic.productController.updateNextItem();
-            totalLabel.setText("TOTAL: " + stationLogic.productController.getTotal());
-
             itemList.setModel(new javax.swing.AbstractListModel<String>() {
+
                 //TODO: need to add prices and totals to the products and display them somehow
-            	List<String> strings = stationLogic.productController.getScanned().stream().map(p -> p.getDescription()).toList();
+                List<String> strings = stationLogic.productController.getScanned().stream().map(p -> p.getDescription()).toList();
                 public int getSize() { return strings.size(); }
                 public String getElementAt(int i) { return strings.get(i); }
             });
