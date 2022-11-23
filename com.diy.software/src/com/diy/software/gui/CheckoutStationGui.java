@@ -10,7 +10,6 @@ import ca.ucalgary.seng300.simulation.InvalidArgumentSimulationException;
 
 import javax.swing.*;
 
-import java.util.*;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
