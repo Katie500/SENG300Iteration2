@@ -23,10 +23,6 @@ public class Demo {
         station.scanner.turnOn();
         station.cardReader.plugIn();
         station.cardReader.turnOn();
-        
-        //setup electronic scale
-        station.scale.plugIn();
-        station.scale.turnOn();
 
         // Create barcodes
         Barcode barcode1 = new Barcode(new Numeral[] { Numeral.one });
@@ -70,7 +66,6 @@ public class Demo {
         c.setTime(date);
         c.add(Calendar.DATE, 1);
         creditIssuer.addCardData(card.number, card.cardholder, c, card.cvv, 10000);
-                
 
         // Setup station logic
         DoItYourselfStationLogic stationLogic = new DoItYourselfStationLogic(station, creditIssuer);
