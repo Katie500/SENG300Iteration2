@@ -277,7 +277,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
     	if (!bags.getOwnBagsOrNot()) {
 	    	stationLogic.productController.addToTotal(bags.getBagPrice());
 	    	bags.addBag();
-    		totalLabel.setText("TOTAL: " + stationLogic.productController.getTotal());
+    		totalLabel.setText("TOTAL: $" + stationLogic.productController.getTotal());
     	} else  {
     		errorMessage.setText("Error: Untoggle own bags");
     	}
