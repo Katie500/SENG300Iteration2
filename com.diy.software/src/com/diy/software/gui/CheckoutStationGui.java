@@ -4,6 +4,7 @@ import com.diy.hardware.BarcodedProduct;
 import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.simulation.Customer;
 import com.diy.software.DoItYourselfStationLogic;
+import com.diy.software.bags.Bags;
 import com.diy.software.controllers.ReceiptController;
 
 import ca.ucalgary.seng300.simulation.InvalidArgumentSimulationException;
@@ -22,6 +23,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
     private DoItYourselfStationLogic stationLogic;
     private Customer customer;
     private DoItYourselfStationAR station;
+    private Bags bags;
     JPanel checkoutPanel = new JPanel();
     static JLabel welcomeLabelTop = new JLabel();
     JButton selectLanguageButton = new JButton();
@@ -54,6 +56,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
         this.stationLogic = stationLogic;
         this.customer = customer;
         this.station = station;
+        this.bags = new Bags();
         initCheckoutStationGui();
     }
 
@@ -271,11 +274,21 @@ public class CheckoutStationGui extends javax.swing.JFrame{
     }
 
     private void purchaseBagToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO: Bes handles here
+    	if (!bags.getOwnBagsOrNot()) {
+	    	stationLogic.productController.updateCost(bags.getBagPrice());
+	    	bags.addBag();
+    		totalLabel.setText("TOTAL: " + stationLogic.productController.getTotal());
+    	} else  {
+    		errorMessage.setText("Error: Untoggle own bags");
+    	}
     }
 
     private void noBagsToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO: Liam handles here
+    	if (!bags.getOwnBagsOrNot()) {
+    		bags.updateOwnBagsOrNot(true);
+    	}
+    	else 
+    		bags.updateOwnBagsOrNot(false);
     }
 
     private void membershipLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {
