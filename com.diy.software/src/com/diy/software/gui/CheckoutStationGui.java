@@ -286,10 +286,13 @@ public class CheckoutStationGui extends javax.swing.JFrame{
     private void noBagsToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {
     	if (!bags.getOwnBagsOrNot()) {
     		bags.updateOwnBagsOrNot(true);
-    		//stationLogic.productController.priceToSub
+    		stationLogic.productController.subtractFromTotal(bags.getTotalBagsCost());
+            totalLabel.setText("TOTAL: $" + stationLogic.productController.getTotal());
     	}
-    	else 
+    	else {
     		bags.updateOwnBagsOrNot(false);
+            bags.resetBags();
+    	}
     }
 
     private void membershipLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {

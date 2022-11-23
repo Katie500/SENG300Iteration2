@@ -17,11 +17,16 @@ public class Bags {
 	public int getTotalBagsSelected() {
 		return totalBagsSelected;
 	}
+	public long getTotalBagsCost() {
+		return totalBagsSelected * BAG_PRICE;
+	}
 	
 	public void addBag() {
 		totalBagsSelected = totalBagsSelected + 1;
 	}
-	
+	public void resetBags() {
+		totalBagsSelected = 0;
+	}
 	public boolean ownBagsOrNot() {
 		return noBags;
 	}
