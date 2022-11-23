@@ -3,6 +3,7 @@ package com.diy.software.gui;
 import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.simulation.Customer;
 import com.diy.software.DoItYourselfStationLogic;
+import com.diy.software.gui.cardpayment.DebitGui;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -145,10 +146,11 @@ public class PaymentMethodScreenGui extends javax.swing.JFrame {
     }
 
     private void debitButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        DebitCardInputGui gui = new DebitCardInputGui(customer, station, stationLogic);
+        DebitGui gui = new DebitGui(customer, station, stationLogic);
         gui.setVisible(true);
         this.setVisible(false);
     }
+    
     private void cryptoButtonActionPerformed(java.awt.event.ActionEvent evt) {
         //TODO: Check to see if crypto was received and if correct then call the code featured below
         ConfirmationScreenGui gui = new ConfirmationScreenGui(customer, station, stationLogic);
