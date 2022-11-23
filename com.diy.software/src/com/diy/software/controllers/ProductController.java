@@ -47,7 +47,9 @@ public class ProductController implements BarcodeScannerListener {
      *
      * @return The total value of items scanned during the current transaction.
      */
-    public long getTotal() {return scanned.stream().mapToLong(p -> p.getPrice()).sum();}
+    public long getTotal() {
+        return scanned.stream().mapToLong(p -> p.getPrice()).sum();
+    }
 
     @Override
     public void barcodeScanned(BarcodeScanner barcodeScanner, Barcode barcode)  {
