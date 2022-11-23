@@ -133,7 +133,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
             }
         });
 
-        noBagsToggleButton.setText("No Bags");
+        noBagsToggleButton.setText("Add Own Bags");
         noBagsToggleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 noBagsToggleButtonActionPerformed(evt);
