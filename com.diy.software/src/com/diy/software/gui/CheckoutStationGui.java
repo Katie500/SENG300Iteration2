@@ -251,7 +251,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
             customer.selectNextItem();
             customer.scanItem();
 
-            stationLogic.productController.updateCost(list.get(currentIndex).getPrice());
+            stationLogic.productController.addToTotal(list.get(currentIndex).getPrice());
             stationLogic.productController.updateNextItem();
             totalLabel.setText("TOTAL: " + stationLogic.productController.getTotal());
 
@@ -275,7 +275,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
 
     private void purchaseBagToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {
     	if (!bags.getOwnBagsOrNot()) {
-	    	stationLogic.productController.updateCost(bags.getBagPrice());
+	    	stationLogic.productController.addToTotal(bags.getBagPrice());
 	    	bags.addBag();
     		totalLabel.setText("TOTAL: " + stationLogic.productController.getTotal());
     	} else  {
@@ -286,6 +286,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
     private void noBagsToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {
     	if (!bags.getOwnBagsOrNot()) {
     		bags.updateOwnBagsOrNot(true);
+    		//stationLogic.productController.priceToSub
     	}
     	else 
     		bags.updateOwnBagsOrNot(false);
