@@ -152,6 +152,9 @@ public class DebitCardInputGui extends javax.swing.JFrame {
 				newText = "";
 				pinEntered = "";
 				setVisible(false);
+				//adding this so when we press cancel it just cancels the payment not the program
+				PaymentMethodScreenGui gui = new PaymentMethodScreenGui(customer, station, stationLogic);
+				gui.setVisible(true);
 			} else if (pinEntered.length() < 4) {
 				pinEntered += buttonPressed;
 				newText += '*';

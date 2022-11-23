@@ -10,10 +10,13 @@ import ca.ucalgary.seng300.simulation.InvalidArgumentSimulationException;
 
 import javax.swing.*;
 
+import java.util.*;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+
+
 
 public class CheckoutStationGui extends javax.swing.JFrame{
 
@@ -21,7 +24,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
     private Customer customer;
     private DoItYourselfStationAR station;
     JPanel checkoutPanel = new JPanel();
-    JLabel welcomeLabelTop = new JLabel();
+    static JLabel welcomeLabelTop = new JLabel();
     JButton selectLanguageButton = new JButton();
     JButton payButton = new JButton();
     //scroll panel for list of products
@@ -42,6 +45,8 @@ public class CheckoutStationGui extends javax.swing.JFrame{
     
     boolean signalink = false;
     boolean signalpaper= false;
+
+    static boolean membershipConfirmed = false;
 
     
     
@@ -117,7 +122,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
             }
         });
 
-        totalLabel.setText("TOTAL: " + stationLogic.productController.getTotal());
+        totalLabel.setText("TOTAL: $" + stationLogic.productController.getTotal());
 
         purchaseBagToggleButton.setText("Purchase Bag");
         purchaseBagToggleButton.addActionListener(new java.awt.event.ActionListener() {
@@ -132,8 +137,8 @@ public class CheckoutStationGui extends javax.swing.JFrame{
                 noBagsToggleButtonActionPerformed(evt);
             }
         });
-
-        membershipLoginButton.setText("Membership Login");
+        if(!membershipConfirmed){
+        membershipLoginButton.setText("Membership Login");}
         membershipLoginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 membershipLoginButtonActionPerformed(evt);
@@ -226,6 +231,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
         PaymentMethodScreenGui gui = new PaymentMethodScreenGui(customer, station, stationLogic);
         gui.setVisible(true);
         this.setVisible(false);
+        //itemList.removeAllElements();
     }
 
     private void callAttendantButtonActionPerformed(java.awt.event.ActionEvent evt) {

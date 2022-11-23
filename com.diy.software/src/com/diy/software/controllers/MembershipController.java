@@ -28,7 +28,7 @@ public class MembershipController {
         }
     }
 
-    private HashMap<String, MembershipInfo> membershipDatabase = new HashMap<>();
+    private static HashMap<String, MembershipInfo> membershipDatabase = new HashMap<>();
 
     public void insertMember(String membershipID, String name, int year_opened, String month_opened, int day_opened, int status){
         MembershipInfo newMember = new MembershipInfo(name, year_opened, month_opened, day_opened, status);
@@ -48,6 +48,10 @@ public class MembershipController {
         else{
             return 0;
         }
+    }
+
+    public static String getName(String input){
+        return membershipDatabase.get(input).name;
     }
 
 }
