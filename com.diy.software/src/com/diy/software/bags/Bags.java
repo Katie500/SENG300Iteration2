@@ -29,4 +29,8 @@ public class Bags {
 	public void updateOwnBagsOrNot(boolean choice) {
 		noBags = choice;
 	}
+	
+	public boolean getOwnBagsOrNot() {
+		return noBags;
+	}
 }

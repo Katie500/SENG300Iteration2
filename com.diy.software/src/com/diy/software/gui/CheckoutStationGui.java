@@ -274,15 +274,21 @@ public class CheckoutStationGui extends javax.swing.JFrame{
     }
 
     private void purchaseBagToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO: Bes handles here
-    	stationLogic.productController.updateCost(bags.getBagPrice());
-    	bags.addBag();
-    	totalLabel.setText("TOTAL: " + stationLogic.productController.getTotal());
+    	if (!bags.getOwnBagsOrNot()) {
+	    	stationLogic.productController.updateCost(bags.getBagPrice());
+	    	bags.addBag();
+    		totalLabel.setText("TOTAL: " + stationLogic.productController.getTotal());
+    	} else  {
+    		errorMessage.setText("Error: Untoggle own bags");
+    	}
     }
 
     private void noBagsToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO: Liam handles here
-    	
+    	if (!bags.getOwnBagsOrNot()) {
+    		bags.updateOwnBagsOrNot(true);
+    	}
+    	else 
+    		bags.updateOwnBagsOrNot(false);
     }
 
     private void membershipLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {
