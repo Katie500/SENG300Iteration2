@@ -133,7 +133,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
             }
         });
 
-        noBagsToggleButton.setText("Add Own Bags");
+        noBagsToggleButton.setText("Use Own Bags");
         noBagsToggleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 noBagsToggleButtonActionPerformed(evt);
@@ -282,6 +282,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
     		errorMessage.setText("Error: Untoggle own bags");
     	}
     }
+   
 
     private void noBagsToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {
     	if (!bags.getOwnBagsOrNot()) {
