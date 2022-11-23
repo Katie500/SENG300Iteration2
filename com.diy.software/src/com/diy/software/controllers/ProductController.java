@@ -16,6 +16,9 @@ public class ProductController implements BarcodeScannerListener {
     private DoItYourselfStationLogic stationLogic;
     private List<BarcodedProduct> scanned = new ArrayList();
 
+    private long totalPrice;
+    private int currentItem;
+
     /**
      * Basic constructor.
      *
@@ -24,6 +27,8 @@ public class ProductController implements BarcodeScannerListener {
      */
     public ProductController(DoItYourselfStationLogic stationLogic) {
         this.stationLogic = stationLogic;
+        totalPrice = 0;
+        currentItem = 0;
     }
 
     /**
@@ -47,9 +52,21 @@ public class ProductController implements BarcodeScannerListener {
      *
      * @return The total value of items scanned during the current transaction.
      */
-    public long getTotal() {
-        return scanned.stream().mapToLong(p -> p.getPrice()).sum();
+
+    public void updateNextItem() {
+        currentItem = currentItem + 1;
     }
+    public int getCurrentIndex() {
+        return currentItem;
+    }
+    public long getTotal() {
+        return totalPrice;
+    }
+
+    public void updateCost(long priceToAdd) {
+        totalPrice = totalPrice + priceToAdd;
+    }
+
 
     @Override
     public void barcodeScanned(BarcodeScanner barcodeScanner, Barcode barcode)  {
