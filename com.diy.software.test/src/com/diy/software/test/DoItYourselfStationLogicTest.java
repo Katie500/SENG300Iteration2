@@ -12,7 +12,7 @@ public class DoItYourselfStationLogicTest {
 		DoItYourselfStationAR station = new DoItYourselfStationAR();
 		CardIssuer creditIssuer = new CardIssuer("Credit", 10);
 		DoItYourselfStationLogic logic = new DoItYourselfStationLogic(station, creditIssuer);
-	
+		
 	@Test
 	public void testgetInProgress() {
 		assertTrue(logic.getInProgress());
