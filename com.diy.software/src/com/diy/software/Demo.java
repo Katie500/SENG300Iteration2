@@ -23,6 +23,10 @@ public class Demo {
         station.scanner.turnOn();
         station.cardReader.plugIn();
         station.cardReader.turnOn();
+        
+        // Setup electronic scale
+        station.scale.plugIn();
+        station.scale.turnOn();
 
         // Create barcodes
         Barcode barcode1 = new Barcode(new Numeral[] { Numeral.one });

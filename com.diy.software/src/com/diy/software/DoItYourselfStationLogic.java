@@ -6,6 +6,9 @@ import com.diy.hardware.external.CardIssuer;
 import com.diy.hardware.external.ProductDatabases;
 import com.diy.software.controllers.PaymentController;
 import com.diy.software.controllers.ProductController;
+import com.diy.software.controllers.WeightController;
+import com.jimmyselectronics.OverloadException;
+import com.jimmyselectronics.virgilio.ElectronicScale;
 
 import java.util.List;
 
@@ -26,7 +29,26 @@ public class DoItYourselfStationLogic {
      * Tracks if the customers session has begun
      */
     private boolean inProgress = true;
+    /**
+     * The controller that tracks the weight of the items
+     */
+    private WeightController electronicScale;
 
+    
+    //System variables
+    /**
+     * tracks the current weight
+     */
+    private double baggingAreaCurrentWeight;
+    /**
+     * tracks the bagging area expected weight
+     */
+    private double baggingAreaExpectedWeight;
+    
+    private ElectronicScale baggingArea;
+    private static double scaleMaximumWeightConfiguration = 5000.0;
+    private static double scaleSensitivityConfiguration = 0.5;
+    
     /**
      * Installs an instance of the logic on the indicated station.
      *
@@ -85,5 +107,50 @@ public class DoItYourselfStationLogic {
     public void setInProgress(boolean inProgress) {
         this.inProgress = inProgress;
     }
+    
+    
+    /**
+     * Gets current expected weight
+     */
+
+	public double getCurrentExpectedWeight() {
+		try {
+			baggingAreaExpectedWeight = baggingArea.getCurrentWeight();
+			return baggingAreaExpectedWeight;
+		}catch(OverloadException e) {
+			e.printStackTrace();
+		}
+		return baggingAreaCurrentWeight;
+	}
+
+	public void systemDisable() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void notifyUser(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void enableScanningAndBagging() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void bagItemSuccess(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateWeightOnGUI(double weightInGrams) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setScanStatus(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
 }
 

@@ -149,6 +149,12 @@ public class AttendantStationGui extends javax.swing.JFrame {
     }
 
 
+	public void notifyWeightChange() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 }
 
