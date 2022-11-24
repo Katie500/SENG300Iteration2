@@ -353,6 +353,7 @@ public class MembershipScreenGui extends javax.swing.JFrame {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO: disregard whatever input was inputted
         memberPin.clear();
+        passwordPINtextbox.setText(convertMembershipToString(memberPin));
         this.setVisible(false);
     }
 
@@ -364,6 +365,8 @@ public class MembershipScreenGui extends javax.swing.JFrame {
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         memberPin.clear();
+        passwordPINtextbox.setText(convertMembershipToString(memberPin));
+        System.out.println(convertMembershipToString(memberPin));
     }
 
 
