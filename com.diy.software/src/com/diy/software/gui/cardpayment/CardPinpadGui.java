@@ -173,44 +173,55 @@ public class CardPinpadGui extends javax.swing.JFrame {
 	private void validatePayment() {
 		Card selectedCard = walletGui.getSelectedCard();
 
-		if (selectedCard == null) {
-			errorMessage.setText("Please select a card from the wallet to insert.");
-		} else {
-			try {
-				CardData selectedCardData = station.cardReader.insert(selectedCard, pinEntered);
-				
-				stationLogic.paymentController.cardDataRead(station.cardReader, selectedCardData);
-				stationLogic.paymentController.payWithCard();
-				
-				// Display the confirmation screen if the payment is successful
-				ConfirmationScreenGui successGui = new ConfirmationScreenGui(customer, station, stationLogic);
-				successGui.setVisible(true);
-				setVisible(false);
-			} catch (IOException e) {
-				String exceptionMessage = e.toString();
+		try {
+			stationLogic.paymentController.validateCardPayment(selectedCard, pinEntered, station.cardReader);
 
-				if (exceptionMessage.contains("InvalidPINException")) {
-					// If the pin entered is invalid,display an error message.
-					errorMessage.setText("Invalid pin.");
-
-				} else if (exceptionMessage.contains("BlockedCardException")) {
-					// If the customer enters the wrong pin 3 times, the card is blocked.
-					errorMessage.setText(selectedCard.kind + " is blocked.");
-
-				} else if (exceptionMessage.contains("ChipFailureException")) {
-					// If the chip failed.
-					errorMessage.setText("Chip failure. Reinsert the card, and enter the pin.");
-				}
-
-				// For any failed payment attempts, remove the card from the slot and clear the
-				// pin input
-				station.cardReader.remove();
-				walletGui.removeCardFromSlot();
-
-				pinEntered = "";
-				pinpadInput.setText("");
-			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+//			e.printStackTrace();
 		}
+		
+//		try {
+//
+//			station.cardReader.insert(selectedCard, pinEntered);
+//			
+//			boolean isSuccess = stationLogic.paymentController.payWithCard();
+//			
+//			if(isSuccess) {
+//				// Display the confirmation screen if the payment is successful
+//				ConfirmationScreenGui successGui = new ConfirmationScreenGui(customer, station, stationLogic);
+//				successGui.setVisible(true);
+//				setVisible(false);
+//			} else {
+//				// Display failed payment screen
+//				PaymentErrorGui failGui = new PaymentErrorGui(customer, station, stationLogic);
+//				failGui.setVisible(true);
+//			}
+//			
+//			
+//		} catch (IOException e) {
+//			String exceptionMessage = e.toString();
+//
+//			if (exceptionMessage.contains("InvalidPINException")) {
+//				// If the pin entered is invalid,display an error message.
+//				errorMessage.setText("Invalid pin.");
+//
+//			} else if (exceptionMessage.contains("BlockedCardException")) {
+//				// If the customer enters the wrong pin 3 times, the card is blocked.
+//				errorMessage.setText(selectedCard.kind + " is blocked.");
+//				stationLogic.paymentController.blockCard(selectedCard.number);
+//			} else if (exceptionMessage.contains("ChipFailureException")) {
+//				// If the chip failed.
+//				errorMessage.setText("Chip failure. Reinsert the card, and enter the pin.");
+//			}
+//			
+//			e.printStackTrace();
+//		}
+
+		walletGui.removeCardFromSlot();
+		pinEntered = "";
+		pinpadInput.setText("");
 	}
 }
 
