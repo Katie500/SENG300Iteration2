@@ -139,12 +139,16 @@ public class CheckoutStationGui extends javax.swing.JFrame{
                 noBagsToggleButtonActionPerformed(evt);
             }
         });
-        if(!membershipConfirmed){
-        membershipLoginButton.setText("Membership Login");}
+        //if(!membershipConfirmed){
+        membershipLoginButton.setText("Membership Login");
+        //}
+        if(membershipConfirmed){
+        membershipLoginButton.setVisible(false);
+        }
         membershipLoginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 membershipLoginButtonActionPerformed(evt);
-            }
+        }
         });
 
 
@@ -297,8 +301,9 @@ public class CheckoutStationGui extends javax.swing.JFrame{
     }
 
     private void membershipLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        MembershipScreenGui gui = new MembershipScreenGui(customer, station, stationLogic);
-        gui.setVisible(true);
+        MembershipScreenGui membershipgui = new MembershipScreenGui(customer, station, stationLogic);
+        membershipgui.setVisible(true);
+        //this.setVisible(false);
 
     }
     

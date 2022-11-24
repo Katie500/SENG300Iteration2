@@ -173,7 +173,8 @@ public class CardPinpadGui extends javax.swing.JFrame {
 			
 			if(isSuccess) {
 				// Display the confirmation screen if the payment is successful
-				ConfirmationScreenGui successGui = new ConfirmationScreenGui(customer, station, stationLogic);
+				boolean cashSelected = false;
+				ConfirmationScreenGui successGui = new ConfirmationScreenGui(customer, station, stationLogic,cashSelected);
 				successGui.setVisible(true);
 				setVisible(false);
 			} else {

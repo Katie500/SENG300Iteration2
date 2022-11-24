@@ -12,12 +12,10 @@ import com.jimmyselectronics.necchi.Barcode;
 import com.jimmyselectronics.necchi.BarcodedItem;
 import com.jimmyselectronics.necchi.Numeral;
 import com.jimmyselectronics.opeechee.Card;
+import com.unitedbankingservices.banknote.Banknote;
+import com.unitedbankingservices.coin.Coin;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Demo {
     public static void main(String[] args) {
@@ -47,6 +45,18 @@ public class Demo {
         ProductDatabases.BARCODED_PRODUCT_DATABASE.put(barcode1, product1);
         ProductDatabases.BARCODED_PRODUCT_DATABASE.put(barcode2, product2);
         ProductDatabases.BARCODED_PRODUCT_DATABASE.put(barcode3, product3);
+
+        // Setup currency
+        Currency canadianDollar = Currency.getInstance("CAD");
+
+        // Setup Banknotes
+        Banknote tenDollar = new Banknote(canadianDollar,10);
+        Banknote twentyDollar = new Banknote(canadianDollar,20);
+        Banknote fiftyDollar = new Banknote(canadianDollar,50);
+
+        // Setup Coins
+        Coin toonie = new Coin(canadianDollar,2);
+        Coin loonie = new Coin(canadianDollar,1);
 
         // Setup customer
         Customer customer = new Customer();
