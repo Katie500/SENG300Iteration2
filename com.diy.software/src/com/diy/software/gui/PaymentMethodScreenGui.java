@@ -17,6 +17,8 @@ public class PaymentMethodScreenGui extends javax.swing.JFrame {
     private static Customer customer;
     private static DoItYourselfStationAR station;
 
+    static boolean cashSelected;
+
 
     public PaymentMethodScreenGui(Customer customer, DoItYourselfStationAR station, DoItYourselfStationLogic stationLogic) {
         initComponents();
@@ -122,7 +124,8 @@ public class PaymentMethodScreenGui extends javax.swing.JFrame {
 
     private void cashButtonActionPerformed(java.awt.event.ActionEvent evt) {
         //TODO: Check to see if cash was inserted and if correct then call the code featured below
-        ConfirmationScreenGui gui = new ConfirmationScreenGui(customer, station, stationLogic);
+        cashSelected = true;
+        ConfirmationScreenGui gui = new ConfirmationScreenGui(customer, station, stationLogic, cashSelected);
         gui.setVisible(true);
         this.setVisible(false);
         /*IF cash was not correct, error message gui call is:
@@ -139,7 +142,8 @@ public class PaymentMethodScreenGui extends javax.swing.JFrame {
     
     private void cryptoButtonActionPerformed(java.awt.event.ActionEvent evt) {
         //TODO: Check to see if crypto was received and if correct then call the code featured below
-        ConfirmationScreenGui gui = new ConfirmationScreenGui(customer, station, stationLogic);
+        cashSelected = false;
+        ConfirmationScreenGui gui = new ConfirmationScreenGui(customer, station, stationLogic,cashSelected);
         gui.setVisible(true);
         this.setVisible(false);
         /*IF crypto was not received, error message gui call is:

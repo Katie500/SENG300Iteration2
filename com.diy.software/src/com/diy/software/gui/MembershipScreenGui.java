@@ -337,8 +337,9 @@ public class MembershipScreenGui extends javax.swing.JFrame {
         // TODO: store membership number someplace awesome so we can find it later
         if(membershipController.verifyMembership(convertMembershipToString(memberPin)) == 1){
             System.out.println("Valid Membership");
-            //CheckoutStationGui.welcomeLabelTop.setText("Welcome Mr. Smith!");
+            //changing welcome label to have member name
             CheckoutStationGui.welcomeLabelTop.setText("Welcome " + MembershipController.getName(convertMembershipToString(memberPin)) + "!");
+            //getting rid of member button
             CheckoutStationGui.membershipConfirmed = true;
 //            CheckoutStationGui newgui = new CheckoutStationGui(customer, station, stationLogic);
 //            newgui.setVisible(true);
