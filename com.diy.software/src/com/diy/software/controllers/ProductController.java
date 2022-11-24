@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ProductController implements BarcodeScannerListener {
     private DoItYourselfStationLogic stationLogic;
-    public List<BarcodedProduct> scanned = new ArrayList();
+    private List<BarcodedProduct> scanned = new ArrayList();
 
     private long totalPrice;
     private int currentItem;
