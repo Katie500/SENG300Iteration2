@@ -125,8 +125,8 @@ public class PaymentMethodScreenGui extends javax.swing.JFrame {
     private void cashButtonActionPerformed(java.awt.event.ActionEvent evt) {
         //TODO: Check to see if cash was inserted and if correct then call the code featured below
         cashSelected = true;
-        ConfirmationScreenGui gui = new ConfirmationScreenGui(customer, station, stationLogic, cashSelected);
-        gui.setVisible(true);
+        CashOptionsGui cashgui = new CashOptionsGui(customer, station, stationLogic, cashSelected);
+        cashgui.setVisible(true);
         this.setVisible(false);
         /*IF cash was not correct, error message gui call is:
         PaymentErrorGui gui = new PaymentErrorGui(customer,station,stationLogic);
