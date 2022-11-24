@@ -3,10 +3,10 @@ package com.diy.software.bags;
 public class Bags {
 	private final long BAG_PRICE = 1;
 	private int totalBagsSelected;
-	private boolean noBags;
+	private boolean ownBags;
 	
 	public Bags () {
-		noBags = false;
+		ownBags = false;
 		totalBagsSelected = 0;
 	}
 	
@@ -17,20 +17,21 @@ public class Bags {
 	public int getTotalBagsSelected() {
 		return totalBagsSelected;
 	}
+	public long getTotalBagsCost() {
+		return totalBagsSelected * BAG_PRICE;
+	}
 	
 	public void addBag() {
 		totalBagsSelected = totalBagsSelected + 1;
 	}
-	
-	public boolean ownBagsOrNot() {
-		return noBags;
+	public void resetBags() {
+		totalBagsSelected = 0;
 	}
-	
+
 	public void updateOwnBagsOrNot(boolean choice) {
-		noBags = choice;
+		ownBags = choice;
 	}
-	
 	public boolean getOwnBagsOrNot() {
-		return noBags;
+		return ownBags;
 	}
 }

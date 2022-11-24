@@ -66,9 +66,9 @@ public class ProductController implements BarcodeScannerListener {
     public void addToTotal(long priceToAdd) {
         totalPrice = totalPrice + priceToAdd;
     }
-//    public void subtractFromTotal(long priceToSub) {
-//    	totalPrice = totalPrice - priceToSub;
-//    }
+    public void subtractFromTotal(long priceToSub) {
+    	totalPrice = totalPrice - priceToSub;
+    }
     
     public void resetTotal() {
     	totalPrice = 0;

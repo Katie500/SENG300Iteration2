@@ -35,7 +35,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
     JButton callAttendantButton = new JButton();
     JButton scanItemButton = new JButton();
     JLabel totalLabel = new JLabel();
-    JToggleButton purchaseBagToggleButton = new JToggleButton();
+    JButton purchaseBagButton = new JButton();
     JToggleButton noBagsToggleButton = new JToggleButton();
     JButton membershipLoginButton = new JButton();
     JLabel lowInkLabel = new JLabel();
@@ -126,14 +126,14 @@ public class CheckoutStationGui extends javax.swing.JFrame{
 
         totalLabel.setText("TOTAL: $" + stationLogic.productController.getTotal());
 
-        purchaseBagToggleButton.setText("Purchase Bag");
-        purchaseBagToggleButton.addActionListener(new java.awt.event.ActionListener() {
+        purchaseBagButton.setText("Purchase Bag");
+        purchaseBagButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                purchaseBagToggleButtonActionPerformed(evt);
+                purchaseBagButtonActionPerformed(evt);
             }
         });
 
-        noBagsToggleButton.setText("No Bags");
+        noBagsToggleButton.setText("Use Own Bags");
         noBagsToggleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 noBagsToggleButtonActionPerformed(evt);
@@ -173,7 +173,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
                                         .addComponent(noBagsToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(scanItemButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(payButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(purchaseBagToggleButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(purchaseBagButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(selectLanguageButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(callAttendantButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addContainerGap())
@@ -207,7 +207,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(payButton)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(purchaseBagToggleButton)
+                                                .addComponent(purchaseBagButton)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(noBagsToggleButton)
                                                 .addGap(20, 20, 20))))
@@ -273,23 +273,27 @@ public class CheckoutStationGui extends javax.swing.JFrame{
         //TODO: add languages maybe at some point idk
     }
 
-    private void purchaseBagToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void purchaseBagButtonActionPerformed(java.awt.event.ActionEvent evt) {
     	if (!bags.getOwnBagsOrNot()) {
 	    	stationLogic.productController.addToTotal(bags.getBagPrice());
 	    	bags.addBag();
-    		totalLabel.setText("TOTAL: " + stationLogic.productController.getTotal());
+    		totalLabel.setText("TOTAL: $" + stationLogic.productController.getTotal());
     	} else  {
     		errorMessage.setText("Error: Untoggle own bags");
     	}
     }
+   
 
     private void noBagsToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {
     	if (!bags.getOwnBagsOrNot()) {
     		bags.updateOwnBagsOrNot(true);
-    		//stationLogic.productController.priceToSub
+    		stationLogic.productController.subtractFromTotal(bags.getTotalBagsCost());
+            totalLabel.setText("TOTAL: $" + stationLogic.productController.getTotal());
     	}
-    	else 
+    	else {
     		bags.updateOwnBagsOrNot(false);
+            bags.resetBags();
+    	}
     }
 
     private void membershipLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {
