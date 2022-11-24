@@ -3,6 +3,7 @@ package com.diy.software.gui;
 import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.simulation.Customer;
 import com.diy.software.DoItYourselfStationLogic;
+import com.diy.software.controllers.MembershipController;
 
 import javax.swing.*;
 
@@ -13,12 +14,15 @@ public class ConfirmationScreenGui extends javax.swing.JFrame {
     private static Customer customer;
     private static DoItYourselfStationAR station;
 
+    private static boolean bool;
 
-    public ConfirmationScreenGui(Customer customer, DoItYourselfStationAR station, DoItYourselfStationLogic stationLogic) {
+
+    public ConfirmationScreenGui(Customer customer, DoItYourselfStationAR station, DoItYourselfStationLogic stationLogic, boolean bool) {
         initComponents();
         ConfirmationScreenGui.customer = customer;
         ConfirmationScreenGui.station = station;
         ConfirmationScreenGui.stationLogic = stationLogic;
+        ConfirmationScreenGui.bool = bool;
 
     }
 
@@ -61,9 +65,15 @@ public class ConfirmationScreenGui extends javax.swing.JFrame {
 
         thanksForShoppingLabel.setText("Thanks For Shopping  With Us!");
 
+        if(bool){
+            totalPaidLabel.setVisible(false);
+            changeReturnedLabel.setVisible(false);
+        }
+
         totalPaidLabel.setText("Total Paid:");
 
         changeReturnedLabel.setText("Change Returned:");
+
 
         javax.swing.GroupLayout confirmationScreenPanelLayout = new javax.swing.GroupLayout(confirmationScreenPanel);
         confirmationScreenPanel.setLayout(confirmationScreenPanelLayout);
@@ -110,11 +120,11 @@ public class ConfirmationScreenGui extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(confirmationScreenPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(confirmationScreenPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(confirmationScreenPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(confirmationScreenPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -122,8 +132,8 @@ public class ConfirmationScreenGui extends javax.swing.JFrame {
 
     private void printReceiptButtonActionPerformed(java.awt.event.ActionEvent evt) {
         //TODO: Figure out if we need to do something here. Maybe check with hardware to see if a receipt was actually printed
-        WelcomeScreenGui gui = new WelcomeScreenGui(customer, station, stationLogic);
-        gui.setVisible(true);
+        WelcomeScreenGui welcomegui = new WelcomeScreenGui(customer, station, stationLogic);
+        welcomegui.setVisible(true);
         this.setVisible(false);
         //TODO: Figure out how to launch new clean checkout station
     }
@@ -131,16 +141,19 @@ public class ConfirmationScreenGui extends javax.swing.JFrame {
     private void scanMoreItemsButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO: Figure out how to clear the screen but keep membership number on file
     	stationLogic.productController.resetTotal();
-        CheckoutStationGui gui = new CheckoutStationGui(customer, station, stationLogic);
-        gui.setVisible(true);
+        //this changes the label of checkoutsttion to member's name
+        //CheckoutStationGui.welcomeLabelTop.setText("Welcome " + MembershipController.getName(convertMembershipToString(memberPin)) + "!");
+        CheckoutStationGui newcheckoutgui = new CheckoutStationGui(customer, station, stationLogic);
+        newcheckoutgui.setVisible(true);
         this.setVisible(false);
         //TODO: Figure out how to launch new clean checkout station
     }
 
     private void endSessionButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        WelcomeScreenGui gui = new WelcomeScreenGui(customer, station, stationLogic);
-        gui.setVisible(true);
+        WelcomeScreenGui welcomegui2 = new WelcomeScreenGui(customer, station, stationLogic);
+        welcomegui2.setVisible(true);
         this.setVisible(false);
+        //make membership button visible again
         CheckoutStationGui.membershipConfirmed = (false);
         //TODO: Figure out how to launch new clean checkout station
     }
