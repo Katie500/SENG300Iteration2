@@ -20,13 +20,13 @@ public class DoItYourselfStationLogic {
      */
     public PaymentController paymentController;
     /**
-     * Tracks if the customers session has begun
-     */
-    private boolean inProgress = true;
-    /**
      * The controller that tracks the inserted cashPayment
      */
     public CashPaymentController cashPaymentController;
+    /**
+     * Tracks if the customers session has begun
+     */
+    private boolean inProgress = true;
 
     /**
      * Installs an instance of the logic on the indicated station.
