@@ -46,6 +46,17 @@ public class Demo {
         ProductDatabases.BARCODED_PRODUCT_DATABASE.put(barcode2, product2);
         ProductDatabases.BARCODED_PRODUCT_DATABASE.put(barcode3, product3);
 
+        // Setup currency
+        Currency canadianDollar = Currency.getInstance("CAD");
+
+        // Setup Banknotes
+        Banknote tenDollar = new Banknote(canadianDollar,10);
+        Banknote twentyDollar = new Banknote(canadianDollar,20);
+        Banknote fiftyDollar = new Banknote(canadianDollar,50);
+
+        // Setup Coins
+        Coin toonie = new Coin(canadianDollar,2);
+        Coin loonie = new Coin(canadianDollar,1);
 
         // Setup customer
         Customer customer = new Customer();
