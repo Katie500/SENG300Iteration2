@@ -47,7 +47,6 @@ public class Demo {
         ProductDatabases.BARCODED_PRODUCT_DATABASE.put(barcode3, product3);
 
 
-
         // Setup customer
         Customer customer = new Customer();
         customer.useStation(station);
