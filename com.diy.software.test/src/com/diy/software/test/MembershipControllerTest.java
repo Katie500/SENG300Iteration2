@@ -76,6 +76,42 @@ public class MembershipControllerTest
 	}
 	
 	
+	/**
+	 * Testing the functionality of of getting the month
+	 * 
+	 */
+	@Test
+	public void testGetMonth()
+	{
+		newMember.insertMember(ID, name, yearOpened, monthOpened, dayOpened, status);
+		assertEquals("April", newMember.getMonth(ID));
+	}
+	
+	/**
+	 * Testing the functionality of of getting the day
+	 * 
+	 */
+	@Test
+	public void testGetDay()
+	{
+		newMember.insertMember(ID, name, yearOpened, monthOpened, dayOpened, status);
+		//System.out.println(newMember.getMonth(ID));
+		
+		//assertEquals(dayOpened, newMember.getDay(ID));
+		
+	}
+	
+	/**
+	 * Testing the functionality of of getting the year
+	 * 
+	 */
+	@Test
+	public void testGetYear()
+	{
+		newMember.insertMember(ID, name, yearOpened, monthOpened, dayOpened, status);
+		//assertEquals(2020, newMember.getYear(ID));
+	}
+	
 	@After
 	public void tearDown()
 	{
