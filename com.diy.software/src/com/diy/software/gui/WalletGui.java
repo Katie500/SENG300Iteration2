@@ -1,65 +1,51 @@
 package com.diy.software.gui;
 
-import java.util.Calendar;
-import java.util.Random;
+import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-import com.diy.hardware.external.CardIssuer;
-import com.diy.simulation.Wallet;
 import com.jimmyselectronics.opeechee.Card;
 
+@SuppressWarnings("serial")
 public class WalletGui extends JPanel {
-	public final Wallet wallet = new Wallet();
-	
-	private final int NUMBER_CARDS = 2;
+	private List<Card> cards;
 	
 	private Card selectedCard = null;
-	private CardIssuer selectedCardIssuer = null;
-	
 	private JButton currentCardButton = null;
 	
-	public WalletGui() {
-        //       Add label
+	public WalletGui(List<Card> cards) {
+		this.cards = cards;
+		
+        // Add label
         JLabel debitPINLabel = new JLabel();
         debitPINLabel.setText("Wallet");
         
         debitPINLabel.setHorizontalAlignment(JLabel.CENTER);
         debitPINLabel.setFont(new Font(debitPINLabel.getName(), Font.PLAIN, 20));
         
-		setLayout(new GridLayout(NUMBER_CARDS+1,1));
+		setLayout(new GridLayout(cards.size()+1,1));
 		setBackground(Color.white);
 		
         add(debitPINLabel);
 		
-		initializeWalletContents();
+        initializeWalletGuiContents();
 	}
 	
-    private void initializeWalletContents() {
-    	Random random = new Random();
-    	CardIssuer cardIssuer = new CardIssuer("Card Issuer 1", 3);
-    	
-    	for (int i = 1; i <= NUMBER_CARDS; i++) {
-    		String strI = Integer.toString(i);
-    		String cardNumber = Long.toString((long) (1000000000000000L + random.nextFloat() * 9000000000000000L));
+    private void initializeWalletGuiContents() {
+    	for (int i = 0; i < cards.size(); i++) {
+    		Card card = cards.get(i);
+    		String formattedCardNumber = card.number.replaceAll("(.{" + 4 + "})", "$1 ").trim();
     		
-    		String kind = "Debit " + strI;
-    		String cvv = Integer.toString(100 + random.nextInt(900));
-    		String pin = "1234";
-//    		String pin = Integer.toString(1000 + random.nextInt(9000));
-    		
-    		Card debitCard = new Card(kind, cardNumber, "Card Holder Name", cvv, pin, true, true);
-    		wallet.cards.add(debitCard);
+    		String cardInfo = ((card.isTapEnabled) ? "Has tap, " : "No tap, ") + ((card.hasChip) ? "has chip" : "no chip");
     		
     		// Create GUI for card
-    		JButton cardButton = new JButton("<html>" + kind + "<br>" + cardNumber + "</html>");
+    		JButton cardButton = new JButton("<html>" + card.kind + "<br>" + formattedCardNumber + "<br>" + cardInfo + "</html>");
+    		cardButton.setFont(new Font(cardButton.getName(), Font.PLAIN, 10));
     		
 			cardButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					selectedCard = debitCard;
-					
 					if(currentCardButton != null) {
 						AbstractButton button = (AbstractButton) e.getSource();
 						currentCardButton.setBorder(button.getBorder());
@@ -67,22 +53,37 @@ public class WalletGui extends JPanel {
 					
 					cardButton.setBorder(BorderFactory.createLineBorder(new Color(72, 102, 150), 5));
 					
-					selectedCard = debitCard;
-					selectedCardIssuer = cardIssuer;
+					selectedCard = card;
 					currentCardButton = (JButton) e.getSource();
 				}
 			});
 			
     		add(cardButton);
-    		cardIssuer.addCardData(cardNumber, "Card Holder Name", Calendar.getInstance(), cvv, 1000);
     	}
+    }
+    
+    public void setSelectedCard(Card selectedCard) {
+    	this.selectedCard = selectedCard;
     }
     
     public Card getSelectedCard() {
     	return this.selectedCard;
     }
     
-    public CardIssuer getSelectedCardIssuer() {
-    	return this.selectedCardIssuer;
+    public JButton getCurrentCardButton() {
+    	return this.currentCardButton;
+    }
+    
+    public void setCurrentCardButton(JButton currentCard) {
+    	this.currentCardButton = currentCard;
+    }
+    
+    public void removeCardFromSlot() {
+    	if(currentCardButton != null && selectedCard != null) {
+        	currentCardButton.setBorder(new JButton().getBorder());
+        	currentCardButton = null;
+        	
+        	selectedCard = null;
+    	}
     }
 }
