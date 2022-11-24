@@ -253,7 +253,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
 
             stationLogic.productController.addToTotal(list.get(currentIndex).getPrice());
             stationLogic.productController.updateNextItem();
-            totalLabel.setText("TOTAL: " + stationLogic.productController.getTotal());
+            totalLabel.setText("TOTAL: $" + stationLogic.productController.getTotal());
 
             itemList.setModel(new javax.swing.AbstractListModel<String>() {
 
