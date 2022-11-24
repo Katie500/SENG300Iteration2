@@ -112,6 +112,7 @@ public class ConfirmationScreenGui extends javax.swing.JFrame {
 
     private void scanMoreItemsButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO: Figure out how to clear the screen but keep membership number on file
+    	stationLogic.productController.resetTotal();
         CheckoutStationGui gui = new CheckoutStationGui(customer, station, stationLogic);
         gui.setVisible(true);
         this.setVisible(false);
