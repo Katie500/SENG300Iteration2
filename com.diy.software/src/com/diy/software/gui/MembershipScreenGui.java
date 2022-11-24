@@ -335,11 +335,17 @@ public class MembershipScreenGui extends javax.swing.JFrame {
 
     private void enterButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO: store membership number someplace awesome so we can find it later
-        if(membershipController.verifyMembership(convertMembershipToString(memberPin)) == 1){
+        if(membershipController.verifyMembership(convertMembershipToString(memberPin))){
             System.out.println("Valid Membership");
-            //CheckoutStationGui.welcomeLabelTop.setText("Welcome Mr. Smith!");
-            CheckoutStationGui.welcomeLabelTop.setText("Welcome " + MembershipController.getName(convertMembershipToString(memberPin)) + "!");
+            //changing welcome label to have member name
+            CheckoutStationGui.welcomeLabelTop.setText("<html>Welcome, " + MembershipController.getName(convertMembershipToString(memberPin))
+                    + "! <br/>Membership Number: " + convertMembershipToString(memberPin)
+                    + " <br/>Proud Member Since: " + MembershipController.getMonth(convertMembershipToString(memberPin)) + " " + MembershipController.getDay(convertMembershipToString(memberPin))
+                    + ", " + MembershipController.getYear(convertMembershipToString(memberPin)));
+            //getting rid of member button
             CheckoutStationGui.membershipConfirmed = true;
+//            CheckoutStationGui newgui = new CheckoutStationGui(customer, station, stationLogic);
+//            newgui.setVisible(true);
             this.setVisible(false);
         }
         else{
@@ -353,6 +359,7 @@ public class MembershipScreenGui extends javax.swing.JFrame {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO: disregard whatever input was inputted
         memberPin.clear();
+        passwordPINtextbox.setText(convertMembershipToString(memberPin));
         this.setVisible(false);
     }
 
@@ -364,6 +371,8 @@ public class MembershipScreenGui extends javax.swing.JFrame {
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         memberPin.clear();
+        passwordPINtextbox.setText(convertMembershipToString(memberPin));
+        System.out.println(convertMembershipToString(memberPin));
     }
 
 

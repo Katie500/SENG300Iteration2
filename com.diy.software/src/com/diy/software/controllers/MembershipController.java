@@ -29,6 +29,7 @@ public class MembershipController {
     }
 
     private static HashMap<String, MembershipInfo> membershipDatabase = new HashMap<>();
+    public String activeMember = null;
 
     public void insertMember(String membershipID, String name, int year_opened, String month_opened, int day_opened, int status){
         MembershipInfo newMember = new MembershipInfo(name, year_opened, month_opened, day_opened, status);
@@ -36,23 +37,39 @@ public class MembershipController {
     }
 
     public void insertMember(String membershipID, String name, int year_opened, String month_opened, int day_opened){
-        MembershipInfo newMember = new MembershipInfo(name, year_opened, month_opened, day_opened);
+        
+    	MembershipInfo newMember = new MembershipInfo(name, year_opened, month_opened, day_opened);
         membershipDatabase.put(membershipID, newMember);
     }
 
-    public int verifyMembership(String input){
+    public boolean verifyMembership(String input){
         if(membershipDatabase.containsKey(input)){
             System.out.println(membershipDatabase.get(input).name);
-            return 1;
+            return true;
         }
         else{
-            return 0;
+            return false;
         }
     }
 
-    public static String getName(String input){
-        return membershipDatabase.get(input).name;
+    /**
+     * 
+     * 
+     * @param input the ID as input
+     */
+    public static String getName(String input){return membershipDatabase.get(input).name;}
+    public static String getMonth(String input){return membershipDatabase.get(input).month_opened;}
+    public static int getDay(String input){return membershipDatabase.get(input).day_opened;}
+    public static int getYear(String input){return membershipDatabase.get(input).year_opened;}
+
+    //Set active member
+    public void setActiveMember(String input){
+        if(verifyMembership(input)) {
+            this.activeMember = input;
+        }
     }
+
+    // Get active mem
 
 }
 

@@ -6,14 +6,16 @@ import com.diy.hardware.external.CardIssuer;
 import com.diy.hardware.external.ProductDatabases;
 import com.diy.simulation.Customer;
 import com.diy.software.gui.WelcomeScreenGui;
+
 import com.jimmyselectronics.necchi.Barcode;
 //import com.jimmyselectronics.necchi.BarcodedItem;
 import com.jimmyselectronics.necchi.BarcodedItem;
 import com.jimmyselectronics.necchi.Numeral;
 import com.jimmyselectronics.opeechee.Card;
+import com.unitedbankingservices.banknote.Banknote;
+import com.unitedbankingservices.coin.Coin;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 public class Demo {
     public static void main(String[] args) {
@@ -48,6 +50,18 @@ public class Demo {
         ProductDatabases.BARCODED_PRODUCT_DATABASE.put(barcode2, product2);
         ProductDatabases.BARCODED_PRODUCT_DATABASE.put(barcode3, product3);
 
+        // Setup currency
+        Currency canadianDollar = Currency.getInstance("CAD");
+
+        // Setup Banknotes
+        Banknote tenDollar = new Banknote(canadianDollar,10);
+        Banknote twentyDollar = new Banknote(canadianDollar,20);
+        Banknote fiftyDollar = new Banknote(canadianDollar,50);
+
+        // Setup Coins
+        Coin toonie = new Coin(canadianDollar,2);
+        Coin loonie = new Coin(canadianDollar,1);
+
         // Setup customer
         Customer customer = new Customer();
         customer.useStation(station);
@@ -57,19 +71,10 @@ public class Demo {
         customer.shoppingCart.add(item2);
         customer.shoppingCart.add(item3);
 
-        // Create cards
-        Card card = new Card("Credit", "0000111122223333", "John Doe", "012", "345", true, true);
-
-        // Add card to customer waller
-        customer.wallet.cards.add(card);
+        initializeWallet(customer, 2, new ArrayList<Boolean>());
 
         // Populate card issuer
-        CardIssuer creditIssuer = new CardIssuer("Credit", 10);
-        Date date = new Date();
-        Calendar c = Calendar.getInstance();
-        c.setTime(date);
-        c.add(Calendar.DATE, 1);
-        creditIssuer.addCardData(card.number, card.cardholder, c, card.cvv, 10000);
+        CardIssuer creditIssuer = initializeCardIssuer(customer);
 
         // Setup station logic
         DoItYourselfStationLogic stationLogic = new DoItYourselfStationLogic(station, creditIssuer);
@@ -77,5 +82,58 @@ public class Demo {
         // Start at welcome screen
         WelcomeScreenGui frame = new WelcomeScreenGui(customer, station, stationLogic);
         frame.setVisible(true);
+    }
+    
+	static void initializeWallet(Customer customer, int n, List<Boolean> s) {
+	    if(n == 0) {
+	    	int customerCards = customer.wallet.cards.size() + 1;
+	    	Card card = createCardInfo("Card " + customerCards, s.get(0), s.get(1));
+	    	
+	    	customer.wallet.cards.add(card);
+	    	return;
+	    }
+	    
+	    List<Boolean> a1 = new ArrayList<Boolean>(s);
+	    List<Boolean> a2 = new ArrayList<Boolean>(s);
+	    
+	    a1.add(true);
+	    a2.add(false);
+	    
+	    initializeWallet(customer, n-1, a1);
+	    initializeWallet(customer, n-1, a2);
+	}
+    
+    private static Card createCardInfo(String kind, boolean isTap, boolean hasChip) {
+    	Random random = new Random();
+		String cardNumber = Long.toString((long) (1000000000000000L + random.nextFloat() * 9000000000000000L));
+		
+		String cvv = Integer.toString(100 + random.nextInt(900));
+		String pin = "1234";
+		
+		Card card = new Card(kind, cardNumber, kind + " Holder", cvv, pin, isTap, hasChip);
+		
+		return card;
+    }
+    
+    private static CardIssuer initializeCardIssuer(Customer customer) {
+    	CardIssuer cardIssuer = new CardIssuer("Card Issuer", 10);
+    	
+    	// Set card expiration to two years from now.
+    	Date date = new Date();
+    	
+    	Calendar c = Calendar.getInstance();   
+    	c.setTimeInMillis(date.getTime());
+    	c.add(Calendar.YEAR, 2);
+    	
+
+    	// Add cards from the customer's wallet to the card issuer.
+    	List<Card> cards = customer.wallet.cards;
+    	
+    	for(int i = 0; i< cards.size(); i++) {
+    		Card card = cards.get(i);
+    		cardIssuer.addCardData(card.number, card.cardholder, c, card.cvv, 10000);
+    	}
+    	
+    	return cardIssuer;
     }
 }
