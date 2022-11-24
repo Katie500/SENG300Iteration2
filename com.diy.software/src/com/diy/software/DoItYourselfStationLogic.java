@@ -1,13 +1,10 @@
 package com.diy.software;
 
-import com.diy.hardware.BarcodedProduct;
 import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.hardware.external.CardIssuer;
-import com.diy.hardware.external.ProductDatabases;
+import com.diy.software.controllers.CashPayment.CashPaymentController;
 import com.diy.software.controllers.PaymentController;
 import com.diy.software.controllers.ProductController;
-
-import java.util.List;
 
 public class DoItYourselfStationLogic {
     /**
@@ -22,6 +19,10 @@ public class DoItYourselfStationLogic {
      * The controller that tracks the inserted card for payment
      */
     public PaymentController paymentController;
+    /**
+     * The controller that tracks the inserted cashPayment
+     */
+    public CashPaymentController cashPaymentController;
     /**
      * Tracks if the customers session has begun
      */
@@ -65,6 +66,7 @@ public class DoItYourselfStationLogic {
 
         paymentController = new PaymentController(this, creditIssuer);
         station.cardReader.register(paymentController);
+
     }
 
     /**
