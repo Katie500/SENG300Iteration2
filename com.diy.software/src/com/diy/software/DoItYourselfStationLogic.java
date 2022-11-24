@@ -67,8 +67,7 @@ public class DoItYourselfStationLogic {
         paymentController = new PaymentController(this, creditIssuer);
         station.cardReader.register(paymentController);
 
-        cashPaymentController = new CashPaymentController(this);
-
+//        cashPaymentController = new CashPaymentController(this);
     }
 
     /**
