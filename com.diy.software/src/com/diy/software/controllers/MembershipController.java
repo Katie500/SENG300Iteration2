@@ -56,9 +56,10 @@ public class MembershipController {
      * 
      * @param input the ID as input
      */
-    public static String getName(String input){
-        return membershipDatabase.get(input).name;
-    }
+    public static String getName(String input){return membershipDatabase.get(input).name;}
+    public static String getMonth(String input){return membershipDatabase.get(input).month_opened;}
+    public static Integer getDay(String input){return membershipDatabase.get(input).day_opened;}
+    public static Integer getYear(String input){return membershipDatabase.get(input).year_opened;}
 
 }
 
