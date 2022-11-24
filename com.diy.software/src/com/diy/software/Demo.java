@@ -50,13 +50,13 @@ public class Demo {
         Currency CanadianDollar = Currency.getInstance("cad");
 
         // Setup banknotes
-        Banknote tenDollar = new Banknote (CanadianDollar, 10);
-        Banknote twentyDollar = new Banknote (CanadianDollar,20);
-        Banknote fiftyDollar = new Banknote (CanadianDollar,50);
+        Banknote tenDollar = new Banknote(CanadianDollar, 10);
+        Banknote twentyDollar = new Banknote(CanadianDollar,20);
+        Banknote fiftyDollar = new Banknote(CanadianDollar,50);
 
         // Setup Coins
-        Coin toonie = new Coin (CanadianDollar,2);
-        Coin loonie = new Coin (CanadianDollar, 1);
+        Coin toonie = new Coin(CanadianDollar,2);
+        Coin loonie = new Coin(CanadianDollar, 1);
 
         // Setup customer
         Customer customer = new Customer();
