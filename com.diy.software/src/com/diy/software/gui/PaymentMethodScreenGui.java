@@ -3,6 +3,7 @@ package com.diy.software.gui;
 import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.simulation.Customer;
 import com.diy.software.DoItYourselfStationLogic;
+import com.diy.software.gui.cardpayment.CreditGui;
 import com.diy.software.gui.cardpayment.DebitGui;
 
 import javax.swing.*;
@@ -114,24 +115,9 @@ public class PaymentMethodScreenGui extends javax.swing.JFrame {
 
     //TODO: Credit is broken for some reason
     private void creditButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        try {
-            customer.selectCard("Credit");
-            customer.insertCard("345");
-            var paymentSuccess = stationLogic.paymentController.payWithCard();
-
-            if (paymentSuccess) {
-                System.out.println("Payment success");
-                ConfirmationScreenGui gui = new ConfirmationScreenGui(customer, station, stationLogic);
-                gui.setVisible(true);
-                this.setVisible(false);
-            } else {
-                PaymentErrorGui gui = new PaymentErrorGui(customer,station,stationLogic);
-                gui.setVisible(true);
-            }
-        } catch (IOException e) {
-            PaymentErrorGui gui = new PaymentErrorGui(customer,station,stationLogic);
-            gui.setVisible(true);
-        }
+        CreditGui gui = new CreditGui(customer, station, stationLogic);
+        gui.setVisible(true);
+        this.setVisible(false);
     }
 
     private void cashButtonActionPerformed(java.awt.event.ActionEvent evt) {

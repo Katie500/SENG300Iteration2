@@ -7,13 +7,12 @@ import com.diy.software.DoItYourselfStationLogic;
 import com.diy.software.gui.*;
 
 import com.jimmyselectronics.opeechee.Card;
-import com.jimmyselectronics.opeechee.Card.CardData;
 
 import javax.swing.*;
 import java.awt.event.*;
-import java.io.IOException;
 import java.awt.*;
 
+@SuppressWarnings("serial")
 public class CardPinpadGui extends javax.swing.JFrame {
 	private JPanel mainPanel = new JPanel();
 	private GridBagConstraints gbc = new GridBagConstraints();
@@ -166,63 +165,33 @@ public class CardPinpadGui extends javax.swing.JFrame {
 			}
 
 			pinpadInput.setText(newText);
-			System.out.println(pinEntered);
 		}
 	};
-
+	
 	private void validatePayment() {
 		Card selectedCard = walletGui.getSelectedCard();
-
-		try {
-			stationLogic.paymentController.validateCardPayment(selectedCard, pinEntered, station.cardReader);
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
-//			e.printStackTrace();
-		}
 		
-//		try {
-//
-//			station.cardReader.insert(selectedCard, pinEntered);
-//			
-//			boolean isSuccess = stationLogic.paymentController.payWithCard();
-//			
-//			if(isSuccess) {
-//				// Display the confirmation screen if the payment is successful
-//				ConfirmationScreenGui successGui = new ConfirmationScreenGui(customer, station, stationLogic);
-//				successGui.setVisible(true);
-//				setVisible(false);
-//			} else {
-//				// Display failed payment screen
-//				PaymentErrorGui failGui = new PaymentErrorGui(customer, station, stationLogic);
-//				failGui.setVisible(true);
-//			}
-//			
-//			
-//		} catch (IOException e) {
-//			String exceptionMessage = e.toString();
-//
-//			if (exceptionMessage.contains("InvalidPINException")) {
-//				// If the pin entered is invalid,display an error message.
-//				errorMessage.setText("Invalid pin.");
-//
-//			} else if (exceptionMessage.contains("BlockedCardException")) {
-//				// If the customer enters the wrong pin 3 times, the card is blocked.
-//				errorMessage.setText(selectedCard.kind + " is blocked.");
-//				stationLogic.paymentController.blockCard(selectedCard.number);
-//			} else if (exceptionMessage.contains("ChipFailureException")) {
-//				// If the chip failed.
-//				errorMessage.setText("Chip failure. Reinsert the card, and enter the pin.");
-//			}
-//			
-//			e.printStackTrace();
-//		}
+		try {
+			boolean isSuccess = stationLogic.paymentController.validateCardPayment(selectedCard, pinEntered, station.cardReader);
+			stationLogic.paymentController.transactionStatus(isSuccess);
+			
+			if(isSuccess) {
+				// Display the confirmation screen if the payment is successful
+				ConfirmationScreenGui successGui = new ConfirmationScreenGui(customer, station, stationLogic);
+				successGui.setVisible(true);
+				setVisible(false);
+			} else {
+				// Display failed payment screen. Pin and card was successful, but the total might have been 0 so the transaction is not complete.
+				PaymentErrorGui failGui = new PaymentErrorGui(customer, station, stationLogic);
+				failGui.setVisible(true);
+			}
+		} catch (Exception e) {
+			String exceptionM = e.getMessage();
+			errorMessage.setText(exceptionM);
+		}
 
 		walletGui.removeCardFromSlot();
 		pinEntered = "";
 		pinpadInput.setText("");
 	}
 }
-
-//sourced from netbeans

@@ -13,6 +13,7 @@ import com.jimmyselectronics.necchi.BarcodedItem;
 import com.jimmyselectronics.necchi.Numeral;
 import com.jimmyselectronics.opeechee.Card;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -56,7 +57,7 @@ public class Demo {
         customer.shoppingCart.add(item2);
         customer.shoppingCart.add(item3);
 
-        initializeWallet(customer);
+        initializeWallet(customer, 2, new ArrayList<Boolean>());
 
         // Populate card issuer
         CardIssuer creditIssuer = initializeCardIssuer(customer);
@@ -69,24 +70,33 @@ public class Demo {
         frame.setVisible(true);
     }
     
-    private static void initializeWallet(Customer customer) {
-    	// Create credit card
-    	Card debitCard = createCardInfo("Debit Card");
-    	Card creditCard = createCardInfo("Credit Card");
-    	
-    	// Add cards to the customer's wallet
-    	customer.wallet.cards.add(debitCard);
-    	customer.wallet.cards.add(creditCard);
-    }
+	static void initializeWallet(Customer customer, int n, List<Boolean> s) {
+	    if(n == 0) {
+	    	int customerCards = customer.wallet.cards.size() + 1;
+	    	Card card = createCardInfo("Card " + customerCards, s.get(0), s.get(1));
+	    	
+	    	customer.wallet.cards.add(card);
+	    	return;
+	    }
+	    
+	    List<Boolean> a1 = new ArrayList<Boolean>(s);
+	    List<Boolean> a2 = new ArrayList<Boolean>(s);
+	    
+	    a1.add(true);
+	    a2.add(false);
+	    
+	    initializeWallet(customer, n-1, a1);
+	    initializeWallet(customer, n-1, a2);
+	}
     
-    private static Card createCardInfo(String kind) {
+    private static Card createCardInfo(String kind, boolean isTap, boolean hasChip) {
     	Random random = new Random();
 		String cardNumber = Long.toString((long) (1000000000000000L + random.nextFloat() * 9000000000000000L));
 		
 		String cvv = Integer.toString(100 + random.nextInt(900));
 		String pin = "1234";
 		
-		Card card = new Card(kind, cardNumber, kind + " Holder", cvv, pin, true, true);
+		Card card = new Card(kind, cardNumber, kind + " Holder", cvv, pin, isTap, hasChip);
 		
 		return card;
     }

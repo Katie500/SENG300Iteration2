@@ -37,8 +37,11 @@ public class WalletGui extends JPanel {
     		Card card = cards.get(i);
     		String formattedCardNumber = card.number.replaceAll("(.{" + 4 + "})", "$1 ").trim();
     		
+    		String cardInfo = ((card.isTapEnabled) ? "Has tap, " : "No tap, ") + ((card.hasChip) ? "has chip" : "no chip");
+    		
     		// Create GUI for card
-    		JButton cardButton = new JButton("<html>" + card.kind + "<br>" + formattedCardNumber + "</html>");
+    		JButton cardButton = new JButton("<html>" + card.kind + "<br>" + formattedCardNumber + "<br>" + cardInfo + "</html>");
+    		cardButton.setFont(new Font(cardButton.getName(), Font.PLAIN, 10));
     		
 			cardButton.addActionListener(new ActionListener() {
 				@Override
@@ -76,9 +79,11 @@ public class WalletGui extends JPanel {
     }
     
     public void removeCardFromSlot() {
-    	selectedCard = null;
-    	
-    	currentCardButton.setBorder(new JButton().getBorder());
-    	currentCardButton = null;
+    	if(currentCardButton != null && selectedCard != null) {
+        	currentCardButton.setBorder(new JButton().getBorder());
+        	currentCardButton = null;
+        	
+        	selectedCard = null;
+    	}
     }
 }
