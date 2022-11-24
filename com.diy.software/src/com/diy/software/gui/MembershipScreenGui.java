@@ -340,6 +340,8 @@ public class MembershipScreenGui extends javax.swing.JFrame {
             //CheckoutStationGui.welcomeLabelTop.setText("Welcome Mr. Smith!");
             CheckoutStationGui.welcomeLabelTop.setText("Welcome " + MembershipController.getName(convertMembershipToString(memberPin)) + "!");
             CheckoutStationGui.membershipConfirmed = true;
+//            CheckoutStationGui newgui = new CheckoutStationGui(customer, station, stationLogic);
+//            newgui.setVisible(true);
             this.setVisible(false);
         }
         else{
