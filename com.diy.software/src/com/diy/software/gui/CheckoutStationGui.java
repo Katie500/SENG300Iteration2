@@ -142,7 +142,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
         //if(!membershipConfirmed){
         membershipLoginButton.setText("Membership Login");
         //}
-        if(!membershipConfirmed){
+        if(membershipConfirmed){
         membershipLoginButton.setVisible(false);
         }
         membershipLoginButton.addActionListener(new java.awt.event.ActionListener() {
