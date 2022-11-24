@@ -36,7 +36,8 @@ public class MembershipController {
     }
 
     public void insertMember(String membershipID, String name, int year_opened, String month_opened, int day_opened){
-        MembershipInfo newMember = new MembershipInfo(name, year_opened, month_opened, day_opened);
+        
+    	MembershipInfo newMember = new MembershipInfo(name, year_opened, month_opened, day_opened);
         membershipDatabase.put(membershipID, newMember);
     }
 
@@ -50,6 +51,11 @@ public class MembershipController {
         }
     }
 
+    /**
+     * 
+     * 
+     * @param input the ID as input
+     */
     public static String getName(String input){
         return membershipDatabase.get(input).name;
     }
