@@ -4,16 +4,18 @@ import java.io.IOException;
 
 import com.diy.hardware.external.CardIssuer;
 import com.diy.software.DoItYourselfStationLogic;
+import com.diy.software.exceptions.*;
 import com.jimmyselectronics.AbstractDevice;
 import com.jimmyselectronics.AbstractDeviceListener;
 import com.jimmyselectronics.opeechee.Card;
+import com.jimmyselectronics.opeechee.Card.CardData;
 import com.jimmyselectronics.opeechee.CardReader;
 import com.jimmyselectronics.opeechee.CardReaderListener;
 
 public class PaymentController implements CardReaderListener {
     private DoItYourselfStationLogic stationLogic;
     private CardIssuer creditIssuer;
-    private Card.CardData cardData;
+    private Card selectedCard;
     
     /**
      * Basic constructor.
@@ -26,44 +28,48 @@ public class PaymentController implements CardReaderListener {
         this.creditIssuer = creditIssuer;
     }
 
-    public boolean validateCardPayment(Card selectedCard, String pinEntered, CardReader cardReader) throws Exception {
+    public boolean validateCardPayment(String pinEntered, CardReader cardReader) throws Exception {
     	boolean isSuccess;
     	
-		if (selectedCard == null) {
-			throw new Exception("Please select a card from the wallet.");
-		} else {
-			try {
-				cardReader.insert(selectedCard, pinEntered);
-				
-				isSuccess = payWithCard();
-				
-				cardReader.remove();
-			} catch (IOException e) {
-				String exceptionMessage = e.toString();
-				
-				cardReader.remove();
-				
-				if (exceptionMessage.contains("InvalidPINException")) {
-					// If the pin entered is invalid,display an error message.
-					throw new Exception("Invalid pin.");
-				} else if (exceptionMessage.contains("BlockedCardException")) {
-					// If the customer enters the wrong pin 3 times, the card is blocked.
-					creditIssuer.block(selectedCard.number);
-					throw new Exception(selectedCard.kind + " is blocked.");
-				} else if (exceptionMessage.contains("ChipFailureException")) {
-					// If the card has a chip but the reader failed to read the card data.
-					if(selectedCard.hasChip) {
-						throw new Exception("Chip failure. Please reinsert the card, and enter the pin.");
-					} else {
-						throw new Exception("Inserted card has no chip.");
-					}
-				}
-				
-				throw e;
+    	if(pinEntered == null)
+    		throw new IllegalArgumentException("Please enter a pin.");
+    	
+		if (selectedCard == null)
+			throw new NullPointerException("Please select a card from the wallet.");
+		
+		if (cardReader == null)
+			throw new NullPointerException("Card reader");
+		
+
+		try {
+			cardReader.insert(selectedCard, pinEntered);
+			isSuccess = payWithCard();
+			
+		} catch (IOException e) {
+			String exceptionMessage = e.toString();
+			
+			// If the pin entered is invalid,display an error message.
+			if (exceptionMessage.contains("InvalidPINException"))
+				throw new CardTransactionException("Invalid pin.");
+			
+			// If the customer enters the wrong pin 3 times, the card is blocked.
+			if (exceptionMessage.contains("BlockedCardException")) {
+				creditIssuer.block(selectedCard.number);
+				throw new CardTransactionException(selectedCard.kind + " is blocked.");
 			}
+			
+			// If the card has no chip, or the card has a chip but the reader failed to read the card data.
+			if (exceptionMessage.contains("ChipFailureException")) {
+				if(selectedCard.hasChip)
+					throw new ChipFailureException("Chip failure. Please reinsert the card, and enter the pin.");
+				
+				throw new ChipFailureException("Inserted card has no chip.");
+			}
+			
+			throw e;
+		}
 		
 		return isSuccess;
-		}
 	}
     
     /**
@@ -71,35 +77,25 @@ public class PaymentController implements CardReaderListener {
      */
     public boolean payWithCard() throws Exception {
         long charge = stationLogic.productController.getTotal();
-        long holdNumber = creditIssuer.authorizeHold(cardData.getNumber(), charge);
+        long holdNumber = creditIssuer.authorizeHold(selectedCard.number, charge);
         
-        if(charge <= 0) {
-        	throw new Exception("Unable to complete transaction for the amount: $" + charge);
-        } else if(holdNumber < 0) {
-        	throw new Exception("Unable to complete transaction");
-        }
+        if(charge <= 0) 
+        	throw new CardTransactionException("Unable to complete transaction for the amount: $" + charge);
         
-        boolean paySuccess = creditIssuer.postTransaction(cardData.getNumber(), holdNumber, charge);
+        if(holdNumber < 0)
+        	throw new IssuerHoldException("Unable to complete transaction");
+        
+        boolean paySuccess = creditIssuer.postTransaction(selectedCard.number, holdNumber, charge);
         return paySuccess;
     }
     
     public void transactionStatus(boolean isSuccess) {
     }
     
-    @Override
-    public void cardInserted(CardReader reader) {
-    }
-    
-    @Override
-    public void cardRemoved(CardReader reader) {
-        cardData = null;
+    public void setSelectedCard(Card card) {
+    	this.selectedCard = card;
     }
 
-    @Override
-    public void cardDataRead(CardReader reader, Card.CardData data) {
-        cardData = data;
-    }
-    
 	@Override
 	public void enabled(AbstractDevice<? extends AbstractDeviceListener> device) {
 		// TODO Auto-generated method stub
@@ -125,6 +121,15 @@ public class PaymentController implements CardReaderListener {
 	}
 
 	@Override
+	public void cardInserted(CardReader reader) {
+	}
+
+	@Override
+	public void cardRemoved(CardReader reader) {
+		setSelectedCard(null);
+	}
+
+	@Override
 	public void cardTapped(CardReader reader) {
 		// TODO Auto-generated method stub
 		
@@ -135,4 +140,11 @@ public class PaymentController implements CardReaderListener {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void cardDataRead(CardReader reader, CardData data) {
+		// TODO Auto-generated method stub
+		
+	}
+    
 }

@@ -6,16 +6,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import com.diy.hardware.DoItYourselfStationAR;
+import com.diy.software.DoItYourselfStationLogic;
 import com.jimmyselectronics.opeechee.Card;
 
 @SuppressWarnings("serial")
 public class WalletGui extends JPanel {
 	private List<Card> cards;
 	
-	private Card selectedCard = null;
-	private JButton currentCardButton = null;
+	private JToggleButton currentCardButton = null;
+	static DoItYourselfStationLogic stationLogic;
+	static DoItYourselfStationAR station;
 	
-	public WalletGui(List<Card> cards) {
+	public WalletGui(List<Card> cards, DoItYourselfStationLogic stationLogic, DoItYourselfStationAR station) {
+		WalletGui.stationLogic = stationLogic;
+		WalletGui.station = station;
+		
 		this.cards = cards;
 		
         // Add label
@@ -41,21 +47,29 @@ public class WalletGui extends JPanel {
     		String cardInfo = ((card.isTapEnabled) ? "Has tap, " : "No tap, ") + ((card.hasChip) ? "has chip" : "no chip");
     		
     		// Create GUI for card
-    		JButton cardButton = new JButton("<html>" + card.kind + "<br>" + formattedCardNumber + "<br>" + cardInfo + "</html>");
+    		JToggleButton cardButton = new JToggleButton("<html>" + card.kind + "<br>" + formattedCardNumber + "<br>" + cardInfo + "</html>");
     		cardButton.setFont(new Font(cardButton.getName(), Font.PLAIN, 10));
     		
 			cardButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if(currentCardButton != null) {
-						AbstractButton button = (AbstractButton) e.getSource();
-						currentCardButton.setBorder(button.getBorder());
+		            AbstractButton abstractButton = (AbstractButton)e.getSource();   
+					boolean selected = abstractButton.getModel().isSelected();
+			
+					if(selected) {
+						if(currentCardButton != null) {
+							currentCardButton.setBorder(new JButton().getBorder());
+							currentCardButton.setBackground(new JButton().getBackground());
+							currentCardButton.getModel().setSelected(false);							
+						}
+
+						cardButton.setBorder(BorderFactory.createLineBorder(new Color(72, 102, 150), 5));
+						
+						stationLogic.paymentController.setSelectedCard(card);
+						currentCardButton = (JToggleButton) e.getSource();
+					} else {
+						removeCardFromSlot();
 					}
-					
-					cardButton.setBorder(BorderFactory.createLineBorder(new Color(72, 102, 150), 5));
-					
-					selectedCard = card;
-					currentCardButton = (JButton) e.getSource();
 				}
 			});
 			
@@ -63,28 +77,27 @@ public class WalletGui extends JPanel {
     	}
     }
     
-    public void setSelectedCard(Card selectedCard) {
-    	this.selectedCard = selectedCard;
-    }
-    
-    public Card getSelectedCard() {
-    	return this.selectedCard;
-    }
-    
-    public JButton getCurrentCardButton() {
+    public JToggleButton getCurrentCardButton() {
     	return this.currentCardButton;
     }
     
-    public void setCurrentCardButton(JButton currentCard) {
+    public void setCurrentCardButton(JToggleButton currentCard) {
     	this.currentCardButton = currentCard;
     }
     
     public void removeCardFromSlot() {
-    	if(currentCardButton != null && selectedCard != null) {
+    	if(currentCardButton != null) {
+    		currentCardButton.setSelected(false);
+    		
         	currentCardButton.setBorder(new JButton().getBorder());
+        	currentCardButton.setBackground(new JButton().getBackground());
         	currentCardButton = null;
         	
-        	selectedCard = null;
+        	try {
+        		station.cardReader.remove();
+        	} catch (Exception e) {
+        		System.out.println("Returned card to wallet.");
+        	}
     	}
     }
 }

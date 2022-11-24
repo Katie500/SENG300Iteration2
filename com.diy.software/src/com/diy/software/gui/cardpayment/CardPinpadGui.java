@@ -6,8 +6,6 @@ import com.diy.simulation.Customer;
 import com.diy.software.DoItYourselfStationLogic;
 import com.diy.software.gui.*;
 
-import com.jimmyselectronics.opeechee.Card;
-
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
@@ -36,7 +34,7 @@ public class CardPinpadGui extends javax.swing.JFrame {
 		CardPinpadGui.stationLogic = stationLogic;
 		CardPinpadGui.cardPaymentType = cardPaymentType;
 		
-		this.walletGui = new WalletGui(customer.wallet.cards);
+		this.walletGui = new WalletGui(customer.wallet.cards, stationLogic, station);
 		
 		station.plugIn();
 		station.turnOn();
@@ -169,10 +167,8 @@ public class CardPinpadGui extends javax.swing.JFrame {
 	};
 	
 	private void validatePayment() {
-		Card selectedCard = walletGui.getSelectedCard();
-		
 		try {
-			boolean isSuccess = stationLogic.paymentController.validateCardPayment(selectedCard, pinEntered, station.cardReader);
+			boolean isSuccess = stationLogic.paymentController.validateCardPayment(pinEntered, station.cardReader);
 			stationLogic.paymentController.transactionStatus(isSuccess);
 			
 			if(isSuccess) {
