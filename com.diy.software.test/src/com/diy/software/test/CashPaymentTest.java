@@ -162,23 +162,6 @@ public class CashPaymentTest {
     }
 
     @Test (expected = Exception.class)
-    public void chargeIsNegative()throws Exception{
-        Barcode barcode1 = new Barcode(new Numeral[] { Numeral.one });
-        BarcodedProduct product1 = new BarcodedProduct(barcode1, "Chocolate", -5, 15);
-        stationLogic.productController.barcodeScanned(newScanner,barcode1);
-        long total = product1.getPrice();
-        stationLogic.productController.addToTotal(total);
-
-        CashPaymentController newCashPayment = new CashPaymentController(stationLogic);
-        BanknotePaymentController newBanknote = new BanknotePaymentController(stationLogic);
-        CoinPaymentController newCoin = new CoinPaymentController(stationLogic);
-
-        Currency canadianDollar = Currency.getInstance("CAD");
-        newCoin.validCoinDetected(null,2);
-        newCashPayment.payWithCash(newCashPayment.getTotalPaid(newBanknote.getTotalBanknotes(),newCoin.getTotalCoins()));
-    }
-
-    @Test (expected = Exception.class)
     public void notEnoughAmount()throws Exception{
         Barcode barcode1 = new Barcode(new Numeral[] { Numeral.one });
         BarcodedProduct product1 = new BarcodedProduct(barcode1, "Chocolate", 5, 15);
