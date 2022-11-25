@@ -46,7 +46,10 @@ public class DoItYourselfStationLogic {
      */
     private double baggingAreaExpectedWeight;
     
+    private boolean systemEnabled = true;
     private ElectronicScale baggingArea;
+	private double scaleMaxWeight = 5000.0;
+	private double scaleSensitivity = 0.5;
     private static double scaleMaximumWeightConfiguration = 5000.0;
     private static double scaleSensitivityConfiguration = 0.5;
     
@@ -90,6 +93,10 @@ public class DoItYourselfStationLogic {
         station.cardReader.register(paymentController);
 
 //        cashPaymentController = new CashPaymentController(this);
+    
+        baggingArea = new ElectronicScale(scaleMaxWeight, scaleSensitivity);
+        baggingArea.plugIn();
+        baggingArea.turnOn();
     }
 
     /**
@@ -110,50 +117,38 @@ public class DoItYourselfStationLogic {
     public void setInProgress(boolean inProgress) {
         this.inProgress = inProgress;
     }
-    
-    
-    /**
-     * Gets current expected weight
-     */
 
+    
 	public double getCurrentExpectedWeight() {
-		try {
-			baggingAreaExpectedWeight = baggingArea.getCurrentWeight();
-			return baggingAreaExpectedWeight;
-		}catch(OverloadException e) {
-			e.printStackTrace();
-		}
+		return baggingAreaExpectedWeight;
+	}
+	public double getCurrentWeight() throws OverloadException {
+		baggingAreaCurrentWeight = baggingArea.getCurrentWeight();
 		return baggingAreaCurrentWeight;
 	}
+	
+	
+	public void weightDiscrepancy(ElectronicScale baggingArea, double currentWeight) throws OverloadException {
+		//Compare current weight vs previous weight
+		double expected_weight = getCurrentExpectedWeight();
+		//double current_weight = baggingArea.getCurrentWeight();
 
-	public void systemDisable() {
-		// TODO Auto-generated method stub
-		
-	}
+		if (electronicScale.weightDiscrepancy){
+			//Station to disabled scanning
+//			station.scanner.disable();
+//			//GUI to disable scanning and bagging
+//			disableScanningAndBagging();
+//			//Signal attendant to help
+//			requestAttendant = true;
+		}
+		else{
+//			station.scanner.enable();
+//			enableScanningAndBagging();
+		}
 
-	public void notifyUser(String string) {
-		// TODO Auto-generated method stub
-		
 	}
+  
 
-	public void enableScanningAndBagging() {
-		// TODO Auto-generated method stub
-		
-	}
 
-	public void bagItemSuccess(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void updateWeightOnGUI(double weightInGrams) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setScanStatus(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
 }
 

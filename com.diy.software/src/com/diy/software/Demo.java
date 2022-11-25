@@ -15,11 +15,18 @@ import com.jimmyselectronics.opeechee.Card;
 import com.unitedbankingservices.banknote.Banknote;
 import com.unitedbankingservices.coin.Coin;
 
+import ca.powerutility.PowerGrid;
+import ca.powerutility.PowerSurge;
+
 import java.util.*;
 
 public class Demo {
     public static void main(String[] args) {
-        // Setup station
+        
+    	//Making sure there is no Power surge or power outage
+    	PowerGrid.engageUninterruptiblePowerSource();
+   
+    	// Setup station
     	DoItYourselfStationAR station = new DoItYourselfStationAR();
         station.scanner.plugIn();
         station.scanner.turnOn();
