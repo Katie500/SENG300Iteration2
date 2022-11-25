@@ -37,7 +37,7 @@ public class DoItYourselfStationLogic {
     /**
      * The controller that tracks the weight of the items
      */
-    private WeightController electronicScaleListener;
+    public WeightController electronicScaleListener;
     
     
     //System variables

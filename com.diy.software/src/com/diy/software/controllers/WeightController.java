@@ -63,6 +63,7 @@ public class WeightController implements ElectronicScaleListener {
 		baggedItemsWeight += weightInGrams;
 		
 		
+		
 	}
 
 	@Override
@@ -86,7 +87,6 @@ public class WeightController implements ElectronicScaleListener {
 		if (expectedWeight < baggedItemsWeight || expectedWeight > baggedItemsWeight) {
 			//systemReference.systemDisable();
 			weightDiscrepancy = true;
-			System.out.println("gets here");
 		} else if (expectedWeight == baggedItemsWeight) {
 			//If the program executes this it means no weight discrepancy
 			weightDiscrepancy = false;

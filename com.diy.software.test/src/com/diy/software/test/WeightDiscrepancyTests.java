@@ -258,10 +258,9 @@ public class WeightDiscrepancyTests {
 		
         customer.selectNextItem();
         customer.scanItem();
-        customer.selectNextItem();
-        customer.scanItem();
         customer.placeItemInBaggingArea();
-        
-        assertFalse(stationLogic.getWeightDiscrepancy());
+        double baggedItemsWeight = stationLogic.electronicScaleListener.getBaggedItemsWeight();
+        double expectedOutcome = 15;
+        assertEquals(baggedItemsWeight, expectedOutcome,15.0);
 	}
 }
