@@ -25,7 +25,6 @@ public class BanknotePaymentController implements BanknoteValidatorObserver {
 
     @Override
     public void invalidBanknoteDetected(BanknoteValidator validator) {
-        newBanknote = null;
     }
 
     public long getTotalBanknotes(){

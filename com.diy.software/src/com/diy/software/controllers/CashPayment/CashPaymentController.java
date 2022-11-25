@@ -27,6 +27,7 @@ public class CashPaymentController {
             throw new Exception("Please add amount to complete the payment");
         }
 
+        // Calculate change
         long change = totalPaid - charge;
         return change;
     }
