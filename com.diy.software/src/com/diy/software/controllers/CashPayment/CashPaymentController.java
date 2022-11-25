@@ -4,22 +4,21 @@ import com.diy.software.DoItYourselfStationLogic;
 
 public class CashPaymentController {
     private DoItYourselfStationLogic stationLogic;
-    private BanknotePaymentController banknotes;
-    private CoinPaymentController coins;
+    private long totalPaid;
+    private long totalBanknotes;
+    private long totalCoins;
 
-    public CashPaymentController(DoItYourselfStationLogic stationLogic,BanknotePaymentController banknotes,CoinPaymentController coins){
+    public CashPaymentController(DoItYourselfStationLogic stationLogic){
         this.stationLogic = stationLogic;
-        this.banknotes = banknotes;
-        this.coins = coins;
     }
 
-    public long payWithCash() throws Exception {
+    public long getTotalPaid(long totalBanknotes,long totalCoins){
+        totalPaid = totalBanknotes + totalCoins;
+        return totalPaid;
+    }
 
+    public long payWithCash(long totalPaid) throws Exception {
         long charge = stationLogic.productController.getTotal();
-        long totalBanknotes = banknotes.getTotalBanknotes();
-        long totalCoins = coins.getTotalCoins();
-        long totalPaid = totalBanknotes + totalCoins;
-        stationLogic.productController.subtractFromTotal(totalPaid);
 
         if (charge < 0){
             throw new Exception("Unable to complete transaction for the amount: $" + charge);
