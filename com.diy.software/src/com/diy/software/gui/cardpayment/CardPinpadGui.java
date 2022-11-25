@@ -7,6 +7,8 @@ import com.diy.software.DoItYourselfStationLogic;
 import com.diy.software.gui.*;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
+
 import java.awt.event.*;
 import java.awt.*;
 
@@ -86,16 +88,53 @@ public class CardPinpadGui extends javax.swing.JFrame {
 		mainPanel.add(pinpadPanel, gbc);
 		addPinpadButtons();
 
+		addCardPaymentMethodButtons();
+		
 		gbc.gridx = 2;
 		gbc.gridy = 1;
-		gbc.gridheight = 4;
+		gbc.gridheight = 5;
 		gbc.fill = GridBagConstraints.BOTH;
 		mainPanel.add(walletGui, gbc);
-
+		
+		
+		
 		add(mainPanel);
 		pack();
 	}
 
+	private void addCardPaymentMethodButtons() {
+		JPanel methodPannel = new JPanel(new GridBagLayout());
+		TitledBorder title = BorderFactory.createTitledBorder("or");
+		
+		title.setTitleJustification(TitledBorder.CENTER);
+		title.setTitleFont(new Font(errorMessage.getName(), Font.PLAIN, 15));
+		methodPannel.setBorder(title);
+		
+		GridBagConstraints gbc2 = new GridBagConstraints();
+		
+		gbc2.anchor = GridBagConstraints.CENTER;
+		gbc2.fill = GridBagConstraints.HORIZONTAL;
+        
+		gbc2.insets = new Insets(3, 3, 3, 3);
+
+		JButton swipeButton = new JButton("Swipe card");
+		JButton tapButton = new JButton("Tap card");
+		
+		swipeButton.addActionListener(buttonListener);
+		tapButton.addActionListener(buttonListener);
+		
+		methodPannel.add(tapButton, gbc2);
+		
+		gbc2.gridy = 2;
+		methodPannel.add(swipeButton, gbc2);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridy = 5;
+		gbc.gridx = 1;
+		
+		mainPanel.add(methodPannel, gbc);
+	}
+	
 	private void addPinpadButtons() {
 		for (int i = 1; i <= 12; i++) {
 			String buttonLabel = Integer.toString(i);
@@ -129,13 +168,13 @@ public class CardPinpadGui extends javax.swing.JFrame {
 			}
 
 			JButton b = new JButton(buttonLabel);
-			b.addActionListener(pinpadListener);
+			b.addActionListener(buttonListener);
 
 			pinpadPanel.add(b, gbc);
 		}
 	}
 
-	ActionListener pinpadListener = new ActionListener() {
+	ActionListener buttonListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String buttonPressed = e.getActionCommand();
@@ -144,8 +183,14 @@ public class CardPinpadGui extends javax.swing.JFrame {
 			errorMessage.setText(" ");
 
 			if (buttonPressed.equals("Enter")) {
-				validatePayment();
-				return;
+				validatePayment("insert");
+
+			} else if (buttonPressed.equals("Tap card")) {
+				validatePayment("tap");
+				
+			} else if (buttonPressed.equals("Swipe card")) {
+				validatePayment("swipe");
+				
 			} else if (buttonPressed.equals("Cancel")) {
 				newText = "";
 				pinEntered = "";
@@ -163,9 +208,9 @@ public class CardPinpadGui extends javax.swing.JFrame {
 		}
 	};
 	
-	private void validatePayment() {
+	private void validatePayment(String cardMethod) {
 		try {
-			boolean isSuccess = stationLogic.paymentController.validateCardPayment(pinEntered, station.cardReader);
+			boolean isSuccess = stationLogic.paymentController.validateCardPayment(pinEntered, station.cardReader, cardMethod);
 			
 			if(isSuccess) {
 				// Display the confirmation screen if the payment is successful
