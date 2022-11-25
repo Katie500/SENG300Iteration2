@@ -1,5 +1,9 @@
 package com.diy.software.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.diy.hardware.BarcodedProduct;
 import com.diy.software.DoItYourselfStationLogic;
 import com.diy.software.gui.AttendantStationGui;
 import com.jimmyselectronics.AbstractDevice;
@@ -12,12 +16,12 @@ import com.jimmyselectronics.virgilio.ElectronicScaleListener;
 public class WeightController implements ElectronicScaleListener {
 
 	private DoItYourselfStationLogic systemReference;
-	private AttendantStationGui attendantReference;
 	public boolean weightDiscrepancy;
+	private double expectedWeight;
+	private double currentWeight;
 	
-	public WeightController(DoItYourselfStationLogic station, AttendantStationGui attendant) {
+	public WeightController(DoItYourselfStationLogic station) {
 		this.systemReference = station;
-		this.attendantReference = attendant;
 	}
 	
 
@@ -49,24 +53,16 @@ public class WeightController implements ElectronicScaleListener {
 	public void weightChanged(ElectronicScale scale, double weightInGrams) {
 		//This updates the gui through the system with the new updated weight
 		
-		double expectedWeight = systemReference.getCurrentExpectedWeight();
-		double currentWeight = 0;
+		
+		
+		expectedWeight = systemReference.getCurrentExpectedWeight();
 		currentWeight = expectedWeight + weightInGrams;
 		
 		if (expectedWeight < currentWeight || expectedWeight > currentWeight) {
-//			//Notify that there is a weight discrepancy
-//			systemReference.systemDisable();
-//			systemReference.notifyUserGui("Weight Discrepancy, click 'Call Attendant'.");
-			//Notify attendant
-			attendantReference.notifyWeightChange();
 			weightDiscrepancy = true;
 			
 		} else if (expectedWeight == currentWeight) {
-//			//If the program executes this it means no weight discrepancy
-//			systemReference.enableScanningAndBagging();
-//			systemReference.bagItemSuccess(true);
-//			systemReference.updateWeightOnGUI(weightInGrams);
-//			systemReference.setScanStatus(false);
+			//If the program executes this it means no weight discrepancy
 			weightDiscrepancy = false;
 		}
 		

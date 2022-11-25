@@ -7,6 +7,7 @@ import com.diy.software.DoItYourselfStationLogic;
 import com.diy.software.bags.Bags;
 import com.diy.software.controllers.ReceiptController;
 import com.diy.software.gui.MembershipScreenGui;
+import com.jimmyselectronics.Item;
 
 import ca.ucalgary.seng300.simulation.InvalidArgumentSimulationException;
 
@@ -41,6 +42,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
     static JButton membershipLoginButton = new JButton();
     JLabel lowInkLabel = new JLabel();
     JLabel lowPaperLabel = new JLabel();
+    JButton bagItemButton = new JButton();
 
     //Error label
     JLabel errorMessage = new JLabel();
@@ -160,6 +162,13 @@ public class CheckoutStationGui extends javax.swing.JFrame{
         }
         });
 
+        bagItemButton.setText("Bag Item");
+        bagItemButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bagItemButtonActionPerformed(evt);
+            }
+        });
+
 
         javax.swing.GroupLayout checkoutPanelLayout = new javax.swing.GroupLayout(checkoutPanel);
         checkoutPanel.setLayout(checkoutPanelLayout);
@@ -176,19 +185,21 @@ public class CheckoutStationGui extends javax.swing.JFrame{
                                         .addGroup(checkoutPanelLayout.createSequentialGroup()
                                                 .addGap(6, 6, 6)
                                                 .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(errorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGroup(checkoutPanelLayout.createSequentialGroup()
-                                                                .addComponent(lowInkLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(lowInkLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(lowPaperLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addComponent(errorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                                .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(noBagsToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(scanItemButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(payButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(purchaseBagButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(selectLanguageButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(callAttendantButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                                .addComponent(lowPaperLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                                .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(noBagsToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(payButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(purchaseBagButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(selectLanguageButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(callAttendantButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(bagItemButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(scanItemButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap())
         );
         checkoutPanelLayout.setVerticalGroup(
@@ -197,33 +208,37 @@ public class CheckoutStationGui extends javax.swing.JFrame{
                                 .addContainerGap()
                                 .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(checkoutPanelLayout.createSequentialGroup()
-                                                .addComponent(welcomeLabelTop)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(errorMessage)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(totalLabel)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(membershipLoginButton)
-                                                .addGap(12, 12, 12)
-                                                .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(lowInkLabel)
-                                                        .addComponent(lowPaperLabel))
-                                                .addContainerGap())
-                                        .addGroup(checkoutPanelLayout.createSequentialGroup()
                                                 .addComponent(callAttendantButton)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(selectLanguageButton)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(scanItemButton)
+                                                .addComponent(scanItemButton))
+                                        .addGroup(checkoutPanelLayout.createSequentialGroup()
+                                                .addComponent(welcomeLabelTop)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 16, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(checkoutPanelLayout.createSequentialGroup()
+                                                .addComponent(errorMessage)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(totalLabel)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(membershipLoginButton)
+                                                .addGap(18, 18, 18)
+                                                .addGroup(checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(lowInkLabel)
+                                                        .addComponent(lowPaperLabel)))
+                                        .addGroup(checkoutPanelLayout.createSequentialGroup()
+                                                .addComponent(bagItemButton)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(payButton)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(purchaseBagButton)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(noBagsToggleButton)
-                                                .addGap(20, 20, 20))))
+                                                .addComponent(noBagsToggleButton)))
+                                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -236,7 +251,9 @@ public class CheckoutStationGui extends javax.swing.JFrame{
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(checkoutPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(checkoutPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 18, Short.MAX_VALUE))
         );
 
         pack();
@@ -277,11 +294,15 @@ public class CheckoutStationGui extends javax.swing.JFrame{
             });
             
             
+            
+            
         } catch(NoSuchElementException e) {
             errorMessage.setText("Error: No more items in cart");
         } catch(InvalidArgumentSimulationException e) {
             errorMessage.setText("Error: the weight has to be positive");
-        }
+        } //catch() {
+//        	
+//        }
     }
 
     private void selectLanguageButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -318,6 +339,10 @@ public class CheckoutStationGui extends javax.swing.JFrame{
         membershipgui.setVisible(true);
         //this.setVisible(false);
 
+    }
+    private void bagItemButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    	customer.placeItemInBaggingArea();
     }
     
     public boolean getSignalInk() {

@@ -3,6 +3,7 @@ package com.diy.software;
 import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.hardware.external.CardIssuer;
 import com.diy.software.controllers.CashPayment.CashPaymentController;
+import com.diy.software.gui.AttendantStationGui;
 import com.diy.software.controllers.PaymentController;
 import com.diy.software.controllers.ProductController;
 import com.diy.software.controllers.WeightController;
@@ -33,8 +34,8 @@ public class DoItYourselfStationLogic {
     /**
      * The controller that tracks the weight of the items
      */
-    private WeightController electronicScale;
-
+    private WeightController electronicScaleListener;
+    
     
     //System variables
     /**
@@ -47,7 +48,7 @@ public class DoItYourselfStationLogic {
     private double baggingAreaExpectedWeight;
     
     private boolean systemEnabled = true;
-    private ElectronicScale baggingArea;
+    public ElectronicScale baggingArea;
 	private double scaleMaxWeight = 5000.0;
 	private double scaleSensitivity = 0.5;
     private static double scaleMaximumWeightConfiguration = 5000.0;
@@ -97,6 +98,16 @@ public class DoItYourselfStationLogic {
         baggingArea = new ElectronicScale(scaleMaxWeight, scaleSensitivity);
         baggingArea.plugIn();
         baggingArea.turnOn();
+        
+        try {
+        	baggingAreaExpectedWeight = baggingArea.getCurrentWeight();
+        } catch (OverloadException e) {
+        	e.printStackTrace();
+        }
+        
+		electronicScaleListener = new WeightController(this);
+
+		baggingArea.register(electronicScaleListener);
     }
 
     /**
@@ -122,33 +133,11 @@ public class DoItYourselfStationLogic {
 	public double getCurrentExpectedWeight() {
 		return baggingAreaExpectedWeight;
 	}
+	
 	public double getCurrentWeight() throws OverloadException {
 		baggingAreaCurrentWeight = baggingArea.getCurrentWeight();
 		return baggingAreaCurrentWeight;
 	}
-	
-	
-	public void weightDiscrepancy(ElectronicScale baggingArea, double currentWeight) throws OverloadException {
-		//Compare current weight vs previous weight
-		double expected_weight = getCurrentExpectedWeight();
-		//double current_weight = baggingArea.getCurrentWeight();
-
-		if (electronicScale.weightDiscrepancy){
-			//Station to disabled scanning
-//			station.scanner.disable();
-//			//GUI to disable scanning and bagging
-//			disableScanningAndBagging();
-//			//Signal attendant to help
-//			requestAttendant = true;
-		}
-		else{
-//			station.scanner.enable();
-//			enableScanningAndBagging();
-		}
-
-	}
-  
-
 
 }
 
