@@ -83,7 +83,9 @@ public class CashPaymentTest {
         Coin loonie = new Coin(canadianDollar,1);
     }
 
-
+    /**
+     * Tests for BanknotePaymentController
+     */
     @Test
     public void testTotalBanknote1(){
         Currency canadianDollar = Currency.getInstance("CAD");
@@ -101,6 +103,10 @@ public class CashPaymentTest {
         assertEquals(30,newBanknote.getTotalBanknotes());
     }
 
+
+    /**
+     * Tests for CoinPaymentController
+     */
     @Test
     public void testTotalCoin1(){
         Currency canadianDollar = Currency.getInstance("CAD");
@@ -118,6 +124,9 @@ public class CashPaymentTest {
         assertEquals(3,newCoin.getTotalCoins());
     }
 
+    /**
+     * Tests for CashPaymentController
+     */
     @Test
     public void testTotalPaid(){
 
@@ -151,10 +160,39 @@ public class CashPaymentTest {
 
         assertEquals(25,newCashPayment.payWithCash(newCashPayment.getTotalPaid(newBanknote.getTotalBanknotes(),newCoin.getTotalCoins())));
 
-
-
     }
 
+    @Test (expected = Exception.class)
+    public void chargeIsNegative()throws Exception{
+        Barcode barcode1 = new Barcode(new Numeral[] { Numeral.one });
+        BarcodedProduct product1 = new BarcodedProduct(barcode1, "Chocolate", -5, 15);
+        stationLogic.productController.barcodeScanned(newScanner,barcode1);
+        long total = product1.getPrice();
+        stationLogic.productController.addToTotal(total);
 
+        CashPaymentController newCashPayment = new CashPaymentController(stationLogic);
+        BanknotePaymentController newBanknote = new BanknotePaymentController(stationLogic);
+        CoinPaymentController newCoin = new CoinPaymentController(stationLogic);
 
+        Currency canadianDollar = Currency.getInstance("CAD");
+        newCoin.validCoinDetected(null,2);
+        newCashPayment.payWithCash(newCashPayment.getTotalPaid(newBanknote.getTotalBanknotes(),newCoin.getTotalCoins()));
+    }
+
+    @Test (expected = Exception.class)
+    public void notEnoughAmount()throws Exception{
+        Barcode barcode1 = new Barcode(new Numeral[] { Numeral.one });
+        BarcodedProduct product1 = new BarcodedProduct(barcode1, "Chocolate", 5, 15);
+        stationLogic.productController.barcodeScanned(newScanner,barcode1);
+        long total = product1.getPrice();
+        stationLogic.productController.addToTotal(total);
+
+        CashPaymentController newCashPayment = new CashPaymentController(stationLogic);
+        BanknotePaymentController newBanknote = new BanknotePaymentController(stationLogic);
+        CoinPaymentController newCoin = new CoinPaymentController(stationLogic);
+
+        Currency canadianDollar = Currency.getInstance("CAD");
+        newCoin.validCoinDetected(null,2);
+        newCashPayment.payWithCash(newCashPayment.getTotalPaid(newBanknote.getTotalBanknotes(),newCoin.getTotalCoins()));
+    }
 }
