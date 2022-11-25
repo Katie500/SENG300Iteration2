@@ -148,13 +148,6 @@ public class AttendantStationGui extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
-
-	public void notifyWeightChange() {
-		
-	}
-
-
-
 }
 
 //sourced from netbeans

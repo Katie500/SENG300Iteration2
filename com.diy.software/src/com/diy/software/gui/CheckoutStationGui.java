@@ -7,6 +7,7 @@ import com.diy.software.DoItYourselfStationLogic;
 import com.diy.software.bags.Bags;
 import com.diy.software.controllers.ReceiptController;
 import com.diy.software.gui.MembershipScreenGui;
+import com.jimmyselectronics.Item;
 
 import ca.ucalgary.seng300.simulation.InvalidArgumentSimulationException;
 
@@ -341,6 +342,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
     }
     private void bagItemButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+    	customer.placeItemInBaggingArea();
     }
     
     public boolean getSignalInk() {

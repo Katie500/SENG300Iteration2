@@ -16,7 +16,6 @@ import com.diy.software.controllers.PaymentController;
 import com.diy.software.exceptions.CardTransactionException;
 import com.diy.software.exceptions.IssuerHoldException;
 import com.jimmyselectronics.opeechee.Card;
-import com.jimmyselectronics.opeechee.CardReader;
 
 
 
@@ -27,7 +26,7 @@ public class PaymentControllerTest {
 	Card noChip = createCardInfo("No Chip", true, false);
 	Card validCard = createCardInfo("Valid card", true, true);
 	Card invalidCard = createCardInfo("Invalid Card", true, true);
-	Card notInIssuer = createCardInfo("Issuer 2 Card", true, true);;
+	Card notInIssuer = createCardInfo("Issuer 2 Card", true, true);
 	
 	
 	private Card createCardInfo(String kind, boolean isTap, boolean hasChip) {
@@ -141,34 +140,34 @@ public class PaymentControllerTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testNoPinEntered1() throws IOException {
-		stationLogic.paymentController.validateCardPayment(null, this.stationLogic.station.cardReader);
+		stationLogic.paymentController.validateCardPayment(null, this.stationLogic.station.cardReader, "insert");
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testNoPinEntered2() throws IOException {
-		stationLogic.paymentController.validateCardPayment("", this.stationLogic.station.cardReader);
+		stationLogic.paymentController.validateCardPayment("", this.stationLogic.station.cardReader, "insert");
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testNoPinEntered3() throws IOException {
-		stationLogic.paymentController.validateCardPayment("  ", this.stationLogic.station.cardReader);
+		stationLogic.paymentController.validateCardPayment("  ", this.stationLogic.station.cardReader, "insert");
 	}
 	
 	@Test(expected = NullPointerException.class)
 	public void testNoCardInserted1() throws IOException {
-		stationLogic.paymentController.validateCardPayment("1234", this.stationLogic.station.cardReader);
+		stationLogic.paymentController.validateCardPayment("1234", this.stationLogic.station.cardReader, "insert");
 	}
 
 	@Test(expected = NullPointerException.class)
 	public void testNoCardInserted2() throws IOException {
 		stationLogic.paymentController.setSelectedCard(null);
-		stationLogic.paymentController.validateCardPayment("1234", this.stationLogic.station.cardReader);
+		stationLogic.paymentController.validateCardPayment("1234", this.stationLogic.station.cardReader, "insert");
 	}
 	
 	@Test(expected = NullPointerException.class)
 	public void testNoCardReader() throws IOException {
 		stationLogic.paymentController.setSelectedCard(validCard);
-		stationLogic.paymentController.validateCardPayment("1234", null);
+		stationLogic.paymentController.validateCardPayment("1234", null, "insert");
 	}
 	
 	@Test
@@ -179,7 +178,7 @@ public class PaymentControllerTest {
 		do {
 			try {
 				stationLogic.paymentController.setSelectedCard(validCard);
-				isSuccess = stationLogic.paymentController.validateCardPayment("1234", stationLogic.station.cardReader);
+				isSuccess = stationLogic.paymentController.validateCardPayment("1234", stationLogic.station.cardReader, "insert");
 			} catch(Exception e) {
 				chipFailure = e.getMessage().contains("ChipFailureException");
 			}
@@ -191,7 +190,7 @@ public class PaymentControllerTest {
 	@Test(expected = CardTransactionException.class)
 	public void testInvalidCardPin() throws IOException {
 		stationLogic.paymentController.setSelectedCard(validCard);
-		stationLogic.paymentController.validateCardPayment("4321", stationLogic.station.cardReader);
+		stationLogic.paymentController.validateCardPayment("4321", stationLogic.station.cardReader, "insert");
 	}
 	
 	@Test
@@ -203,7 +202,7 @@ public class PaymentControllerTest {
 		while (i <= 3) {
 			try {
 				stationLogic.paymentController.setSelectedCard(validCard);
-				stationLogic.paymentController.validateCardPayment("4321", stationLogic.station.cardReader);
+				stationLogic.paymentController.validateCardPayment("4321", stationLogic.station.cardReader, "insert");
 			} catch (IOException e) {
 				i++;
 				exceptionMsg = e.getMessage();
@@ -220,7 +219,7 @@ public class PaymentControllerTest {
 	
 		try {
 			stationLogic.paymentController.setSelectedCard(noChip);
-			stationLogic.paymentController.validateCardPayment("1234", stationLogic.station.cardReader);
+			stationLogic.paymentController.validateCardPayment("1234", stationLogic.station.cardReader, "insert");
 		} catch (Exception e) {
 			exceptionMsg = e.getMessage();
 		}
@@ -235,7 +234,7 @@ public class PaymentControllerTest {
 		do {
 			try {
 				stationLogic.paymentController.setSelectedCard(validCard);
-				stationLogic.paymentController.validateCardPayment("1234", stationLogic.station.cardReader);
+				stationLogic.paymentController.validateCardPayment("1234", stationLogic.station.cardReader, "insert");
 			} catch (Exception e) {
 				exceptionMsg = e.getMessage();
 			}
@@ -257,7 +256,7 @@ public class PaymentControllerTest {
 		do {
 			try {
 				stationLogic.paymentController.setSelectedCard(validCard);
-				stationLogic.paymentController.validateCardPayment("1234", this.stationLogic.station.cardReader);
+				stationLogic.paymentController.validateCardPayment("1234", this.stationLogic.station.cardReader, "insert");
 				this.stationLogic.station.cardReader.remove();
 			} catch (Exception e) {
 				if(!e.getMessage().contains("Chip failure")) {
@@ -272,8 +271,47 @@ public class PaymentControllerTest {
 	
 	@Test(expected = IssuerHoldException.class)
 	public void testInsertCardLowLimit() throws IOException {
+		String exceptionMsg = "";
+	
+		do {
+			try {
+				stationLogic.paymentController.setSelectedCard(invalidCard);
+				stationLogic.paymentController.validateCardPayment("1234", this.stationLogic.station.cardReader, "insert");
+				stationLogic.station.cardReader.remove();
+			} catch (Exception e) {
+				if(!e.getMessage().contains("ChipFailureException")) {
+					throw e;
+				}
+			}
+		} while(exceptionMsg.equals(""));
+	}
+	
+	@Test(expected = IssuerHoldException.class)
+	public void testSwipeCardLowLimit() throws IOException {
 		stationLogic.paymentController.setSelectedCard(invalidCard);
-		stationLogic.paymentController.validateCardPayment("1234", this.stationLogic.station.cardReader);
+		stationLogic.paymentController.validateCardPayment("1234", this.stationLogic.station.cardReader, "swipe");
+	}
+	
+	
+	@Test
+	public void testSwipeCardSuccess() throws IOException {
+		stationLogic.paymentController.setSelectedCard(validCard);
+		boolean success = stationLogic.paymentController.validateCardPayment("1234", this.stationLogic.station.cardReader, "swipe");
+		
+		assertTrue(success);
+	}
+	
+	@Test(expected = IssuerHoldException.class)
+	public void testTapCardLowLimit() throws IOException {
+		stationLogic.paymentController.setSelectedCard(invalidCard);
+		stationLogic.paymentController.validateCardPayment("1234", this.stationLogic.station.cardReader, "tap");
+	}
+	
+	@Test(expected = NullPointerException.class)
+	public void testTapCardNoTap() throws IOException {
+		Card cardNoTap = createCardInfo("No Tap Card ", false, false);
+		stationLogic.paymentController.setSelectedCard(cardNoTap);
+		stationLogic.paymentController.validateCardPayment("1234", this.stationLogic.station.cardReader, "tap");
 	}
 	/*
 	 * payWithCard() 

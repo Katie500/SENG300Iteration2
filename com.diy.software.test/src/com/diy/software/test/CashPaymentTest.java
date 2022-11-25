@@ -22,7 +22,6 @@ import com.unitedbankingservices.banknote.BanknoteValidator;
 import com.unitedbankingservices.coin.Coin;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.Currency;
 
 public class CashPaymentTest {
