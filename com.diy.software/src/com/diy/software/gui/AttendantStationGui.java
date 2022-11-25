@@ -149,6 +149,11 @@ public class AttendantStationGui extends javax.swing.JFrame {
     }
 
 
+	public void notifyWeightChange() {
+		
+	}
+
+
 
 }
 

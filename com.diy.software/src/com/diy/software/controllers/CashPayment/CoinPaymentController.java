@@ -1,43 +1,27 @@
 package com.diy.software.controllers.CashPayment;
 
 import com.diy.software.DoItYourselfStationLogic;
-import com.unitedbankingservices.coin.Coin;
-import com.unitedbankingservices.coin.CoinDispenserObserver;
-import com.unitedbankingservices.coin.ICoinDispenser;
+import com.unitedbankingservices.coin.*;
 
-public class CoinPaymentController implements CoinDispenserObserver {
+public class CoinPaymentController implements CoinValidatorObserver {
     private DoItYourselfStationLogic stationLogic;
-    private Coin newCoin;
-    private long coin_value;
-    private long total_coins;
+    long total;
 
-    public CoinPaymentController(DoItYourselfStationLogic stationLogic,Coin newCoin){
+    public CoinPaymentController(DoItYourselfStationLogic stationLogic){
         this.stationLogic = stationLogic;
-        this.newCoin = newCoin;
-        coin_value = 0;
-        total_coins = 0;
     }
 
     @Override
-    public void coinAdded(ICoinDispenser dispenser, Coin coin) {
-        newCoin = coin;
+    public void validCoinDetected(CoinValidator validator, long value) {
+        total += value;
     }
 
     @Override
-    public void coinRemoved(ICoinDispenser dispenser, Coin coin) {
-        newCoin = null;
+    public void invalidCoinDetected(CoinValidator validator) {
     }
-
-    @Override
-    public void coinsLoaded(ICoinDispenser dispenser, Coin... coins) {}
-
-    @Override
-    public void coinsUnloaded(ICoinDispenser dispenser, Coin... coins) {}
 
     public long getTotalCoins(){
-        coin_value = newCoin.getValue();
-        total_coins += coin_value;
-        return total_coins;
+        return total;
     }
 
 }

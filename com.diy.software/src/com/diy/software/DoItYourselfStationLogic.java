@@ -5,6 +5,9 @@ import com.diy.hardware.external.CardIssuer;
 import com.diy.software.controllers.CashPayment.CashPaymentController;
 import com.diy.software.controllers.PaymentController;
 import com.diy.software.controllers.ProductController;
+import com.diy.software.controllers.WeightController;
+import com.jimmyselectronics.OverloadException;
+import com.jimmyselectronics.virgilio.ElectronicScale;
 
 public class DoItYourselfStationLogic {
     /**
@@ -27,7 +30,29 @@ public class DoItYourselfStationLogic {
      * Tracks if the customers session has begun
      */
     private boolean inProgress = true;
+    /**
+     * The controller that tracks the weight of the items
+     */
+    private WeightController electronicScale;
 
+    
+    //System variables
+    /**
+     * tracks the current weight
+     */
+    private double baggingAreaCurrentWeight;
+    /**
+     * tracks the bagging area expected weight
+     */
+    private double baggingAreaExpectedWeight;
+    
+    private boolean systemEnabled = true;
+    private ElectronicScale baggingArea;
+	private double scaleMaxWeight = 5000.0;
+	private double scaleSensitivity = 0.5;
+    private static double scaleMaximumWeightConfiguration = 5000.0;
+    private static double scaleSensitivityConfiguration = 0.5;
+    
     /**
      * Installs an instance of the logic on the indicated station.
      *
@@ -68,6 +93,10 @@ public class DoItYourselfStationLogic {
         station.cardReader.register(paymentController);
 
 //        cashPaymentController = new CashPaymentController(this);
+    
+        baggingArea = new ElectronicScale(scaleMaxWeight, scaleSensitivity);
+        baggingArea.plugIn();
+        baggingArea.turnOn();
     }
 
     /**
@@ -88,5 +117,38 @@ public class DoItYourselfStationLogic {
     public void setInProgress(boolean inProgress) {
         this.inProgress = inProgress;
     }
+
+    
+	public double getCurrentExpectedWeight() {
+		return baggingAreaExpectedWeight;
+	}
+	public double getCurrentWeight() throws OverloadException {
+		baggingAreaCurrentWeight = baggingArea.getCurrentWeight();
+		return baggingAreaCurrentWeight;
+	}
+	
+	
+	public void weightDiscrepancy(ElectronicScale baggingArea, double currentWeight) throws OverloadException {
+		//Compare current weight vs previous weight
+		double expected_weight = getCurrentExpectedWeight();
+		//double current_weight = baggingArea.getCurrentWeight();
+
+		if (electronicScale.weightDiscrepancy){
+			//Station to disabled scanning
+//			station.scanner.disable();
+//			//GUI to disable scanning and bagging
+//			disableScanningAndBagging();
+//			//Signal attendant to help
+//			requestAttendant = true;
+		}
+		else{
+//			station.scanner.enable();
+//			enableScanningAndBagging();
+		}
+
+	}
+  
+
+
 }
 

@@ -6,6 +6,7 @@ import com.diy.simulation.Customer;
 import com.diy.software.DoItYourselfStationLogic;
 import com.diy.software.bags.Bags;
 import com.diy.software.controllers.ReceiptController;
+import com.diy.software.gui.MembershipScreenGui;
 
 import ca.ucalgary.seng300.simulation.InvalidArgumentSimulationException;
 
@@ -37,7 +38,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
     JLabel totalLabel = new JLabel();
     JButton purchaseBagButton = new JButton();
     JToggleButton noBagsToggleButton = new JToggleButton();
-    JButton membershipLoginButton = new JButton();
+    static JButton membershipLoginButton = new JButton();
     JLabel lowInkLabel = new JLabel();
     JLabel lowPaperLabel = new JLabel();
 
@@ -66,7 +67,15 @@ public class CheckoutStationGui extends javax.swing.JFrame{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        welcomeLabelTop.setText("Welcome to Checkout. Please scan items.");
+        if(!MembershipScreenGui.membershipManager.hasActiveMember())
+            welcomeLabelTop.setText("Welcome to Checkout. Please scan items.");
+        else {
+            //changing welcome label to have member name
+            welcomeLabelTop.setText("<html>Welcome, " + MembershipScreenGui.membershipManager.getActiveMemberName()
+                    + "! <br/>Membership Number: " + MembershipScreenGui.membershipManager.getActivateMemberID()
+                    + " <br/>Proud Member Since: " + MembershipScreenGui.membershipManager.getActiveMemberMonth() + " " + MembershipScreenGui.membershipManager.getActiveMemberDay()
+                    + ", " + MembershipScreenGui.membershipManager.getActivateMemberYear());
+        }
 
         selectLanguageButton.setText("Select Language");
         selectLanguageButton.addActionListener(new java.awt.event.ActionListener() {
@@ -139,11 +148,11 @@ public class CheckoutStationGui extends javax.swing.JFrame{
                 noBagsToggleButtonActionPerformed(evt);
             }
         });
-        //if(!membershipConfirmed){
+        if(!MembershipScreenGui.membershipManager.hasActiveMember()){
         membershipLoginButton.setText("Membership Login");
-        //}
-        if(membershipConfirmed){
-        membershipLoginButton.setVisible(false);
+        }
+        else{
+            membershipLoginButton.setText("Log out as "+MembershipScreenGui.membershipManager.getActiveMemberName());
         }
         membershipLoginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -266,6 +275,8 @@ public class CheckoutStationGui extends javax.swing.JFrame{
                 public int getSize() { return strings.size(); }
                 public String getElementAt(int i) { return strings.get(i); }
             });
+            
+            
         } catch(NoSuchElementException e) {
             errorMessage.setText("Error: No more items in cart");
         } catch(InvalidArgumentSimulationException e) {
@@ -301,6 +312,8 @@ public class CheckoutStationGui extends javax.swing.JFrame{
     }
 
     private void membershipLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        if(MembershipScreenGui.membershipManager.hasActiveMember())
+            MembershipScreenGui.membershipManager.unsetActiveMember();
         MembershipScreenGui membershipgui = new MembershipScreenGui(customer, station, stationLogic);
         membershipgui.setVisible(true);
         //this.setVisible(false);
@@ -315,6 +328,9 @@ public class CheckoutStationGui extends javax.swing.JFrame{
     	return signalpaper;
     }
 
+    public void setErrorMessage(String message) {
+    	errorMessage.setText(message);
+    }
 
 }
 
