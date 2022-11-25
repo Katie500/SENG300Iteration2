@@ -20,10 +20,6 @@ public class CashPaymentController {
     public long payWithCash(long totalPaid) throws Exception {
         long charge = stationLogic.productController.getTotal();
 
-        if (totalPaid < charge) {
-            throw new Exception("Please add amount to complete the payment");
-        }
-
         // Calculate change
         long change = totalPaid - charge;
         return change;
