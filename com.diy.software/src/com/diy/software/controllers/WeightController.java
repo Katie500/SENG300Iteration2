@@ -80,9 +80,6 @@ public class WeightController implements ElectronicScaleListener {
 		
 	}
 	
-	public boolean getWeightDiscrepancy() {
-		return weightDiscrepancy;
-	}
-	
+
 
 }

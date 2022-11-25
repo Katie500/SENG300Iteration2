@@ -278,6 +278,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
         list = stationLogic.productController.getScanned();
         int currentIndex = stationLogic.productController.getCurrentIndex();
         try {
+        	errorMessage.setText("");
             customer.selectNextItem();
             customer.scanItem();
 
@@ -300,9 +301,7 @@ public class CheckoutStationGui extends javax.swing.JFrame{
             errorMessage.setText("Error: No more items in cart");
         } catch(InvalidArgumentSimulationException e) {
             errorMessage.setText("Error: the weight has to be positive");
-        } //catch() {
-//        	
-//        }
+        } 
     }
 
     private void selectLanguageButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -342,7 +341,20 @@ public class CheckoutStationGui extends javax.swing.JFrame{
     }
     private void bagItemButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    	customer.placeItemInBaggingArea();
+    	try {
+    		errorMessage.setText("");
+    		customer.placeItemInBaggingArea();
+    	}catch(NoSuchElementException e) {
+    		errorMessage.setText("No Item has been scanned.");
+    	}
+    	
+    	boolean weightDiscrepancyCheck = stationLogic.getWeightDiscrepancy();
+    	if (weightDiscrepancyCheck = true) {
+    		errorMessage.setText("Weight Discrepancy. Call Attendant");
+    	} else {
+    		
+    	}
+    	
     }
     
     public boolean getSignalInk() {
