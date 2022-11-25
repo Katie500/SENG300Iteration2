@@ -8,6 +8,7 @@ import com.diy.software.bags.Bags;
 import com.diy.software.controllers.ReceiptController;
 import com.diy.software.gui.MembershipScreenGui;
 import com.jimmyselectronics.Item;
+import com.jimmyselectronics.OverloadException;
 
 import ca.ucalgary.seng300.simulation.InvalidArgumentSimulationException;
 
@@ -127,7 +128,8 @@ public class CheckoutStationGui extends javax.swing.JFrame{
             }
         });
 
-
+        bagItemButton.setVisible(false);
+        
         scanItemButton.setText("Scan Item");
         scanItemButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -281,6 +283,10 @@ public class CheckoutStationGui extends javax.swing.JFrame{
         	errorMessage.setText("");
             customer.selectNextItem();
             customer.scanItem();
+            bagItemButton.setVisible(true);
+            scanItemButton.setVisible(false);
+            
+            
 
             stationLogic.productController.addToTotal(list.get(currentIndex).getPrice());
             stationLogic.productController.updateNextItem();
@@ -301,7 +307,9 @@ public class CheckoutStationGui extends javax.swing.JFrame{
             errorMessage.setText("Error: No more items in cart");
         } catch(InvalidArgumentSimulationException e) {
             errorMessage.setText("Error: the weight has to be positive");
-        } 
+        } catch(IndexOutOfBoundsException e) {
+        	errorMessage.setText("Start Scanning Items.");
+        }
     }
 
     private void selectLanguageButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -344,16 +352,21 @@ public class CheckoutStationGui extends javax.swing.JFrame{
     	try {
     		errorMessage.setText("");
     		customer.placeItemInBaggingArea();
+    		
+    		bagItemButton.setVisible(false);
+            scanItemButton.setVisible(true);
+    		boolean weightDiscrepancyCheck = stationLogic.getWeightDiscrepancy();
+        	if (weightDiscrepancyCheck == true) {
+        		errorMessage.setText("Weight Discrepancy. Call Attendant");
+        	} else {
+        		errorMessage.setText("");
+        	}
     	}catch(NoSuchElementException e) {
     		errorMessage.setText("No Item has been scanned.");
     	}
     	
-    	boolean weightDiscrepancyCheck = stationLogic.getWeightDiscrepancy();
-    	if (weightDiscrepancyCheck = true) {
-    		errorMessage.setText("Weight Discrepancy. Call Attendant");
-    	} else {
-    		
-    	}
+    	
+    	
     	
     }
     

@@ -44,11 +44,11 @@ public class DoItYourselfStationLogic {
     /**
      * tracks the current weight
      */
-    private double baggingAreaCurrentWeight;
+    private double baggingAreaCurrentWeight = 0;
     /**
      * tracks the bagging area expected weight
      */
-    private double baggingAreaExpectedWeight;
+    private double baggingAreaExpectedWeight = 0;
     
     public ElectronicScale baggingArea;
 	private double scaleMaxWeight = 5000.0;
@@ -99,15 +99,12 @@ public class DoItYourselfStationLogic {
         baggingArea.plugIn();
         baggingArea.turnOn();
         
-        try {
-        	baggingAreaExpectedWeight = baggingArea.getCurrentWeight();
-        } catch (OverloadException e) {
-        	e.printStackTrace();
-        }
+        
         
 		electronicScaleListener = new WeightController(this);
 
 		baggingArea.register(electronicScaleListener);
+
     }
 
     /**
@@ -142,13 +139,17 @@ public class DoItYourselfStationLogic {
 		return baggingAreaExpectedWeight;
 	}
 	
-	public double getCurrentWeight() throws OverloadException {
-		baggingAreaCurrentWeight = baggingArea.getCurrentWeight();
-		return baggingAreaCurrentWeight;
+	public boolean getWeightDiscrepancy() {
+		electronicScaleListener.weightDiscrepancy();
+		return electronicScaleListener.weightDiscrepancy;
 	}
 	
-	public boolean getWeightDiscrepancy() {
-		return electronicScaleListener.weightDiscrepancy;
+	public void updateExpectedWeight(double weightNewItem) {
+		baggingAreaExpectedWeight += weightNewItem;
+	}
+	
+	public void updateCurrentWeight(double weightNewItem) {
+		baggingAreaCurrentWeight += weightNewItem;
 	}
 
 }

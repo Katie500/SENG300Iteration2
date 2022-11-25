@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.diy.hardware.BarcodedProduct;
+import com.diy.hardware.external.ProductDatabases;
 import com.diy.software.DoItYourselfStationLogic;
 import com.diy.software.gui.AttendantStationGui;
 import com.jimmyselectronics.AbstractDevice;
@@ -18,7 +19,9 @@ public class WeightController implements ElectronicScaleListener {
 	private DoItYourselfStationLogic systemReference;
 	public boolean weightDiscrepancy;
 	private double expectedWeight;
-	private double currentWeight;
+	private double currentWeight = 0;
+    private double baggedItemsWeight = 0;
+
 	
 	public WeightController(DoItYourselfStationLogic station) {
 		this.systemReference = station;
@@ -56,15 +59,9 @@ public class WeightController implements ElectronicScaleListener {
 		
 		
 		expectedWeight = systemReference.getCurrentExpectedWeight();
-		currentWeight = expectedWeight + weightInGrams;
 		
-		if (expectedWeight < currentWeight || expectedWeight > currentWeight) {
-			weightDiscrepancy = true;
-			
-		} else if (expectedWeight == currentWeight) {
-			//If the program executes this it means no weight discrepancy
-			weightDiscrepancy = false;
-		}
+		baggedItemsWeight += weightInGrams;
+		
 		
 	}
 
@@ -81,5 +78,30 @@ public class WeightController implements ElectronicScaleListener {
 	}
 	
 
+	/**
+	 * Checks for weight discrepancy
+	 */
+	public boolean weightDiscrepancy() {
+		
+		if (expectedWeight < baggedItemsWeight || expectedWeight > baggedItemsWeight) {
+			//systemReference.systemDisable();
+			weightDiscrepancy = true;
+			System.out.println("gets here");
+		} else if (expectedWeight == baggedItemsWeight) {
+			//If the program executes this it means no weight discrepancy
+			weightDiscrepancy = false;
+		}
+		return weightDiscrepancy;
+		
+	}
+	
+    /**
+     * Obtains the list of items scanned with this machine
+     *
+     * @return The total list of items scanned during the current transaction.
+     */
+    public double getBaggedItemsWeight() {
+        return baggedItemsWeight;
+    }
 
 }

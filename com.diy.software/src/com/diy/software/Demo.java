@@ -48,8 +48,8 @@ public class Demo {
 
         // Create barcoded items
         BarcodedItem item1 = new BarcodedItem(barcode1, 15);
-        BarcodedItem item2 = new BarcodedItem(barcode2, 1);
-        BarcodedItem item3 = new BarcodedItem(barcode3, 1);
+        BarcodedItem item2 = new BarcodedItem(barcode2, 25);
+        BarcodedItem item3 = new BarcodedItem(barcode3, 35);
 
         // Create barcoded products
         BarcodedProduct product1 = new BarcodedProduct(barcode1, "Banana", 5, 15);

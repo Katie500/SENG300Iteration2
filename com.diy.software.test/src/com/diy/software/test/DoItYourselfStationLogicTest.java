@@ -41,10 +41,10 @@ public class DoItYourselfStationLogicTest {
 		assertEquals(Weight, testweight, 1);
 	}
 	
-	@SuppressWarnings("deprecation")
-	@Test
-	public void testgetCurrentWeight() throws OverloadException {
-		double testweight = logic.getCurrentWeight();
-		assertEquals(Weight, testweight, 1);
-	}
+//	@SuppressWarnings("deprecation")
+//	@Test
+//	public void testgetCurrentWeight() throws OverloadException {
+//		double testweight = logic.getCurrentWeightScale();
+//		assertEquals(Weight, testweight, 1);
+//	}
 }

@@ -88,6 +88,9 @@ public class ProductController implements BarcodeScannerListener {
         // Add the product to the cart
         var product = ProductDatabases.BARCODED_PRODUCT_DATABASE.get(barcode);
         scanned.add(product);
+        
+        //Updates the expected weight in the scale
+        stationLogic.updateExpectedWeight(product.getExpectedWeight());
     }
 
 	@Override
