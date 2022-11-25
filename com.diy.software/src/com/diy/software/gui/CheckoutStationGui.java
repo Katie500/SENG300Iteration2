@@ -275,6 +275,8 @@ public class CheckoutStationGui extends javax.swing.JFrame{
                 public int getSize() { return strings.size(); }
                 public String getElementAt(int i) { return strings.get(i); }
             });
+            
+            
         } catch(NoSuchElementException e) {
             errorMessage.setText("Error: No more items in cart");
         } catch(InvalidArgumentSimulationException e) {
@@ -326,6 +328,9 @@ public class CheckoutStationGui extends javax.swing.JFrame{
     	return signalpaper;
     }
 
+    public void setErrorMessage(String message) {
+    	errorMessage.setText(message);
+    }
 
 }
 

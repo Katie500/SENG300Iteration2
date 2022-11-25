@@ -13,17 +13,17 @@ public class ConfirmationScreenGui extends javax.swing.JFrame {
     private static DoItYourselfStationLogic stationLogic;
     private static Customer customer;
     private static DoItYourselfStationAR station;
-
     private static boolean bool;
+    private static long total;
 
 
     public ConfirmationScreenGui(Customer customer, DoItYourselfStationAR station, DoItYourselfStationLogic stationLogic, boolean bool) {
-        initComponents();
+        total = stationLogic.productController.getTotal();
+    	initComponents();
         ConfirmationScreenGui.customer = customer;
         ConfirmationScreenGui.station = station;
         ConfirmationScreenGui.stationLogic = stationLogic;
         ConfirmationScreenGui.bool = bool;
-
     }
 
     @SuppressWarnings("unchecked")
@@ -69,10 +69,10 @@ public class ConfirmationScreenGui extends javax.swing.JFrame {
             totalPaidLabel.setVisible(false);
             changeReturnedLabel.setVisible(false);
         }
+        
+        totalPaidLabel.setText("Total Paid: $" + total);
 
-        totalPaidLabel.setText("Total Paid:");
-
-        changeReturnedLabel.setText("Change Returned:");
+        changeReturnedLabel.setText("Change Returned: $0.0");
 
 
         javax.swing.GroupLayout confirmationScreenPanelLayout = new javax.swing.GroupLayout(confirmationScreenPanel);

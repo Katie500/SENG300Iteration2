@@ -13,13 +13,14 @@ public class WeightController implements ElectronicScaleListener {
 
 	private DoItYourselfStationLogic systemReference;
 	private AttendantStationGui attendantReference;
+	public boolean weightDiscrepancy;
 	
 	public WeightController(DoItYourselfStationLogic station, AttendantStationGui attendant) {
 		this.systemReference = station;
 		this.attendantReference = attendant;
 	}
 	
-	
+
 	@Override
 	public void enabled(AbstractDevice<? extends AbstractDeviceListener> device) {
 		// TODO Auto-generated method stub
@@ -53,18 +54,20 @@ public class WeightController implements ElectronicScaleListener {
 		currentWeight = expectedWeight + weightInGrams;
 		
 		if (expectedWeight < currentWeight || expectedWeight > currentWeight) {
-			//Notify that there is a weight discrepancy
-			systemReference.systemDisable();
-			systemReference.notifyUser("Weight Discrepancy, wait for attendant.");
+//			//Notify that there is a weight discrepancy
+//			systemReference.systemDisable();
+//			systemReference.notifyUserGui("Weight Discrepancy, click 'Call Attendant'.");
 			//Notify attendant
 			attendantReference.notifyWeightChange();
+			weightDiscrepancy = true;
 			
 		} else if (expectedWeight == currentWeight) {
-			//If the program executes this it means no weight discrepancy
-			systemReference.enableScanningAndBagging();
-			systemReference.bagItemSuccess(true);
-			systemReference.updateWeightOnGUI(weightInGrams);
-			systemReference.setScanStatus(false);
+//			//If the program executes this it means no weight discrepancy
+//			systemReference.enableScanningAndBagging();
+//			systemReference.bagItemSuccess(true);
+//			systemReference.updateWeightOnGUI(weightInGrams);
+//			systemReference.setScanStatus(false);
+			weightDiscrepancy = false;
 		}
 		
 	}
@@ -80,5 +83,10 @@ public class WeightController implements ElectronicScaleListener {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public boolean getWeightDiscrepancy() {
+		return weightDiscrepancy;
+	}
+	
 
 }
