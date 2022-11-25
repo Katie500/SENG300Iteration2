@@ -263,4 +263,26 @@ public class WeightDiscrepancyTests {
         double expectedOutcome = 15;
         assertEquals(baggedItemsWeight, expectedOutcome,15.0);
 	}
+	
+	@Test
+	public void overLoadTest(){
+		
+		Barcode barcode4 = new Barcode(new Numeral[] { Numeral.one, Numeral.two, Numeral.three, Numeral.four });
+		BarcodedItem item4 = new BarcodedItem(barcode4, 999999);
+
+		// Create barcoded products
+		BarcodedProduct product1 = new BarcodedProduct(barcode4, "Chocolate", 5, 999999);
+		   
+		
+		customer.shoppingCart.add(item4);
+		customer.selectNextItem();
+        customer.scanItem();
+        customer.placeItemInBaggingArea();
+        
+        double baggedItemsWeight = stationLogic.electronicScaleListener.getBaggedItemsWeight();
+        double expectedOutcome = 999999;
+        
+        
+        assertEquals(baggedItemsWeight, expectedOutcome,999999);
+	}
 }
