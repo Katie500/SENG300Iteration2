@@ -40,17 +40,23 @@ public class MembershipController {
     }
 
     public void insertMember(String membershipID, String name, int year_opened, String month_opened, int day_opened){
-        
-    	MembershipInfo newMember = new MembershipInfo(name, year_opened, month_opened, day_opened, membershipID);
-        membershipDatabase.put(membershipID, newMember);
+        if(membershipID != null) {
+            MembershipInfo newMember = new MembershipInfo(name, year_opened, month_opened, day_opened, membershipID);
+            membershipDatabase.put(membershipID, newMember);
+        }
     }
 
     public boolean verifyMembership(String input){
-        if(membershipDatabase.containsKey(input)){
-            System.out.println(membershipDatabase.get(input).name);
-            return true;
+        if(input != null) {
+            if (membershipDatabase.containsKey(input)) {
+                System.out.println(membershipDatabase.get(input).name);
+                return true;
+            }
+            else {
+                return false;
+            }
         }
-        else{
+        else {
             return false;
         }
     }
@@ -67,8 +73,10 @@ public class MembershipController {
 
     //Set active member
     public void setActiveMember(String input){
-        if(verifyMembership(input)) {
-            activeMember = membershipDatabase.get(input);
+        if(input != null) {
+            if (verifyMembership(input)) {
+                activeMember = membershipDatabase.get(input);
+            }
         }
     }
 

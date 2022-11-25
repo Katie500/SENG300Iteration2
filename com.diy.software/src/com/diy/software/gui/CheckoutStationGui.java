@@ -340,10 +340,15 @@ public class CheckoutStationGui extends javax.swing.JFrame{
     }
 
     private void membershipLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        if(MembershipScreenGui.membershipManager.hasActiveMember())
+        if(MembershipScreenGui.membershipManager.hasActiveMember()) {
             MembershipScreenGui.membershipManager.unsetActiveMember();
-        MembershipScreenGui membershipgui = new MembershipScreenGui(customer, station, stationLogic);
-        membershipgui.setVisible(true);
+            welcomeLabelTop.setText("Welcome to Checkout. Please scan items.");
+            membershipLoginButton.setText("Membership Login");
+        }
+        else {
+            MembershipScreenGui membershipgui = new MembershipScreenGui(customer, station, stationLogic);
+            membershipgui.setVisible(true);
+        }
         //this.setVisible(false);
 
     }
