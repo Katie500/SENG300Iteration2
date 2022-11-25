@@ -35,9 +35,6 @@ public class CardPinpadGui extends javax.swing.JFrame {
 		CardPinpadGui.cardPaymentType = cardPaymentType;
 		
 		this.walletGui = new WalletGui(customer.wallet.cards, stationLogic, station);
-		
-		station.plugIn();
-		station.turnOn();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		initComponents();
@@ -169,7 +166,6 @@ public class CardPinpadGui extends javax.swing.JFrame {
 	private void validatePayment() {
 		try {
 			boolean isSuccess = stationLogic.paymentController.validateCardPayment(pinEntered, station.cardReader);
-			stationLogic.paymentController.transactionStatus(isSuccess);
 			
 			if(isSuccess) {
 				// Display the confirmation screen if the payment is successful

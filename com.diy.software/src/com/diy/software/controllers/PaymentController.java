@@ -24,14 +24,21 @@ public class PaymentController implements CardReaderListener {
      *            The station logic that this is part of.
      */
     public PaymentController(DoItYourselfStationLogic stationLogic, CardIssuer creditIssuer) {
+    	if(stationLogic == null)
+    		throw new NullPointerException("Station logic");
+    	
+    	if(creditIssuer == null)
+    		throw new NullPointerException("Credit issuer");
+    	
         this.stationLogic = stationLogic;
         this.creditIssuer = creditIssuer;
     }
 
-    public boolean validateCardPayment(String pinEntered, CardReader cardReader) throws Exception {
+    public boolean validateCardPayment(String pinEntered, CardReader cardReader) throws IOException {
     	boolean isSuccess;
-    	
-    	if(pinEntered == null)
+
+ 
+    	if(pinEntered == null || pinEntered.replaceAll("\\s+","").equals(""))
     		throw new IllegalArgumentException("Please enter a pin.");
     	
 		if (selectedCard == null)
@@ -40,7 +47,6 @@ public class PaymentController implements CardReaderListener {
 		if (cardReader == null)
 			throw new NullPointerException("Card reader");
 		
-
 		try {
 			cardReader.insert(selectedCard, pinEntered);
 			isSuccess = payWithCard();
@@ -75,7 +81,7 @@ public class PaymentController implements CardReaderListener {
     /**
      * @return If a card transaction is successful or not
      */
-    public boolean payWithCard() throws Exception {
+    public boolean payWithCard() throws IOException {
         long charge = stationLogic.productController.getTotal();
         long holdNumber = creditIssuer.authorizeHold(selectedCard.number, charge);
         
@@ -89,35 +95,24 @@ public class PaymentController implements CardReaderListener {
         return paySuccess;
     }
     
-    public void transactionStatus(boolean isSuccess) {
-    }
-    
     public void setSelectedCard(Card card) {
     	this.selectedCard = card;
     }
 
 	@Override
-	public void enabled(AbstractDevice<? extends AbstractDeviceListener> device) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void enabled(AbstractDevice<? extends AbstractDeviceListener> device) {}
 
 	@Override
-	public void disabled(AbstractDevice<? extends AbstractDeviceListener> device) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void disabled(AbstractDevice<? extends AbstractDeviceListener> device) {}
 
 	@Override
 	public void turnedOn(AbstractDevice<? extends AbstractDeviceListener> device) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Turned on");
 	}
 
 	@Override
 	public void turnedOff(AbstractDevice<? extends AbstractDeviceListener> device) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Turned off");
 	}
 
 	@Override
@@ -130,21 +125,12 @@ public class PaymentController implements CardReaderListener {
 	}
 
 	@Override
-	public void cardTapped(CardReader reader) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void cardTapped(CardReader reader) {}
 
 	@Override
-	public void cardSwiped(CardReader reader) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void cardSwiped(CardReader reader) {}
 
 	@Override
-	public void cardDataRead(CardReader reader, CardData data) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void cardDataRead(CardReader reader, CardData data) {}
     
 }
