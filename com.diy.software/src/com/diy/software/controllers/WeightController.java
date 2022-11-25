@@ -17,9 +17,8 @@ public class WeightController implements ElectronicScaleListener {
 
 	private DoItYourselfStationLogic systemReference;
 	public boolean weightDiscrepancy;
-	public double expectedWeight;
-	public double currentWeight;
-	private List<BarcodedProduct> itemsInScale = new ArrayList();
+	private double expectedWeight;
+	private double currentWeight;
 	
 	public WeightController(DoItYourselfStationLogic station) {
 		this.systemReference = station;

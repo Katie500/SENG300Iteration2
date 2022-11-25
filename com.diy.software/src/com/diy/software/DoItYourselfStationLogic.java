@@ -36,8 +36,6 @@ public class DoItYourselfStationLogic {
      */
     private WeightController electronicScaleListener;
     
-    private AttendantStationGui attendant;
-
     
     //System variables
     /**
@@ -50,7 +48,7 @@ public class DoItYourselfStationLogic {
     private double baggingAreaExpectedWeight;
     
     private boolean systemEnabled = true;
-    private ElectronicScale baggingArea;
+    public ElectronicScale baggingArea;
 	private double scaleMaxWeight = 5000.0;
 	private double scaleSensitivity = 0.5;
     private static double scaleMaximumWeightConfiguration = 5000.0;
@@ -135,44 +133,11 @@ public class DoItYourselfStationLogic {
 	public double getCurrentExpectedWeight() {
 		return baggingAreaExpectedWeight;
 	}
+	
 	public double getCurrentWeight() throws OverloadException {
 		baggingAreaCurrentWeight = baggingArea.getCurrentWeight();
 		return baggingAreaCurrentWeight;
 	}
-	
-	/**
-	 * places items in bagging area
-	 */
-	public void StartBagging() {
-//		Demo.customer.placeItemInBaggingArea();
-//		bagItemSuccess = true;
-//		//cheat code
-//		if(bagItemSuccess) {
-//			reEnableScanning();
-//		}
-	}
-	
-	public void weightDiscrepancy(ElectronicScale baggingArea, double currentWeight) throws OverloadException {
-		//Compare current weight vs previous weight
-		double expected_weight = getCurrentExpectedWeight();
-		double current_weight = getCurrentWeight();
-
-		if (electronicScaleListener.weightDiscrepancy){
-			//Station to disabled scanning
-//			station.scanner.disable();
-//			//GUI to disable scanning and bagging
-//			disableScanningAndBagging();
-//			//Signal attendant to help
-//			requestAttendant = true;
-		}
-		else{
-//			station.scanner.enable();
-//			enableScanningAndBagging();
-		}
-
-	}
-  
-
 
 }
 
