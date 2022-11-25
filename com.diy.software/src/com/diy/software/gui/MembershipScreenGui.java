@@ -16,7 +16,7 @@ public class MembershipScreenGui extends javax.swing.JFrame {
     private static DoItYourselfStationAR station;
     private ArrayList<Integer> memberPin = new ArrayList<Integer>();
     private javax.swing.JPasswordField passwordPINtextbox = new javax.swing.JPasswordField();
-    private MembershipController membershipController = new MembershipController();
+    public static MembershipController membershipManager = new MembershipController();
 
 
     public MembershipScreenGui(Customer customer, DoItYourselfStationAR station, DoItYourselfStationLogic stationLogic) {
@@ -65,10 +65,10 @@ public class MembershipScreenGui extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         //Create Memberships
-        membershipController.insertMember("73", "John Willard", 2012, "January", 23);
-        membershipController.insertMember("33", "Edwardo Saville", 2003, "December", 25);
-        membershipController.insertMember("28", "Samantha Rowler", 2021, "August", 3);
-        membershipController.insertMember("10", "Jerome Walker", 2009, "April", 15);
+        membershipManager.insertMember("73", "John Willard", 2012, "January", 23);
+        membershipManager.insertMember("33", "Edwardo Saville", 2003, "December", 25);
+        membershipManager.insertMember("28", "Samantha Rowler", 2021, "August", 3);
+        membershipManager.insertMember("10", "Jerome Walker", 2009, "April", 15);
 
         membershipLabel.setText("Please Enter Membership Number:");
         global.errorLabel.setForeground(Color.red);
@@ -276,81 +276,71 @@ public class MembershipScreenGui extends javax.swing.JFrame {
     private void twoButtonActionPerformed(java.awt.event.ActionEvent evt) {
         memberPin.add(2);
         passwordPINtextbox.setText(convertMembershipToString(memberPin));
-        System.out.println(convertMembershipToString(memberPin));
     }
 
     private void oneButtonActionPerformed(java.awt.event.ActionEvent evt) {
         memberPin.add(1);
         passwordPINtextbox.setText(convertMembershipToString(memberPin));
-        System.out.println(convertMembershipToString(memberPin));
     }
 
     private void threeButtonActionPerformed(java.awt.event.ActionEvent evt) {
         memberPin.add(3);
         passwordPINtextbox.setText(convertMembershipToString(memberPin));
-        System.out.println(convertMembershipToString(memberPin));
     }
 
     private void fourButtonActionPerformed(java.awt.event.ActionEvent evt) {
         memberPin.add(4);
         passwordPINtextbox.setText(convertMembershipToString(memberPin));
-        System.out.println(convertMembershipToString(memberPin));
     }
 
     private void fiveButtonActionPerformed(java.awt.event.ActionEvent evt) {
         memberPin.add(5);
         passwordPINtextbox.setText(convertMembershipToString(memberPin));
-        System.out.println(convertMembershipToString(memberPin));
     }
 
     private void sixButtonActionPerformed(java.awt.event.ActionEvent evt) {
         memberPin.add(6);
         passwordPINtextbox.setText(convertMembershipToString(memberPin));
-        System.out.println(convertMembershipToString(memberPin));
     }
 
     private void sevenButtonActionPerformed(java.awt.event.ActionEvent evt) {
         memberPin.add(7);
         passwordPINtextbox.setText(convertMembershipToString(memberPin));
-        System.out.println(convertMembershipToString(memberPin));
     }
 
     private void eightButtonActionPerformed(java.awt.event.ActionEvent evt) {
         memberPin.add(8);
         passwordPINtextbox.setText(convertMembershipToString(memberPin));
-        System.out.println(convertMembershipToString(memberPin));
     }
 
     private void nineButtonActionPerformed(java.awt.event.ActionEvent evt) {
         memberPin.add(9);
         passwordPINtextbox.setText(convertMembershipToString(memberPin));
-        System.out.println(convertMembershipToString(memberPin));
     }
 
     private void zeroButtonActionPerformed(java.awt.event.ActionEvent evt) {
         memberPin.add(0);
         passwordPINtextbox.setText(convertMembershipToString(memberPin));
-        System.out.println(convertMembershipToString(memberPin));
     }
 
     private void enterButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO: store membership number someplace awesome so we can find it later
-        if(membershipController.verifyMembership(convertMembershipToString(memberPin))){
-            System.out.println("Valid Membership");
+        if(membershipManager.verifyMembership(convertMembershipToString(memberPin))){
+            membershipManager.unsetActiveMember();
+            membershipManager.setActiveMember(convertMembershipToString(memberPin));
             //changing welcome label to have member name
-            CheckoutStationGui.welcomeLabelTop.setText("<html>Welcome, " + MembershipController.getName(convertMembershipToString(memberPin))
-                    + "! <br/>Membership Number: " + convertMembershipToString(memberPin)
-                    + " <br/>Proud Member Since: " + MembershipController.getMonth(convertMembershipToString(memberPin)) + " " + MembershipController.getDay(convertMembershipToString(memberPin))
-                    + ", " + MembershipController.getYear(convertMembershipToString(memberPin)));
+            CheckoutStationGui.welcomeLabelTop.setText("<html>Welcome, " + membershipManager.getActiveMemberName()
+                    + "! <br/>Membership Number: " + membershipManager.getActivateMemberID()
+                    + " <br/>Proud Member Since: " + membershipManager.getActiveMemberMonth() + " " + membershipManager.getActiveMemberDay()
+                    + ", " + membershipManager.getActivateMemberYear());
             //getting rid of member button
-            CheckoutStationGui.membershipConfirmed = true;
+            CheckoutStationGui.membershipLoginButton.setText("Log out as "+ membershipManager.getActiveMemberName());
 //            CheckoutStationGui newgui = new CheckoutStationGui(customer, station, stationLogic);
 //            newgui.setVisible(true);
             this.setVisible(false);
         }
         else{
-            System.out.println("invalid Membership");
-            global.errorLabel.setText("Error: Member invalid");
+            global.errorLabel.setText("<html>Error: Member number is not valid. <br/> Please try again");
 
         }
 
@@ -360,6 +350,12 @@ public class MembershipScreenGui extends javax.swing.JFrame {
         // TODO: disregard whatever input was inputted
         memberPin.clear();
         passwordPINtextbox.setText(convertMembershipToString(memberPin));
+        if(!membershipManager.hasActiveMember()) {
+            //changing welcome label to have member name
+            CheckoutStationGui.welcomeLabelTop.setText("Welcome to Checkout. Please scan items.");
+            //getting rid of member button
+            CheckoutStationGui.membershipLoginButton.setText("Membership Login");
+        }
         this.setVisible(false);
     }
 
@@ -372,7 +368,6 @@ public class MembershipScreenGui extends javax.swing.JFrame {
         // TODO add your handling code here:
         memberPin.clear();
         passwordPINtextbox.setText(convertMembershipToString(memberPin));
-        System.out.println(convertMembershipToString(memberPin));
     }
 
 
