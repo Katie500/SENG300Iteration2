@@ -107,7 +107,7 @@ public class DoItYourselfStationLogic {
         	e.printStackTrace();
         }
         
-		electronicScaleListener = new WeightController(this, this.attendant);
+		electronicScaleListener = new WeightController(this);
 
 		baggingArea.register(electronicScaleListener);
     }
