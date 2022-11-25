@@ -7,6 +7,9 @@ import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.hardware.external.CardIssuer;
 import com.diy.software.DoItYourselfStationLogic;
 import com.jimmyselectronics.OverloadException;
+import com.jimmyselectronics.necchi.Barcode;
+import com.jimmyselectronics.necchi.BarcodedItem;
+import com.jimmyselectronics.necchi.Numeral;
 
 public class DoItYourselfStationLogicTest {
 	
@@ -34,17 +37,36 @@ public class DoItYourselfStationLogicTest {
 		
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
-	public void testgetcurrentexpectedWeight() {
-		double testweight = logic.getCurrentExpectedWeight();
-		assertEquals(Weight, testweight, 1);
+	public void testgetcurrentexpectedWeight() throws OverloadException {
+		 Barcode barcode2 = new Barcode(new Numeral[] { Numeral.two, Numeral.three });
+		 Barcode barcode3 = new Barcode(new Numeral[] { Numeral.one, Numeral.two, Numeral.three });
+
+		BarcodedItem item1 = new BarcodedItem(barcode3, 15);
+		BarcodedItem item2 = new BarcodedItem(barcode2, 1);
+		logic.baggingArea.add(item2);
+		logic.baggingArea.add(item1);
+		double testweight = logic.baggingArea.getCurrentWeight();
+		assertNotEquals(Weight, testweight);
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void testgetCurrentWeight() throws OverloadException {
+		Barcode barcode2 = new Barcode(new Numeral[] { Numeral.two, Numeral.three });
+		 Barcode barcode3 = new Barcode(new Numeral[] { Numeral.one, Numeral.two, Numeral.three });
+
+		BarcodedItem item1 = new BarcodedItem(barcode3, 15);
+		BarcodedItem item2 = new BarcodedItem(barcode2, 1);
+		logic.baggingArea.add(item2);
+		logic.baggingArea.add(item1);
+		
 		double testweight = logic.getCurrentWeight();
-		assertEquals(Weight, testweight, 1);
+		assertNotEquals(Weight, testweight);
+	}
+	
+	@Test
+	public void testgetWeightDiscrepancy() {
+		boolean testweight = logic.getWeightDiscrepancy();
+		assertNotNull(testweight);
 	}
 }
