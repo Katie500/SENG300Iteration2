@@ -285,4 +285,5 @@ public class WeightDiscrepancyTests {
         
         assertEquals(baggedItemsWeight, expectedOutcome,999999);
 	}
+	
 }
