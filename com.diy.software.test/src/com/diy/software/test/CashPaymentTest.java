@@ -26,8 +26,8 @@ import java.util.Currency;
 
 public class CashPaymentTest {
     DoItYourselfStationAR stationAR = new DoItYourselfStationAR();
-    private CardIssuer cardissuer;
-    DoItYourselfStationLogic stationLogic = new DoItYourselfStationLogic(stationAR, cardissuer);
+    CardIssuer creditIssuer = new CardIssuer("Credit", 10);
+    DoItYourselfStationLogic stationLogic = new DoItYourselfStationLogic(stationAR, creditIssuer);
     ProductController product = new ProductController(stationLogic);
 
     BarcodeScanner newScanner = new BarcodeScanner();
@@ -68,9 +68,6 @@ public class CashPaymentTest {
         stationLogic.productController.barcodeScanned(newScanner,barcode2);
         stationLogic.productController.barcodeScanned(newScanner,barcode3);
 
-        long total = product1.getPrice();
-        System.out.println(product1.getPrice());
-        stationLogic.productController.addToTotal(total);
 
         // Setup currency
         Currency canadianDollar = Currency.getInstance("CAD");
