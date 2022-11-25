@@ -80,14 +80,16 @@ public class WeightDiscrepancyTests {
 	@Test
 	public void testNoPower(){
 		stationLogic.station.turnOn();
-		assertTrue(stationLogic.station.scanner.isPoweredUp());
+		stationLogic.baggingArea.turnOff();
+		stationLogic.baggingArea.turnOn();
+		assertTrue(stationLogic.baggingArea.isPoweredUp());
 	}
 	
 	@Test
 	public void testTurnedOff(){
 		stationLogic.station.turnOn();
-		stationLogic.station.turnOff();
-		assertFalse(stationLogic.station.scanner.isPoweredUp());
+		stationLogic.baggingArea.turnOff();
+		assertFalse(stationLogic.baggingArea.isPoweredUp());
 	}
 	
 	@Test
@@ -248,7 +250,18 @@ public class WeightDiscrepancyTests {
         customer.placeItemInBaggingArea();
         
         assertFalse(stationLogic.getWeightDiscrepancy());
+	}
+	
+	@Test
+	public void weightDiscrepancy2() {
         
+		
+        customer.selectNextItem();
+        customer.scanItem();
+        customer.selectNextItem();
+        customer.scanItem();
+        customer.placeItemInBaggingArea();
         
+        assertFalse(stationLogic.getWeightDiscrepancy());
 	}
 }
