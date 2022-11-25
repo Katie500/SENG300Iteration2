@@ -3,6 +3,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.diy.hardware.BarcodedProduct;
 import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.hardware.external.CardIssuer;
 import com.diy.software.DoItYourselfStationLogic;
@@ -57,6 +58,7 @@ public class DoItYourselfStationLogicTest {
 
 		BarcodedItem item1 = new BarcodedItem(barcode3, 15);
 		BarcodedItem item2 = new BarcodedItem(barcode2, 1);
+		
 		logic.baggingArea.add(item2);
 		logic.baggingArea.add(item1);
 		
