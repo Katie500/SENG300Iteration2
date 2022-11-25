@@ -1,5 +1,8 @@
 package com.diy.software;
 
+import java.util.List;
+
+import com.diy.hardware.BarcodedProduct;
 import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.hardware.external.CardIssuer;
 import com.diy.software.controllers.CashPayment.CashPaymentController;
@@ -47,12 +50,9 @@ public class DoItYourselfStationLogic {
      */
     private double baggingAreaExpectedWeight;
     
-    private boolean systemEnabled = true;
     public ElectronicScale baggingArea;
 	private double scaleMaxWeight = 5000.0;
 	private double scaleSensitivity = 0.5;
-    private static double scaleMaximumWeightConfiguration = 5000.0;
-    private static double scaleSensitivityConfiguration = 0.5;
     
     /**
      * Installs an instance of the logic on the indicated station.
@@ -131,12 +131,24 @@ public class DoItYourselfStationLogic {
 
     
 	public double getCurrentExpectedWeight() {
+		double weightCounter = 0;
+		List<BarcodedProduct> scannedItems = productController.getScanned();
+		
+		for(BarcodedProduct item : scannedItems) {
+			weightCounter = weightCounter + item.getExpectedWeight();
+		}
+		
+		baggingAreaExpectedWeight = weightCounter;
 		return baggingAreaExpectedWeight;
 	}
 	
 	public double getCurrentWeight() throws OverloadException {
 		baggingAreaCurrentWeight = baggingArea.getCurrentWeight();
 		return baggingAreaCurrentWeight;
+	}
+	
+	public boolean getWeightDiscrepancy() {
+		return electronicScaleListener.weightDiscrepancy;
 	}
 
 }

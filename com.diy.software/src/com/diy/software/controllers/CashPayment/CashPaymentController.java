@@ -20,9 +20,7 @@ public class CashPaymentController {
     public long payWithCash(long totalPaid) throws Exception {
         long charge = stationLogic.productController.getTotal();
 
-        if (charge < 0){
-            throw new Exception("Unable to complete transaction for the amount: $" + charge);
-        } else if (totalPaid < charge){
+        if (totalPaid < charge) {
             throw new Exception("Please add amount to complete the payment");
         }
 
