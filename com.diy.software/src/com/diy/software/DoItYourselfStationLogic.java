@@ -3,6 +3,7 @@ package com.diy.software;
 import com.diy.hardware.DoItYourselfStationAR;
 import com.diy.hardware.external.CardIssuer;
 import com.diy.software.controllers.CashPayment.CashPaymentController;
+import com.diy.software.gui.AttendantStationGui;
 import com.diy.software.controllers.PaymentController;
 import com.diy.software.controllers.ProductController;
 import com.diy.software.controllers.WeightController;
@@ -33,7 +34,9 @@ public class DoItYourselfStationLogic {
     /**
      * The controller that tracks the weight of the items
      */
-    private WeightController electronicScale;
+    private WeightController electronicScaleListener;
+    
+    private AttendantStationGui attendant;
 
     
     //System variables
@@ -97,6 +100,16 @@ public class DoItYourselfStationLogic {
         baggingArea = new ElectronicScale(scaleMaxWeight, scaleSensitivity);
         baggingArea.plugIn();
         baggingArea.turnOn();
+        
+        try {
+        	baggingAreaExpectedWeight = baggingArea.getCurrentWeight();
+        } catch (OverloadException e) {
+        	e.printStackTrace();
+        }
+        
+		electronicScaleListener = new WeightController(this, this.attendant);
+
+		baggingArea.register(electronicScaleListener);
     }
 
     /**
@@ -127,13 +140,24 @@ public class DoItYourselfStationLogic {
 		return baggingAreaCurrentWeight;
 	}
 	
+	/**
+	 * places items in bagging area
+	 */
+	public void StartBagging() {
+//		Demo.customer.placeItemInBaggingArea();
+//		bagItemSuccess = true;
+//		//cheat code
+//		if(bagItemSuccess) {
+//			reEnableScanning();
+//		}
+	}
 	
 	public void weightDiscrepancy(ElectronicScale baggingArea, double currentWeight) throws OverloadException {
 		//Compare current weight vs previous weight
 		double expected_weight = getCurrentExpectedWeight();
-		//double current_weight = baggingArea.getCurrentWeight();
+		double current_weight = getCurrentWeight();
 
-		if (electronicScale.weightDiscrepancy){
+		if (electronicScaleListener.weightDiscrepancy){
 			//Station to disabled scanning
 //			station.scanner.disable();
 //			//GUI to disable scanning and bagging

@@ -277,11 +277,15 @@ public class CheckoutStationGui extends javax.swing.JFrame{
             });
             
             
+            
+            
         } catch(NoSuchElementException e) {
             errorMessage.setText("Error: No more items in cart");
         } catch(InvalidArgumentSimulationException e) {
             errorMessage.setText("Error: the weight has to be positive");
-        }
+        } //catch() {
+//        	
+//        }
     }
 
     private void selectLanguageButtonActionPerformed(java.awt.event.ActionEvent evt) {

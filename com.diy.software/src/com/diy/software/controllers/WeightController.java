@@ -1,5 +1,9 @@
 package com.diy.software.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.diy.hardware.BarcodedProduct;
 import com.diy.software.DoItYourselfStationLogic;
 import com.diy.software.gui.AttendantStationGui;
 import com.jimmyselectronics.AbstractDevice;
@@ -14,10 +18,15 @@ public class WeightController implements ElectronicScaleListener {
 	private DoItYourselfStationLogic systemReference;
 	private AttendantStationGui attendantReference;
 	public boolean weightDiscrepancy;
+	public double expectedWeight;
+	public double currentWeight;
+	private List<BarcodedProduct> itemsInScale = new ArrayList();
 	
 	public WeightController(DoItYourselfStationLogic station, AttendantStationGui attendant) {
 		this.systemReference = station;
 		this.attendantReference = attendant;
+		expectedWeight = 0;
+		
 	}
 	
 
@@ -48,6 +57,8 @@ public class WeightController implements ElectronicScaleListener {
 	@Override
 	public void weightChanged(ElectronicScale scale, double weightInGrams) {
 		//This updates the gui through the system with the new updated weight
+		
+		
 		
 		double expectedWeight = systemReference.getCurrentExpectedWeight();
 		double currentWeight = 0;
