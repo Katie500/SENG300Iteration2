@@ -14,6 +14,7 @@ import com.diy.hardware.external.CardIssuer;
 import com.diy.software.DoItYourselfStationLogic;
 import com.diy.software.controllers.PaymentController;
 import com.diy.software.exceptions.CardTransactionException;
+import com.diy.software.exceptions.ChipFailureException;
 import com.diy.software.exceptions.IssuerHoldException;
 import com.jimmyselectronics.opeechee.Card;
 
@@ -189,8 +190,18 @@ public class PaymentControllerTest {
 
 	@Test(expected = CardTransactionException.class)
 	public void testInvalidCardPin() throws IOException {
-		stationLogic.paymentController.setSelectedCard(validCard);
-		stationLogic.paymentController.validateCardPayment("4321", stationLogic.station.cardReader, "insert");
+		do {
+			try {
+				stationLogic.paymentController.setSelectedCard(validCard);
+				stationLogic.paymentController.validateCardPayment("4321", stationLogic.station.cardReader, "insert");
+			} catch (Exception e) {
+				if(!e.getMessage().contains("Chip")) {
+					throw e;
+				}
+			}
+			
+			stationLogic.station.cardReader.remove();
+		} while(true);
 	}
 	
 	@Test
@@ -227,23 +238,21 @@ public class PaymentControllerTest {
 		assertEquals("Inserted card has no chip.", exceptionMsg);
 	}
 
-	@Test
-	public void testInsertCardChipFail() {
-		String exceptionMsg = "";
-		
+	@Test(expected = ChipFailureException.class)
+	public void testInsertCardChipFail() throws IOException {
 		do {
 			try {
 				stationLogic.paymentController.setSelectedCard(validCard);
 				stationLogic.paymentController.validateCardPayment("1234", stationLogic.station.cardReader, "insert");
 			} catch (Exception e) {
-				exceptionMsg = e.getMessage();
+				if(!e.getMessage().contains("Power")) {
+					throw e;
+				}
 			}
 			
 			stationLogic.station.cardReader.remove();
-		} while(exceptionMsg.equals(""));
+		} while(true);
 
-	
-		assertEquals("Chip failure. Please reinsert the card, and enter the pin.", exceptionMsg);
 	}
 	
 	@Test
@@ -271,40 +280,68 @@ public class PaymentControllerTest {
 	
 	@Test(expected = IssuerHoldException.class)
 	public void testInsertCardLowLimit() throws IOException {
-		String exceptionMsg = "";
-	
 		do {
 			try {
 				stationLogic.paymentController.setSelectedCard(invalidCard);
 				stationLogic.paymentController.validateCardPayment("1234", this.stationLogic.station.cardReader, "insert");
 				stationLogic.station.cardReader.remove();
 			} catch (Exception e) {
-				if(!e.getMessage().contains("ChipFailureException")) {
+				if(!e.getMessage().contains("Chip")) {
 					throw e;
 				}
 			}
-		} while(exceptionMsg.equals(""));
+		} while(true);
 	}
 	
 	@Test(expected = IssuerHoldException.class)
 	public void testSwipeCardLowLimit() throws IOException {
-		stationLogic.paymentController.setSelectedCard(invalidCard);
-		stationLogic.paymentController.validateCardPayment("1234", this.stationLogic.station.cardReader, "swipe");
+		do {
+			try {
+				stationLogic.paymentController.setSelectedCard(invalidCard);
+				stationLogic.paymentController.validateCardPayment("1234", this.stationLogic.station.cardReader, "insert");
+				stationLogic.station.cardReader.remove();
+			} catch (Exception e) {
+				if(!e.getMessage().contains("MagneticStripeFailureException")) {
+					throw e;
+				}
+			}
+		} while(true);
 	}
 	
 	
 	@Test
-	public void testSwipeCardSuccess() throws IOException {
-		stationLogic.paymentController.setSelectedCard(validCard);
-		boolean success = stationLogic.paymentController.validateCardPayment("1234", this.stationLogic.station.cardReader, "swipe");
+	public void testSwipeCardSuccess() {
+		boolean stripeFail = false;
+		boolean success = false;
 		
+		do {
+			try {
+				stationLogic.paymentController.setSelectedCard(validCard);
+				success = stationLogic.paymentController.validateCardPayment("1234", this.stationLogic.station.cardReader, "swipe");
+				
+			} catch (Exception e) {
+				stationLogic.station.cardReader.remove();
+				System.out.println((e.getMessage().contains("MagneticStripeFailureException"))? "MagStripeFail" : "Err");
+				stripeFail = e.getMessage().contains("MagneticStripeFailureException");
+			}
+		} while(stripeFail);
+		
+
 		assertTrue(success);
 	}
 	
 	@Test(expected = IssuerHoldException.class)
 	public void testTapCardLowLimit() throws IOException {
-		stationLogic.paymentController.setSelectedCard(invalidCard);
-		stationLogic.paymentController.validateCardPayment("1234", this.stationLogic.station.cardReader, "tap");
+		do {
+			try {
+				stationLogic.paymentController.setSelectedCard(invalidCard);
+				stationLogic.paymentController.validateCardPayment("1234", this.stationLogic.station.cardReader, "tap");
+			} catch (Exception e) {
+				if(!e.getMessage().contains("TapFailureException")) {
+					throw e;
+				}
+			}
+		} while(true);
 	}
 	
 	@Test(expected = NullPointerException.class)

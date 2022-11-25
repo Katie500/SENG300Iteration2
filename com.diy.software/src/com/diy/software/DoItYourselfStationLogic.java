@@ -139,6 +139,10 @@ public class DoItYourselfStationLogic {
 		return baggingAreaExpectedWeight;
 	}
 	
+	public double getCurrentWeight() {
+		return electronicScaleListener.getBaggedItemsWeight();
+	}
+	
 	public boolean getWeightDiscrepancy() {
 		electronicScaleListener.weightDiscrepancy();
 		return electronicScaleListener.weightDiscrepancy;
