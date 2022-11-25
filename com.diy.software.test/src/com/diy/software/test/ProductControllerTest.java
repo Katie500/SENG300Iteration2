@@ -29,7 +29,7 @@ public class ProductControllerTest {
 	@Before
 	public void setup() {
 	stationLogic.station.plugIn();
-	
+
 	Barcode barcode1 = new Barcode(new Numeral[] { Numeral.one });
     Barcode barcode2 = new Barcode(new Numeral[] { Numeral.two, Numeral.three });
     Barcode barcode3 = new Barcode(new Numeral[] { Numeral.one, Numeral.two, Numeral.three });

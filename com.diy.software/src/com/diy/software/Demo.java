@@ -28,6 +28,10 @@ public class Demo {
    
     	// Setup station
     	DoItYourselfStationAR station = new DoItYourselfStationAR();
+    		
+		station.plugIn();
+		station.turnOn();
+
         station.scanner.plugIn();
         station.scanner.turnOn();
         station.cardReader.plugIn();
@@ -64,7 +68,7 @@ public class Demo {
         Banknote tenDollar = new Banknote(canadianDollar,10);
         Banknote twentyDollar = new Banknote(canadianDollar,20);
         Banknote fiftyDollar = new Banknote(canadianDollar,50);
-
+        
         // Setup Coins
         Coin toonie = new Coin(canadianDollar,2);
         Coin loonie = new Coin(canadianDollar,1);
