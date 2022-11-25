@@ -326,6 +326,7 @@ public class MembershipScreenGui extends javax.swing.JFrame {
     private void enterButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO: store membership number someplace awesome so we can find it later
         if(membershipManager.verifyMembership(convertMembershipToString(memberPin))){
+            global.errorLabel.setText("");
             membershipManager.unsetActiveMember();
             membershipManager.setActiveMember(convertMembershipToString(memberPin));
             //changing welcome label to have member name
@@ -341,7 +342,6 @@ public class MembershipScreenGui extends javax.swing.JFrame {
         }
         else{
             global.errorLabel.setText("<html>Error: Member number is not valid. <br/> Please try again");
-
         }
 
     }
@@ -356,6 +356,7 @@ public class MembershipScreenGui extends javax.swing.JFrame {
             //getting rid of member button
             CheckoutStationGui.membershipLoginButton.setText("Membership Login");
         }
+        global.errorLabel.setText("");
         this.setVisible(false);
     }
 
@@ -367,6 +368,7 @@ public class MembershipScreenGui extends javax.swing.JFrame {
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         memberPin.clear();
+        global.errorLabel.setText("");
         passwordPINtextbox.setText(convertMembershipToString(memberPin));
     }
 
